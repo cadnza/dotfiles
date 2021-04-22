@@ -11,7 +11,7 @@ autoload -Uz compinit
 compinit
 
 # Set prompt
-PROMPT="%n@%m %1~ %# "
+PROMPT="%B%n%b@%m %F{69}%1~%f %# "
 
 # Import variables
 source ~/.shDotFileSupport/variables.sh

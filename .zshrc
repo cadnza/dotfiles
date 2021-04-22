@@ -10,6 +10,9 @@ zstyle :compinstall filename '/Users/cadenza/.zshrc'
 autoload -Uz compinit
 compinit
 
+# Set prompt
+PROMPT="%n@%m %1~ %# "
+
 # Import variables
 source ~/.shDotFileSupport/variables.sh
 

@@ -10,12 +10,20 @@ zstyle :compinstall filename '/Users/cadenza/.zshrc'
 autoload -Uz compinit
 compinit
 
+# Import variables
+source ~/.shDotFileSupport/variables.sh
+
 # Enable syntax highlighting from Homebrew zsh-syntax-highlighting
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# alias cd and start at target directory
-if [ $HOSTNAME == "TEC-DEV34-WK" ]
+# Set up Tecuity computer
+if [ "$HOST" == "$TECUITY" ];
 then
-	alias cd="HOME=/mnt/c/Users/jon.dayley/ cd"
-	cd
+	
+	## Alias cd and start at Windows home directory
+	TECDIR="/mnt/c/Users/jon.dayley/"
+	HOME="$TECDIR" cd
+	alias cd="HOME=$TECDIR cd"
+
+# End setting up Tecuity computer
 fi

@@ -6,7 +6,7 @@ unsetopt nomatch
 bindkey -e
 
 # Set compinstall settings
-zstyle :compinstall filename '/Users/cadenza/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
@@ -23,7 +23,7 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 if [ "$HOST" == "$TECUITY" ];
 then
 	
-	## Alias cd and start at Windows home directory
+	# Alias cd and start at Windows home directory
 	TECDIR="/mnt/c/Users/jon.dayley/"
 	HOME="$TECDIR" cd
 	alias cd="HOME=$TECDIR cd"

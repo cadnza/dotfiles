@@ -1,7 +1,7 @@
 # Enable line numbering
 set linenumbers
 
-# Include syntax highlighting
+# Enable syntax standard highlighting
 include "/usr/local/share/nano/asm.nanorc"
 include "/usr/local/share/nano/autoconf.nanorc"
 include "/usr/local/share/nano/awk.nanorc"
@@ -46,3 +46,6 @@ include "/usr/local/share/nano/tcl.nanorc"
 include "/usr/local/share/nano/tex.nanorc"
 include "/usr/local/share/nano/texinfo.nanorc"
 include "/usr/local/share/nano/xml.nanorc"
+
+# Enable R syntax highlighting
+include "~/.shDotFileSupport/R.nanorc"

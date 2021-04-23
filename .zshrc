@@ -17,9 +17,9 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' actionformats \
-	'[%F{6}%r%f](%F{214}%b%f)%F{green}%c%f%F{red}%u%f %a'
+	'[%B%F{6}%r%f%%b](%F{214}%b%f)%F{green}%c%f%F{red}%u%f %a'
 zstyle ':vcs_info:*' formats \
-	'[%F{6}%r%f](%F{214}%b%f)%F{green}%c%f%F{red}%u%f'
+	'[%B%F{6}%r%f%%b](%F{214}%b%f)%F{green}%c%f%F{red}%u%f'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' unstagedstr '*'

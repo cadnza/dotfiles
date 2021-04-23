@@ -12,3 +12,5 @@ export PATH=/usr/local/sbin:$PATH
 
 # Add ~/bin to path for symlinks
 export PATH=~/bin:$PATH
+
+echo Testing

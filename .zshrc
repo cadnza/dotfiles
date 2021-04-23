@@ -10,7 +10,7 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
-# Enable syntax highlighting from Homebrew zsh-syntax-highlig>
+# Enable syntax highlighting from Homebrew zsh-syntax-highlighting
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set prompt with version control information

@@ -1,11 +1,7 @@
 # Set up Tecuity computer
-if [ "$HOST" == "$TECUITY" ];
+if [ "$HOST" = "TEC-DEV34-WK" ];
 then
-	
-	# Recognize HomeBrew
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# End setting up Tecuity computer
+	source ~/.shDotFileSupport/setupTecuity.sh
 fi
 
 # Add R to path
@@ -16,6 +12,3 @@ export PATH=/usr/local/sbin:$PATH
 
 # Add ~/bin to path for symlinks
 export PATH=~/bin:$PATH
-
-# Import variables
-source ~/.shDotFileSupport/variables.sh

@@ -10,23 +10,8 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
-# Set prompt
-PROMPT="%B%n%b@%m %F{69}%1~%f %# "
-
-# Import variables
-source ~/.shDotFileSupport/variables.sh
-
-# Enable syntax highlighting from Homebrew zsh-syntax-highlighting
+# Enable syntax highlighting from Homebrew zsh-syntax-highlig>
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Set up Tecuity computer
-if [ "$HOST" == "$TECUITY" ];
-then
-	
-	# Alias cd and start at Windows home directory
-	TECDIR="/mnt/c/Users/jon.dayley/"
-	HOME="$TECDIR" cd
-	alias cd="HOME=$TECDIR cd"
-
-# End setting up Tecuity computer
-fi
+# Set prompt
+PROMPT="%B%n%b@%m %F{69}%1~%f %# "

@@ -24,5 +24,5 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' unstagedstr '*'
 precmd () { vcs_info }
-PS1='%B%n%b@%m %F{69}%1~%f %# '
+PS1='%F{1}%B%n%b%f%F{8}@%f%F{7}%B%m%b%f %F{69}%1~%f %# '
 RPROMPT='${vcs_info_msg_0_}'

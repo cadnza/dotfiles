@@ -18,10 +18,9 @@ export PATH=~/bin:$PATH
 ## Alias nano for softwrapping
 alias nano="nano -S"
 
-## Alias ls-like commands for color
-alias ls="ls -G"
-alias dir="dir -G"
-alias vdir="vdir -G"
-alias grep="grep -G"
-alias fgrep="fgrep -G"
-alias egrep="egrep -G"
+# Echo something
+CLR='\033[0m'
+NCLR='\033[0m' # No Color
+BLD=$(tput bold)
+NBLD=$(tput sgr0)
+echo -e "${CLR}${BLD}Ready?${NBLD}${NCLR}"

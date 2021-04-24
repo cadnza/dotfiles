@@ -7,7 +7,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats \
 	'%B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f'
 zstyle ':vcs_info:*' actionformats \
-	'%B%a%%b %B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f'^T
+	'%B%a%%b %B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' unstagedstr '*'

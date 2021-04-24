@@ -19,9 +19,9 @@ export PATH=~/bin:$PATH
 alias nano="nano -S"
 
 ## Alias ls-like commands for color
-alias ls="ls --color=auto"
-alias dir="dir --color=auto"
-alias vdir="vdir --color=auto"
-alias grep="grep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias egrep="egrep --color=auto"
+alias ls="ls -G"
+alias dir="dir -G"
+alias vdir="vdir -G"
+alias grep="grep -G"
+alias fgrep="fgrep -G"
+alias egrep="egrep -G"

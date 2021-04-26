@@ -17,4 +17,4 @@ CLR='\033[0m'
 NCLR='\033[0m' # No Color
 BLD=$(tput bold)
 NBLD=$(tput sgr0)
-echo -e "${CLR}${BLD}Ready?${NBLD}${NCLR}"
+#echo -e "${CLR}${BLD}Ready?${NBLD}${NCLR}" # Commented out for compatibility

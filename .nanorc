@@ -1,6 +1,40 @@
 # Enable line numbering
 set linenumbers
 
+# Enable line wrapping
+set softwrap
+set atblanks
+
+# Enable auto indenting (makes writing code easier)
+set autoindent
+set smarthome
+
+# Enable 80-character guide stripe
+set guidestripe 81
+
+# Enable scroll bar indicator
+set indicator
+
+# Enable state flags in top right
+set stateflags
+
+# Enable mouse for mousable systems
+set mouse
+
+# Enable deleting selected text
+set zap
+
+# Disable file conversion (can get pesky)
+set noconvert
+
+# Set tab size
+set tabsize 4
+
+# Set colors
+set keycolor orange
+set scrollercolor latte
+set selectedcolor white,blue
+
 # Enable syntax standard highlighting
 include "/usr/local/share/nano/asm.nanorc"
 include "/usr/local/share/nano/autoconf.nanorc"

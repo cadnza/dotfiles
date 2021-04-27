@@ -35,7 +35,13 @@ set keycolor orange
 set scrollercolor latte
 set selectedcolor white,blue
 
-# Enable syntax standard highlighting
+# Enable R syntax highlighting
+include "~/.shDotFileSupport/R.nanorc"
+
+# Highlight my name
+#include "~/.shDotFileSupport/myName.nanorc" # Not working yet
+
+# Enable standard syntax highlighting
 include "/usr/local/share/nano/asm.nanorc"
 include "/usr/local/share/nano/autoconf.nanorc"
 include "/usr/local/share/nano/awk.nanorc"
@@ -80,6 +86,3 @@ include "/usr/local/share/nano/tcl.nanorc"
 include "/usr/local/share/nano/tex.nanorc"
 include "/usr/local/share/nano/texinfo.nanorc"
 include "/usr/local/share/nano/xml.nanorc"
-
-# Enable R syntax highlighting
-include "~/.shDotFileSupport/R.nanorc"

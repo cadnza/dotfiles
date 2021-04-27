@@ -36,7 +36,7 @@ color brightgreen "(\<(break|else|for|function|if|in|next|repeat|return|while)\>
 ## Assignment operators (only the preferred '<-' and '<<-' ones)
 color green "(<){1,2}-"
 
-## Delimiters 
+## Delimiters
 color green "[\)\(,;]+|[\{\}]+|[][]+"
 
 ## Boolean

@@ -27,7 +27,7 @@
 
 
 ##
-syntax "R" "\.[Rr]$"
+syntax "R" "\.[Rr][Mm]?[Dd]?$"
 header "^#!.*/Rscript"
 
 ## Asciibetical list of reserved words, including '...', '..1' etc.

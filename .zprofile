@@ -9,8 +9,8 @@ export PATH=~/.symlinks:$PATH
 
 # Set aliases
 
-## Alias nano for softwrapping
-alias nano="nano -S"
+## Alias R for radian
+alias R="radian"
 
 # Echo something
 CLR='\033[0m'

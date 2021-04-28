@@ -27,7 +27,7 @@
 
 
 ##
-syntax "R" "\.[Rr][Mm]?[Dd]?$"
+syntax "R" "\.(([Rr][Mm]?[Dd]?)|(Rprofile))$"
 header "^#!.*/Rscript"
 
 ## Asciibetical list of reserved words, including '...', '..1' etc.

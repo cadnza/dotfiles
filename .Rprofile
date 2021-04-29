@@ -1,5 +1,5 @@
 # Set language (just in case)
-Sys.setenv(LANG="en")
+#Sys.setenv(LANG="en")
 
 # Remove save dialog for quit
 quit <- function()

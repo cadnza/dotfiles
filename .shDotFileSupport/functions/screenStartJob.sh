@@ -22,5 +22,3 @@ function screenStartJob {
 		eval $CMD
 	fi
 }
-
-echo Sourced!

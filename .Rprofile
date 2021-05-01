@@ -2,7 +2,4 @@
 #Sys.setenv(LANG="en")
 
 # Remove save dialog for quit
-quit <- function()
-	base::quit(save="no")
-q <- function()
-	quit()
+formals(quit)$save <- formals(q)$save <- "no"

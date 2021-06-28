@@ -23,7 +23,15 @@ do
 done
 
 # Enable syntax highlighting from Homebrew zsh-syntax-highlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ `which brew | grep "brew not found" | wc -l` ]]; then
+	echo "Homebrew isn't installed for $USERNAME, so syntax highlighting is disabled."
+	echo "To enable syntax highlighting, please do the following:"
+	echo " 1. Install Homebrew"
+	echo " 2. Run \`brew install zsh-syntax-highlighting\`"
+	echo " 3. Source .zshrc"
+else
+	source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Run prompt setup
 source ~/.shDotFileSupport/prompt.sh

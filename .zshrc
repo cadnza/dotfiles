@@ -25,7 +25,7 @@ then
 		eval "source ~/.shDotFileSupport/functions/$f"
 	done
 else
-	echo "No functions sourced. You'll find them in ~/.shDotFileSupport/functions."
+	#echo "No functions sourced. You'll find them in ~/.shDotFileSupport/functions." # For some reason this causes garbage output after the last echo on Git for Windows SDK. :-/ #TEMP
 fi
 
 # Enable syntax highlighting from Homebrew zsh-syntax-highlighting

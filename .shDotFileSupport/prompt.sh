@@ -17,7 +17,7 @@ zstyle ':vcs_info:*' actionformats \
 	'%B%a%%b %B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f'
 
 # Set right prompt with Git information manually
-#function buildRightPrompt() {
+#buildRightPrompt() {
 #	gitBranchRaw=$(git branch 2> /dev/null) || return
 #	gitBranch=$(echo $gitBranchRaw | grep ^\* | cut -d " " -f 2)
 #	gitRepoRaw=$(git rev-parse --show-toplevel 2> /dev/null) || return
@@ -30,6 +30,6 @@ zstyle ':vcs_info:*' actionformats \
 #	echo $final
 #	return
 #}
-#function precmd(){
+#precmd(){
 #	RPROMPT=$(buildRightPrompt)
 #}

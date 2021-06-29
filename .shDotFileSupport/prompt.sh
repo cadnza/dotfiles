@@ -4,7 +4,7 @@ PS1='%F{1}%n%f%F{8}@%f%F{7}%B%m%b%f %F{69}%1~%f %# '
 # Set right prompt VCS options
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' check-for-changes false # Set to true to show status markers
+zstyle ':vcs_info:*' check-for-changes false # Set to true to show diff status markers
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' unstagedstr '*'
 precmd () { vcs_info }

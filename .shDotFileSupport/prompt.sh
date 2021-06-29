@@ -13,3 +13,21 @@ zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' unstagedstr '*'
 precmd () { vcs_info }
 RPROMPT='${vcs_info_msg_0_}'
+
+# Set right prompt with Git information manually
+#function buildRightPrompt() {
+#	gitBranchRaw=$(git branch 2> /dev/null) || return
+#	gitBranch=$(echo $gitBranchRaw | grep ^\* | cut -d " " -f 2)
+#	gitRepoRaw=$(git rev-parse --show-toplevel 2> /dev/null) || return
+#	gitRepo=$(basename $gitRepoRaw)
+#	sep=→
+#	colorRepo=6
+#	colorSep=8
+#	colorBranch=214
+#	final=%B%F{"$colorRepo"}"$gitRepo"%f%b%F{"$colorSep"}"$sep"%f%F{"$colorBranch"}"$gitBranch"%f
+#	echo $final
+#	return
+#}
+#function precmd(){
+#	RPROMPT=$(buildRightPrompt)
+#}

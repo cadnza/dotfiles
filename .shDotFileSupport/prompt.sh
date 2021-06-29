@@ -12,11 +12,9 @@ RPROMPT='${vcs_info_msg_0_}'
 
 # Set right prompt with VCS info
 zstyle ':vcs_info:*' formats \
-	'%B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f'
-	#'%B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f' # Contains %c and %u tags for use with check-for-changes
+	'%B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f'
 zstyle ':vcs_info:*' actionformats \
-	'%B%a%%b %B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f'
-	#'%B%a%%b %B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f' # Contains %c and %u tags for use with check-for-changes
+	'%B%a%%b %B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f'
 
 # Set right prompt with Git information manually
 #function buildRightPrompt() {

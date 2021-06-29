@@ -25,7 +25,7 @@ RPROMPT='${vcs_info_msg_0_}'
 timeoutGitStatusDiff() {
 	inner() {
 		delay=0.15
-		gtimeout $delay zsh -c "{
+		gtimeout $delay zsh -fc "{
 			git status > /dev/null;
 			echo true;
 		}"
@@ -35,12 +35,16 @@ timeoutGitStatusDiff() {
 	echo $enable
 }
 
-# Configure command to run before every prompt
-precmd () {
+# Configure and deploy Git regular setup command
+setupGitRegular() {
 	vcs_info
 	git branch &> /dev/null || return
 	useDiffIndicator=$(timeoutGitStatusDiff)
 	zstyle ':vcs_info:*' check-for-changes $useDiffIndicator
+}
+setupGitRegular
+precmd() {
+	setupGitRegular
 }
 
 # Set right prompt with Git information manually

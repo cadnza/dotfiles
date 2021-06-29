@@ -25,7 +25,7 @@ RPROMPT='${vcs_info_msg_0_}'
 timeoutGitStatusDiff() {
 	inner() {
 		delay=0.15
-		timeout $delay zsh -c "{
+		gtimeout $delay zsh -c "{
 			git status > /dev/null;
 			echo true;
 		}"

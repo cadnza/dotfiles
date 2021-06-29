@@ -24,7 +24,7 @@ RPROMPT='${vcs_info_msg_0_}'
 # Get function to measure timeout git status (to only show git diffs when economical)
 timeoutGitStatusDiff() {
 	inner() {
-		delay=0.13
+		delay=0.15
 		timeout $delay zsh -c "{
 			git status > /dev/null;
 			echo true;
@@ -37,9 +37,10 @@ timeoutGitStatusDiff() {
 
 # Configure command to run before every prompt
 precmd () {
+	vcs_info
+	git branch &> /dev/null || return
 	useDiffIndicator=$(timeoutGitStatusDiff)
 	zstyle ':vcs_info:*' check-for-changes $useDiffIndicator
-	vcs_info
 }
 
 # Set right prompt with Git information manually

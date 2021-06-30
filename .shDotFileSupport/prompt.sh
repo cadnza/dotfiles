@@ -5,8 +5,8 @@ PS1='%F{1}%n%f%F{8}@%f%F{7}%B%m%b%f %F{69}%1~%f %# '
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' stagedstr '*'
-zstyle ':vcs_info:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '*'
+zstyle ':vcs_info:git:*' unstagedstr '*'
 RPROMPT='${vcs_info_msg_0_}'
 
 # Set right prompt with VCS info
@@ -53,9 +53,9 @@ setupGitRegular() {
 	vcs_info
 	git branch &> /dev/null || return
 	useDiffIndicator=$(timeoutGitStatusDiff)
-	zstyle ':vcs_info:*' check-for-changes $useDiffIndicator
-	zstyle ':vcs_info:*' formats $(buildRightPrompt noAction $useDiffIndicator)
-	zstyle ':vcs_info:*' actionformats $(buildRightPrompt action $useDiffIndicator)
+	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
+	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
+	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)
 }
 setupGitRegular
 precmd() {

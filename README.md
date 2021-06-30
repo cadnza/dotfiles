@@ -1,5 +1,7 @@
 # Shell Dotfiles
 
+![](https://img.shields.io/github/v/release/cadnza/shDotFiles)
+
 *Zsh* dotfiles, specifically. Here's what I've got:
 
 ### A beautiful prompt

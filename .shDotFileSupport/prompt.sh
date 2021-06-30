@@ -82,6 +82,16 @@ decideByTimeout() {
 	enable=$(echo $(inner) | cut -d " " -f 1)
 	echo $enable
 }
+decideBySize() {
+	sizeKB=$(git count-objects | cut -d " " -f 3)
+	threshold=2000
+	if [ $sizeKB -gt $threshold ]
+	then
+		echo false
+		return
+	fi
+	echo true
+}
 
 # Configure and deploy Git regular setup command
 setupGitRegular() {

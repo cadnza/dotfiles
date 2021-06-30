@@ -24,25 +24,23 @@ RPROMPT='${vcs_info_msg_0_}'
 
 # Get function to check commits
 getCommits() {
-	branch=$(git branch -vv | grep ^\*)
-	branchLocal=$(echo $branch | cut -d " " -f 2)
-	branchRemote=$(echo $branch | grep -Eo '\[[^(\[|\:)]+' | sed 's/\[//')
-	nCommitsUnpushed=$(git log "$branchRemote".."$branchLocal" | grep -c ^commit)
-	nCommitsUnpulled=$(git log "$branchLocal".."$branchRemote" | grep -c ^commit)
+	branch=$(git branch -vv | grep ^\* | grep -Eo '\[.+\]')
+	nCommitsUnpushed=$(echo $branch | grep -Eo 'ahead [[:digit:]]+' | cut -d " " -f 2)
+	nCommitsUnpulled=$(echo $branch | grep -Eo 'behind [[:digit:]]+' | cut -d " " -f 2)
 	unpushed=↑
 	unpulled=↓
 	strUnpushed=%F{$colorUnpushed}%B$unpushed%%b$nCommitsUnpushed%f
 	strUnpulled=%F{$colorUnpulled}%B$unpulled%%b$nCommitsUnpulled%f
 	final=""
-	if [ $nCommitsUnpushed -gt 0 ]
+	if [ ${#nCommitsUnpushed} -gt 0 ]
 	then
 		final=$final$strUnpushed
 	fi
-	if [ $nCommitsUnpulled -gt 0 ]
+	if [ ${#nCommitsUnpulled} -gt 0 ]
 	then
 		final=$final$strUnpulled
 	fi
-	if [ $final = "" ]
+	if [ ${#final} -eq 0 ]
 	then
 		echo ""
 		return

@@ -94,7 +94,7 @@ precmd() {
 	setupGitRegular
 	vcs_info
 	draft='${vcs_info_msg_0_}'
-	RPROMPT="$draft $(getCommits $PWD)"
+	RPROMPT="$draft $(getCommits $PWD)" | xargs # For trimming
 }
 
 # Set right prompt with Git information manually

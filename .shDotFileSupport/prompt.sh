@@ -7,6 +7,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' unstagedstr '*'
+RPROMPT='${vcs_info_msg_0_}'
 
 # Set right prompt with VCS info
 buildRightPrompt() {
@@ -55,7 +56,6 @@ setupGitRegular() {
 	zstyle ':vcs_info:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:*' actionformats $(buildRightPrompt action $useDiffIndicator)
-	RPROMPT='${vcs_info_msg_0_}'
 }
 setupGitRegular
 precmd() {

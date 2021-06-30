@@ -1,5 +1,18 @@
+# Set colors
+colorUser=1
+colorMachine=7
+colorDirectory=69
+colorRepo=6
+colorSep=8
+colorBranch=214
+colorStaged=green
+colorUnstaged=red
+colorUnknown=$colorDirectory
+colorUnpushed=13
+colorUnpulled=10
+
 # Set PS1
-PS1='%F{1}%n%f%F{8}@%f%F{7}%B%m%b%f %F{69}%1~%f %# '
+PS1='%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%1~%f %# '
 
 # Set right prompt VCS options
 setopt PROMPT_SUBST
@@ -10,38 +23,52 @@ zstyle ':vcs_info:git:*' unstagedstr '*'
 RPROMPT='${vcs_info_msg_0_}'
 
 # Get function to check commits
-checkCommits() {
+getCommits() {
 	branch=$(git branch -vv | grep ^\*)
 	branchLocal=$(echo $branch | cut -d " " -f 2)
-	branchRemote=$(echo $branch | cut -d " " -f 4 | sed 's/\[//' | sed 's/\://')
-	echo $branchLocal #TEMP
-	echo $branchRemote #TEMP
+	branchRemote=$(echo $branch | grep -Eo '\[[^(\[|\:)]+' | sed 's/\[//')
+	nCommitsUnpushed=$(git log "$branchRemote".."$branchLocal" | grep -c ^commit)
+	nCommitsUnpulled=$(git log "$branchLocal".."$branchRemote" | grep -c ^commit)
+	unpushed=↑
+	unpulled=↓
+	strUnpushed=%F{$colorUnpushed}%B$unpushed%%b$nCommitsUnpushed%f
+	strUnpulled=%F{$colorUnpulled}%B$unpulled%%b$nCommitsUnpulled%f
+	final=""
+	if [ $nCommitsUnpushed -gt 0 ]
+	then
+		final=$final$strUnpushed
+	fi
+	if [ $nCommitsUnpulled -gt 0 ]
+	then
+		final=$final$strUnpulled
+	fi
+	if [ $final = "" ]
+	then
+		echo ""
+		return
+	fi
+	final=%F{$colorSep}":"%f$final
+	echo $final
 }
-checkCommits
 
 # Get function to set right prompt with VCS info
 buildRightPrompt() {
-	colorRepo=6
-	colorSep=8
-	colorBranch=214
-	colorStaged=green
-	colorUnstaged=red
-	colorUnknown=$colorSep
 	sep=→
 	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%F{$colorBranch}%b%f
 	indicatorsString=%F{$colorStaged}%c%f%F{$colorUnstaged}%u%f
 	indicatorDefault=?
-	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
-	if [ $1 = "action" ];
+	indicatorDefaultString=%F{$colorUnknown}%B$indicatorDefault%%b%f
+	if [ $1 = "action" ]
 	then
 		base=$(echo %B%a%%b "$base")
 	fi
-	if [ $2 = "true" ];
+	if [ $2 = "true" ]
 	then
 		base=$(echo $base$indicatorsString)
 	else
 		base=$(echo $base$indicatorDefaultString)
 	fi
+	base=$(echo $base$(getCommits))
 	echo $base
 }
 

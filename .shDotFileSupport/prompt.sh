@@ -70,7 +70,7 @@ buildRightPrompt() {
 }
 
 # Get function to measure timeout git status (to only show git diffs when economical)
-timeoutGitStatusDiff() {
+decideByTimeout() {
 	inner() {
 		delay=0.15
 		gtimeout $delay zsh -fc "{
@@ -86,7 +86,7 @@ timeoutGitStatusDiff() {
 # Configure and deploy Git regular setup command
 setupGitRegular() {
 	git branch &> /dev/null || return
-	useDiffIndicator=$(timeoutGitStatusDiff)
+	useDiffIndicator=$(decideByTimeout)
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)

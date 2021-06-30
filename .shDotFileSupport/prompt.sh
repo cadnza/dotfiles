@@ -73,7 +73,7 @@ timeoutGitStatusDiff() {
 	inner() {
 		delay=0.15
 		gtimeout $delay zsh -fc "{
-			git status > /dev/null;
+			git status &> /dev/null;
 			echo true;
 		}"
 		echo false;

@@ -9,6 +9,16 @@ zstyle ':vcs_info:git:*' stagedstr '*'
 zstyle ':vcs_info:git:*' unstagedstr '*'
 RPROMPT='${vcs_info_msg_0_}'
 
+# Get function to check commits
+checkCommits() {
+	branch=$(git branch -vv | grep ^\*)
+	branchLocal=$(echo $branch | cut -d " " -f 2)
+	branchRemote=$(echo $branch | cut -d " " -f 4 | sed 's/\[//' | sed 's/\://')
+	echo $branchLocal #TEMP
+	echo $branchRemote #TEMP
+}
+checkCommits
+
 # Get function to set right prompt with VCS info
 buildRightPrompt() {
 	colorRepo=6

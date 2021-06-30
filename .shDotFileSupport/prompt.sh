@@ -69,7 +69,7 @@ buildRightPrompt() {
 	echo $base
 }
 
-# Get function to measure timeout git status (to only show git diffs when economical)
+# Get function to decide whether to show git diff indicators by timeout
 decideByTimeout() {
 	inner() {
 		delay=0.15
@@ -82,6 +82,8 @@ decideByTimeout() {
 	enable=$(echo $(inner) | cut -d " " -f 1)
 	echo $enable
 }
+
+# Get function to decide whether to show git diff indicators by reported repo size
 decideBySize() {
 	sizeKB=$(git count-objects | cut -d " " -f 3)
 	threshold=2000

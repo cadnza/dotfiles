@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/github/v/release/cadnza/shDotFiles)
 
-*Zsh* dotfiles, specifically. Here's what I've got:
+*Zsh* dotfiles, specifically. Here's what you get:
 
 ### A beautiful prompt
 
@@ -12,7 +12,7 @@
 ### Handy Git indicators
 
 - Branch and repo to the right that  disappear when you type over them
-- Smart change indicators that show for staged and unstaged changes *only* when displaying them doesn't slow down the terminal
+- Smart change indicators that show for staged and unstaged changes *only* when displaying them doesn't slow down the terminal (Because it does sometimes. It's terrible.)
 - A subtle indicator for repos that are too large for change indicators
 - Fast unpushed and unpulled commit indicators for all repos, regardless of size
 - No effect on performance in directories that aren't repos
@@ -27,13 +27,15 @@
 
 ### A play area for functions
 
-- All of scripts get sourced on startup
+- All contained scripts get sourced on startup
 
 ### Short files and easy setup
 
 - Because short files are happy files. 🙂
 
-### Syntax highlighting with [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+### Syntax highlighting
+
+- With [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
 ### Aliases, path, etc.
 

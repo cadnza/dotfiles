@@ -97,15 +97,15 @@ decideBySize() {
 
 # Configure and deploy Git regular setup command
 setupGitRegular() {
-	git rev-parse &> /dev/null || return
+	git rev-parse &> /dev/null || {RPROMPT=""; return;}
 	useDiffIndicator=$(decideBySize)
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)
-}
-precmd() {
-	setupGitRegular
 	vcs_info
 	draft='${vcs_info_msg_0_}'
 	RPROMPT=$(echo "$draft $(getCommits $PWD)" | xargs echo -n) # xargs for trimming
+}
+precmd() {
+	setupGitRegular
 }

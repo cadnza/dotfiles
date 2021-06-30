@@ -77,7 +77,7 @@ decideByTimeout() {
 			git status &> /dev/null;
 			echo true;
 		}"
-		echo false;
+		echo false
 	}
 	enable=$(echo $(inner) | cut -d " " -f 1)
 	echo $enable

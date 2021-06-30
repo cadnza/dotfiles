@@ -96,21 +96,3 @@ precmd() {
 	draft='${vcs_info_msg_0_}'
 	RPROMPT="$draft $(getCommits $PWD)" | xargs echo -n # For trimming
 }
-
-# Set right prompt with Git information manually
-#buildRightPrompt() {
-#	gitBranchRaw=$(git branch 2> /dev/null) || return
-#	gitBranch=$(echo $gitBranchRaw | grep ^\* | cut -d " " -f 2)
-#	gitRepoRaw=$(git rev-parse --show-toplevel 2> /dev/null) || return
-#	gitRepo=$(basename $gitRepoRaw)
-#	sep=→
-#	colorRepo=6
-#	colorSep=8
-#	colorBranch=214
-#	final=%B%F{"$colorRepo"}"$gitRepo"%f%b%F{"$colorSep"}"$sep"%f%F{"$colorBranch"}"$gitBranch"%f
-#	echo $final
-#	return
-#}
-#precmd(){
-#	RPROMPT=$(buildRightPrompt)
-#}

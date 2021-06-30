@@ -20,17 +20,17 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' stagedstr '*'
 zstyle ':vcs_info:git:*' unstagedstr '*'
-RPROMPT='${vcs_info_msg_0_}'
 
 # Get function to check commits
 getCommits() {
-	branch=$(git branch -vv | grep ^\* | grep -Eo '\[.+\]')
+	workingDirectory=$1
+	branch=$(git -C $workingDirectory branch -vv | grep ^\* | grep -Eo '\[.+\]')
 	nCommitsUnpushed=$(echo $branch | grep -Eo 'ahead [[:digit:]]+' | cut -d " " -f 2)
 	nCommitsUnpulled=$(echo $branch | grep -Eo 'behind [[:digit:]]+' | cut -d " " -f 2)
 	unpushed=↑
 	unpulled=↓
-	strUnpushed=%F{$colorUnpushed}%B$unpushed%%b$nCommitsUnpushed%f
-	strUnpulled=%F{$colorUnpulled}%B$unpulled%%b$nCommitsUnpulled%f
+	strUnpushed=%F{$colorUnpushed}%B$unpushed%b$nCommitsUnpushed%f
+	strUnpulled=%F{$colorUnpulled}%B$unpulled%b$nCommitsUnpulled%f
 	final=""
 	if [ ${#nCommitsUnpushed} -gt 0 ]
 	then
@@ -45,7 +45,6 @@ getCommits() {
 		echo ""
 		return
 	fi
-	final=%F{$colorSep}":"%f$final
 	echo $final
 }
 
@@ -66,7 +65,7 @@ buildRightPrompt() {
 	else
 		base=$(echo $base$indicatorDefaultString)
 	fi
-	base=$(echo $base$(getCommits))
+	base=$(echo $base)
 	echo $base
 }
 
@@ -96,6 +95,8 @@ setupGitRegular() {
 setupGitRegular
 precmd() {
 	setupGitRegular
+	stringVCS=${vcs_info_msg_0_}
+	RPROMPT="$stringVCS $(getCommits $PWD)"
 }
 
 # Set right prompt with Git information manually

@@ -65,7 +65,6 @@ buildRightPrompt() {
 	else
 		base=$(echo $base$indicatorDefaultString)
 	fi
-	base=$(echo $base)
 	echo $base
 }
 
@@ -85,18 +84,17 @@ timeoutGitStatusDiff() {
 
 # Configure and deploy Git regular setup command
 setupGitRegular() {
-	vcs_info
 	git branch &> /dev/null || return
 	useDiffIndicator=$(timeoutGitStatusDiff)
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)
 }
-setupGitRegular
 precmd() {
 	setupGitRegular
-	stringVCS=${vcs_info_msg_0_}
-	RPROMPT="$stringVCS $(getCommits $PWD)"
+	vcs_info
+	draft='${vcs_info_msg_0_}'
+	RPROMPT="$draft $(getCommits $PWD)"
 }
 
 # Set right prompt with Git information manually

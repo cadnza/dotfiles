@@ -10,16 +10,28 @@ zstyle ':vcs_info:*' unstagedstr '*'
 
 # Set right prompt with VCS info
 buildRightPrompt() {
-	final=%B%F{6}%r%f%%b%F{8}→%f%F{214}%b%f%F{green}%c%f%F{red}%u%f
-	if [ -n "$1" ];
+	colorRepo=6
+	colorSep=8
+	colorBranch=214
+	colorStaged=green
+	colorUnstaged=red
+	colorUnknown=$colorSep
+	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}→%f%F{$colorBranch}%b%f
+	indicatorsString=%F{$colorStaged}%c%f%F{$colorUnstaged}%u%f
+	indicatorDefault=?
+	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
+	if [ $1 = "action" ];
 	then
-		final=$(echo %B%a%%b "$final")
+		base=$(echo %B%a%%b "$base")
 	fi
-	echo $final
+	if [ $2 = "true" ];
+	then
+		base=$(echo $base$indicatorsString)
+	else
+		base=$(echo $base$indicatorDefaultString)
+	fi
+	echo $base
 }
-zstyle ':vcs_info:*' formats $(buildRightPrompt)
-zstyle ':vcs_info:*' actionformats $(buildRightPrompt 1)
-RPROMPT='${vcs_info_msg_0_}'
 
 # Get function to measure timeout git status (to only show git diffs when economical)
 timeoutGitStatusDiff() {
@@ -41,6 +53,9 @@ setupGitRegular() {
 	git branch &> /dev/null || return
 	useDiffIndicator=$(timeoutGitStatusDiff)
 	zstyle ':vcs_info:*' check-for-changes $useDiffIndicator
+	zstyle ':vcs_info:*' formats $(buildRightPrompt noAction $useDiffIndicator)
+	zstyle ':vcs_info:*' actionformats $(buildRightPrompt action $useDiffIndicator)
+	RPROMPT='${vcs_info_msg_0_}'
 }
 setupGitRegular
 precmd() {

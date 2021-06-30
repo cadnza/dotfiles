@@ -2,6 +2,7 @@
 colorUser=1
 colorMachine=7
 colorDirectory=69
+colorAction=15
 colorRepo=6
 colorSep=8
 colorBranch=214
@@ -57,7 +58,7 @@ buildRightPrompt() {
 	indicatorDefaultString=%F{$colorUnknown}%B$indicatorDefault%%b%f
 	if [ $1 = "action" ]
 	then
-		base=$(echo %B%a%%b "$base")
+		base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")
 	fi
 	if [ $2 = "true" ]
 	then

@@ -85,8 +85,8 @@ decideByTimeout() {
 
 # Get function to decide whether to show git diff indicators by reported repo size
 decideBySize() {
-	sizeKB=$(git count-objects | cut -d " " -f 3)
 	threshold=2000
+	sizeKB=$(git count-objects | cut -d " " -f 3)
 	if [ $sizeKB -gt $threshold ]
 	then
 		echo false

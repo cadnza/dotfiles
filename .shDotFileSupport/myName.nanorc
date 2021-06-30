@@ -1,3 +1,0 @@
-# Format occurrences of my name
-syntax "myName" ".*"
-icolor black,mint "joh?n(ath[ao]n)?( (m(ichael)?\.?))?( day?i?le?y)?"

@@ -47,6 +47,7 @@ timeoutGitStatusDiff() {
 	enable=$(echo $(inner) | cut -d " " -f 1)
 	echo $enable
 }
+#TEMP
 
 # Configure and deploy Git regular setup command
 setupGitRegular() {

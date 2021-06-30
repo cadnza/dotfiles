@@ -9,7 +9,7 @@ zstyle ':vcs_info:git:*' stagedstr '*'
 zstyle ':vcs_info:git:*' unstagedstr '*'
 RPROMPT='${vcs_info_msg_0_}'
 
-# Set right prompt with VCS info
+# Get function to set right prompt with VCS info
 buildRightPrompt() {
 	colorRepo=6
 	colorSep=8
@@ -17,7 +17,8 @@ buildRightPrompt() {
 	colorStaged=green
 	colorUnstaged=red
 	colorUnknown=$colorSep
-	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}→%f%F{$colorBranch}%b%f
+	sep=→
+	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%F{$colorBranch}%b%f
 	indicatorsString=%F{$colorStaged}%c%f%F{$colorUnstaged}%u%f
 	indicatorDefault=?
 	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f

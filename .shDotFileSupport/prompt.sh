@@ -96,7 +96,7 @@ decideBySize() {
 # Configure and deploy Git regular setup command
 setupGitRegular() {
 	git branch &> /dev/null || return
-	useDiffIndicator=$(decideByTimeout)
+	useDiffIndicator=$(decideBySize)
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)

@@ -94,5 +94,5 @@ precmd() {
 	setupGitRegular
 	vcs_info
 	draft='${vcs_info_msg_0_}'
-	RPROMPT="$draft $(getCommits $PWD)" | xargs echo -n # For trimming
+	RPROMPT=$(echo "$draft $(getCommits $PWD)" | xargs echo -n) # xargs for trimming
 }

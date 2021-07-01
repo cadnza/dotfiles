@@ -12,6 +12,31 @@ colorUnknown=$colorDirectory
 colorUnpushed=13
 colorUnpulled=10
 
+# Detect OS
+osMacos="darwin"
+osLinux="
+linux
+bsd
+"
+osWindows="
+cygwin
+msys
+"
+osSolaris="solaris"
+osHaiku="haiku"
+if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
+elif [[ $(echo $osMacos | grep -c -i $OSTYPE) -gt 0 ]]
+then
+elif [[ $(echo $osLinux | grep -c -i $OSTYPE) -gt 0 ]]
+then
+elif [[ $(echo $osWindows | grep -c -i $OSTYPE) -gt 0 ]]
+then
+elif [[ $(echo $osSolaris | grep -c -i $OSTYPE) -gt 0 ]]
+then
+elif [[ $(echo $osHaiku | grep -c -i $OSTYPE) -gt 0 ]]
+then
+fi
+
 # Run patch to speed up git completion
 # (I currently don't understand how this works. I'm pending reading into the zsh completion system, but that's not a priority right now.)
 # The fix comes from here:

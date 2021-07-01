@@ -1,8 +1,12 @@
 # Configure prompt colors
-# Note: colorMachine is configured per OS, so it's in setupOS.sh.
 # Standard prompt
 colorUser=1
 colorDirectory=69
+# Machine
+colorMacos=7
+colorLinux=green
+colorWindows=208
+colorOther=7 #TEMP
 # Git
 colorAction=15
 colorRepo=6

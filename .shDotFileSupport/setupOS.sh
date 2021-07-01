@@ -27,7 +27,7 @@ if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
 elif [[ $(isOSmatch $osMacos) = 1 ]]
 then
 	# Set machine prompt color
-	colorMachine=7
+	colorMachine=$colorMacos
 	# Enable syntax highlighting
 	source $(brew --prefix 2> /dev/null)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zshs 2> /dev/null || {
 		showZshInstallInstructions "brew install zsh-syntax-highlighting"
@@ -36,7 +36,7 @@ then
 elif [[ $(isOSmatch $osLinux) = 1 ]]
 then
 	# Set machine prompt color
-	colorMachine=green
+	colorMachine=$colorLinux
 	# Enable syntax highlighting
 	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || {
 		showZshInstallInstructions "sudo apt-get install zsh-syntax-highlighting"
@@ -45,7 +45,7 @@ then
 elif [[ $(isOSmatch $osWindows) = 1 ]]
 then
 	# Set machine prompt color
-	colorMachine=208
+	colorMachine=$colorWindows
 	# Enable syntax highlighting
 	echo "NOTE: zsh-syntax-highlighting isn't available for Windows yet, so syntax highlighting is disabled."
 	# Add Git Bash SDK to path to give Git for Windows' zsh access to Git Bash's functions
@@ -54,7 +54,7 @@ then
 elif [[ $(isOSmatch $osOther) = 1 ]]
 then
 	# Set machine prompt color
-	colorMachine=7 #TEMP
+	colorMachine=$colorOther #TEMP
 fi
 
 # Add aliases for non-macos machines

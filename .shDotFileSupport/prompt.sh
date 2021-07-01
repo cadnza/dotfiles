@@ -1,6 +1,5 @@
 # Set colors
 colorUser=1
-colorMachine=7
 colorDirectory=69
 colorAction=15
 colorRepo=6

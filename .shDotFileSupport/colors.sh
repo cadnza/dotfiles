@@ -1,16 +1,19 @@
 # Configure prompt colors
 # Note: colorMachine is configured per OS, so it's in setupOS.sh.
+# Standard prompt
 colorUser=1
 colorDirectory=69
+# Git
 colorAction=15
 colorRepo=6
-colorSep=8
 colorBranch=214
 colorStaged=green
 colorUnstaged=red
 colorUnknown=$colorDirectory
 colorUnpushed=13
 colorUnpulled=10
+# Global separator
+colorSep=8
 
 # Configure LS colors
 export TERM=xterm-256color

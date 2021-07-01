@@ -24,16 +24,24 @@ msys
 "
 osSolaris="solaris"
 osHaiku="haiku"
+isOSmatch() {
+	if [[ $(echo $1 | grep -c -i $OSTYPE) -gt 0 ]]
+	then
+		echo true
+	else
+		echo ""
+	fi
+}
 if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
-elif [[ $(echo $osMacos | grep -c -i $OSTYPE) -gt 0 ]]
+elif [[ $(isOSmatch $osMacos) -gt 0 ]]
 then
-elif [[ $(echo $osLinux | grep -c -i $OSTYPE) -gt 0 ]]
+elif [[ $(isOSmatch $osLinux) -gt 0 ]]
 then
-elif [[ $(echo $osWindows | grep -c -i $OSTYPE) -gt 0 ]]
+elif [[ $(isOSmatch $osWindows) -gt 0 ]]
 then
-elif [[ $(echo $osSolaris | grep -c -i $OSTYPE) -gt 0 ]]
+elif [[ $(isOSmatch $osSolaris) -gt 0 ]]
 then
-elif [[ $(echo $osHaiku | grep -c -i $OSTYPE) -gt 0 ]]
+elif [[ $(isOSmatch $osHaiku) -gt 0 ]]
 then
 fi
 

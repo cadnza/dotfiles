@@ -16,12 +16,6 @@ source ~/.shDotFileSupport/setupOS.sh
 # Run color setup
 source ~/.shDotFileSupport/colors.sh
 
-# Run setup for work machine
-if [[ $COMPUTERNAME = "TEC-DEV34-WK" ]]
-then
-	source ~/.shDotFileSupport/work.sh
-fi
-
 # Modify path
 source ~/.shDotFileSupport/path.sh
 

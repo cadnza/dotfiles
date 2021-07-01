@@ -22,8 +22,10 @@ osWindows="
 cygwin
 msys
 "
-osSolaris="solaris"
-osHaiku="haiku"
+osOther="
+solaris
+haiku
+"
 isOSmatch() {
 	if [[ $(echo $1 | grep -c -i $OSTYPE) -gt 0 ]]
 	then
@@ -39,9 +41,7 @@ elif [[ $(isOSmatch $osLinux) -gt 0 ]]
 then
 elif [[ $(isOSmatch $osWindows) -gt 0 ]]
 then
-elif [[ $(isOSmatch $osSolaris) -gt 0 ]]
-then
-elif [[ $(isOSmatch $osHaiku) -gt 0 ]]
+elif [[ $(isOSmatch $osOther) -gt 0 ]]
 then
 fi
 

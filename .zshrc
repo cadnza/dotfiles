@@ -24,16 +24,7 @@ source ~/.shDotFileSupport/path.sh
 source ~/.shDotFileSupport/aliases.sh
 
 # Source functions
-funcs=$(ls ~/.shDotFileSupport/functions 2> /dev/null)
-if [[ `echo $funcs | grep \S+ | wc -l` -gt 0 ]];
-then
-	for f in $funcs
-	do
-		eval "source ~/.shDotFileSupport/functions/$f"
-	done
-else
-	#echo "No functions sourced. You'll find them in ~/.shDotFileSupport/functions." # For some reason this causes garbage output after the last echo on Git for Windows SDK. :-/ #TEMP
-fi
+source ~/.shDotFileSupport/functions.sh
 
 # Enable syntax highlighting from Homebrew zsh-syntax-highlighting
 if [[ `which brew | grep "brew not found" | wc -l` -ge 1 ]]; then

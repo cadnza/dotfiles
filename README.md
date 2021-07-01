@@ -25,10 +25,6 @@
 - A nice ruler at 80 characters
 - A scroll bar (Well, an indicator anyway. You can't scroll with it.)
 
-### A play area for functions
-
-- All contained scripts get sourced on startup
-
 ### Short files and easy setup
 
 - Because short files are happy files. 🙂

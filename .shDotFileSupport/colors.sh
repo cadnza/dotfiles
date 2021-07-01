@@ -6,7 +6,7 @@ colorDirectory=69
 colorMacos=7
 colorLinux=green
 colorWindows=208
-colorOther=7 #TEMP
+colorOther=5
 # Git
 colorAction=15
 colorRepo=6

@@ -52,3 +52,10 @@ then
 	# Set machine prompt color
 	colorMachine=7 #TEMP
 fi
+
+# Add aliases for non-macos machines
+if [[ $(isOSmatch $osMacos) = 0 ]]
+then
+	alias ls="ls --color"
+	alias gtimeout="timeout"
+fi

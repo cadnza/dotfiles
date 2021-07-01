@@ -1,4 +1,5 @@
 # Configure prompt colors
+# Note: colorMachine is configured per OS, so it's in setupOS.sh.
 colorUser=1
 colorDirectory=69
 colorAction=15

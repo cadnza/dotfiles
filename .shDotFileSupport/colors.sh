@@ -1,3 +1,16 @@
+# Configure prompt colors
+colorUser=1
+colorDirectory=69
+colorAction=15
+colorRepo=6
+colorSep=8
+colorBranch=214
+colorStaged=green
+colorUnstaged=red
+colorUnknown=$colorDirectory
+colorUnpushed=13
+colorUnpulled=10
+
 # Configure LS colors
 export TERM=xterm-256color
 export CLICOLOR=yes

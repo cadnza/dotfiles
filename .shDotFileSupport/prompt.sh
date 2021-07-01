@@ -1,16 +1,3 @@
-# Set colors
-colorUser=1
-colorDirectory=69
-colorAction=15
-colorRepo=6
-colorSep=8
-colorBranch=214
-colorStaged=green
-colorUnstaged=red
-colorUnknown=$colorDirectory
-colorUnpushed=13
-colorUnpulled=10
-
 # Run patch to speed up git completion
 # (I currently don't understand how this works. I'm pending reading into the zsh completion system, but that's not a priority right now.)
 # The fix comes from here:

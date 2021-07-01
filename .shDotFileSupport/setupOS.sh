@@ -43,6 +43,8 @@ elif [[ $(isOSmatch $osWindows) -gt 0 ]]
 then
 	# Set machine prompt color
 	colorMachine=7 #TEMP
+	# Enable syntax highlighting
+	echo "NOTE: zsh-syntax-highlighting isn't available for Windows yet, so syntax highlighting is disabled."
 elif [[ $(isOSmatch $osOther) -gt 0 ]]
 then
 	# Set machine prompt color

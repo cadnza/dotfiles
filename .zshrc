@@ -10,11 +10,11 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
-# Run settings per OS
-source ~/.shDotFileSupport/setupOS.sh
-
 # Run color setup
 source ~/.shDotFileSupport/colors.sh
+
+# Run settings per OS
+source ~/.shDotFileSupport/setupOS.sh
 
 # Modify path
 source ~/.shDotFileSupport/path.sh

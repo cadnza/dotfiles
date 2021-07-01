@@ -34,7 +34,7 @@ then
 elif [[ $(isOSmatch $osLinux) = 1 ]]
 then
 	# Set machine prompt color
-	colorMachine=7 #TEMP
+	colorMachine=green
 	# Enable syntax highlighting
 	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || {
 		showZshInstallInstructions "sudo apt-get install zsh-syntax-highlighting"

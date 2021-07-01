@@ -1,44 +1,46 @@
 # Group OSs
 osMacos="darwin"
-osLinux="
-linux
-bsd
-"
-osWindows="
-cygwin
-msys
-"
-osOther="
-solaris
-haiku
-"
+osLinux="linux bsd"
+osWindows="cygwin msys"
+osOther="solaris haiku"
 
 # Define function for OS matching
 isOSmatch() {
-	if [[ $(echo $1 | grep -c -i $OSTYPE) -gt 0 ]]
+	ptrn="("$(echo $1 | sed 's/ /\|/g')")"
+	if [[ $(echo $OSTYPE | grep -Pci "$ptrn") -gt 0 ]]
 	then
-		echo true
+		echo 1
 	else
-		echo ""
+		echo 0
 	fi
+}
+
+# Get function to show for zsh-syntax-highlighting install instructions
+showZshInstallInstructions() {
+	cmd=$1
+	echo "To enable syntax highlighting, run \`$1\` and start a new shell."
 }
 
 # Configure settings per OS
 if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
 elif [[ $(isOSmatch $osMacos) -gt 0 ]]
+then
 	# Set machine prompt color
 	# Enable syntax highlighting
+elif [[ $(isOSmatch $osLinux) = 1 ]]
 then
-elif [[ $(isOSmatch $osLinux) -gt 0 ]]
 	# Set machine prompt color
+	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || echo 13
 	# Enable syntax highlighting
-then
 elif [[ $(isOSmatch $osWindows) -gt 0 ]]
-	# Set machine prompt color
-	# Enable syntax highlighting
 then
+	# Set machine prompt color
+	source $(brew --prefix 2> /dev/null)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zshs 2> /dev/null || {
+		showZshInstallInstructions "brew install zsh-syntax-highlighting"
+	}
+	# Enable syntax highlighting
 elif [[ $(isOSmatch $osOther) -gt 0 ]]
+then
 	# Set machine prompt color
 	# Enable syntax highlighting
-then
 fi

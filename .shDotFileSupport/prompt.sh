@@ -12,6 +12,14 @@ colorUnknown=$colorDirectory
 colorUnpushed=13
 colorUnpulled=10
 
+# Run patch to speed up git completion
+# (I currently don't understand how this works. I'm pending reading into the zsh completion system, but that's not a priority right now.)
+# The fix comes from here:
+#     https://stackoverflow.com/questions/9810327/zsh-auto-completion-for-git-takes-significant-amount-of-time-can-i-turn-it-off#9810485
+#__git_files () {
+#	_wanted files expl 'local files' _files
+#}
+
 # Set PS1
 PS1='%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%1~%f %# '
 

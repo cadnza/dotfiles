@@ -10,6 +10,9 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
+# Run settings per OS
+source ~/.shDotFileSupport/setupOS.sh
+
 # Run setup for work machine
 if [[ $COMPUTERNAME = "TEC-DEV34-WK" ]]
 then

@@ -23,7 +23,7 @@ showZshInstallInstructions() {
 
 # Configure settings per OS
 if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
-elif [[ $(isOSmatch $osMacos) -gt 0 ]]
+elif [[ $(isOSmatch $osMacos) = 1 ]]
 then
 	# Set machine prompt color
 	colorMachine=7
@@ -39,13 +39,15 @@ then
 	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || {
 		showZshInstallInstructions "sudo apt-get install zsh-syntax-highlighting"
 	}
-elif [[ $(isOSmatch $osWindows) -gt 0 ]]
+elif [[ $(isOSmatch $osWindows) = 1 ]]
 then
 	# Set machine prompt color
-	colorMachine=7 #TEMP
+	colorMachine= #208
 	# Enable syntax highlighting
 	echo "NOTE: zsh-syntax-highlighting isn't available for Windows yet, so syntax highlighting is disabled."
-elif [[ $(isOSmatch $osOther) -gt 0 ]]
+	# Add Git Bash SDK to path to give Git for Windows' zsh access to Git Bash's functions
+	export PATH=/c/git-sdk-64/usr/bin:$PATH
+elif [[ $(isOSmatch $osOther) = 1 ]]
 then
 	# Set machine prompt color
 	colorMachine=7 #TEMP

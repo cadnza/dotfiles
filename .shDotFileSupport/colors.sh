@@ -1,3 +1,7 @@
+# Load colors
+autoload -U color
+colors
+
 # Configure prompt colors
 # Standard prompt
 colorUser=1

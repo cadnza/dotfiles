@@ -6,7 +6,7 @@ osWindows="cygwin msys"
 # Define function for OS matching
 isOSmatch() {
 	ptrn="("$(echo $1 | sed 's/ /\|/g')")"
-	if [[ $(echo $OSTYPE | LC_ALL=en_US.utf8 grep -Pci "$ptrn") -gt 0 ]]
+	if [[ $(echo $OSTYPE | LC_ALL=en_US.utf8 grep -Eci "$ptrn") -gt 0 ]]
 	then
 		echo 1
 	else

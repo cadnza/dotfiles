@@ -1,5 +1,5 @@
 # Load colors
-autoload -U color
+autoload -U colors
 colors
 
 # Configure prompt colors

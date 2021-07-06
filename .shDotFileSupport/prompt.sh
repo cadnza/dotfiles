@@ -19,7 +19,7 @@ zstyle ':vcs_info:git:*' unstagedstr '*'
 # Get function to check commits
 getCommits() {
 	workingDirectory=$1
-	branch=$(git -C $workingDirectory branch -vv 2> /dev/null || return | grep ^\* | grep -Eo '\[.+\]')
+	branch=$(git -C $workingDirectory branch -vv | grep ^\* | grep -Eo '\[.+\]')
 	nCommitsUnpushed=$(echo $branch | grep -Eo 'ahead [[:digit:]]+' | cut -d " " -f 2)
 	nCommitsUnpulled=$(echo $branch | grep -Eo 'behind [[:digit:]]+' | cut -d " " -f 2)
 	unpushed=↑

@@ -22,3 +22,13 @@ function screenStartJob {
 		eval $CMD
 	fi
 }
+
+# Go to the top level of a Git repo
+
+gd() {
+	root=$(git rev-parse --show-toplevel) 2> /dev/null || {
+		echo \`gd\` only works inside a Git repo.
+		return
+	}
+	cd $root
+}

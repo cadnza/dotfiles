@@ -27,7 +27,7 @@ function screenStartJob {
 
 gd() {
 	root=$(git rev-parse --show-toplevel) 2> /dev/null || {
-		echo \`gd\` only works inside a Git repo.
+		echo -e "\e[32mgd\e[0m only works inside a Git repo."
 		return
 	}
 	cd $root

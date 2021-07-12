@@ -1,4 +1,4 @@
-echo "NOTE: zsh-syntax-highlighting isn't available as a package for your OS yet,"
+echo "NOTE: zsh-syntax-highlighting isn't available as a package for $OS yet,"
 echo -e "but you can source the script directly from the repo by running \e[32mhighlight\e[0m."
 
 highlight() {

@@ -18,10 +18,9 @@ target=$HIGHLIGHTING_DIRECTORY/zsh-syntax-highlighting.zsh
 # Source target script or make highlight function available on failure
 source $target 2> /dev/null || {
 	# Echo messages
-	echo "NOTE: zsh-syntax-highlighting isn't available as a package for $OS"
-	echo -e "yet. You can source it directly from the repo by running \e[32mhighlight\e[0m, which"
-	echo "will enable syntax highlighting until you restart your computer or clear"
-	echo "your temporary files."
+	echo "NOTE: zsh-syntax-highlighting isn't available as a package for $OS yet."
+	echo -e "You can source it directly from the repo by running \e[32mhighlight\e[0m, which will"
+	echo "enable syntax highlighting until the computer's temporary files are cleared."
 	# Define highlight function
 	highlight() {
 		# Return if highlighting is already enabled

@@ -71,7 +71,7 @@ else
 fi
 
 # Add aliases for non-macos machines
-if [[ $workingOS = $osMacos ]]
+if [[ $workingOS != $osMacos ]]
 then
 	alias ls="ls --color"
 	alias gtimeout="timeout"

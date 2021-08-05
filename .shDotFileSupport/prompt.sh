@@ -89,25 +89,18 @@ decideBySize() {
 	echo true
 }
 
-# Configure Git setup command
-setupGitRegular() {
-	git rev-parse &> /dev/null || {RPROMPT=""; return;}
-	useDiffIndicator=$osUseDiffIndicator #$(decideBySize)
+# Configure and run one-time and regular Git setup commands
+setupGitOnce() {
+	useDiffIndicator=$osUseDiffIndicator
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)
 	vcs_info
+}
+setupGitRegular() {
+	git rev-parse &> /dev/null || {RPROMPT=""; return;}
 	draft='${vcs_info_msg_0_}'
 	RPROMPT=$(echo "$draft $(getCommits $PWD)" | xargs echo -n) # xargs for trimming
 }
-
-# Run Git setup command
-# This can be called in precmd if you're using a function to determine whether
-# to show git status indicators. on a per-repo basis. If that's that case, that
-# function should return either `true` or `false` to the `useDiffIndicator`
-# variable in setupGitRegular, and the call should look like this:
-#     precmd() {setupGitRegular}
-# If you're not determining whether to use indicators on a per-repo basis, then
-# you only need to run setupGitRegular once; there's no need to put it in
-# precmd.
-setupGitRegular
+setupGitOnce
+precmd() {setupGitRegular}

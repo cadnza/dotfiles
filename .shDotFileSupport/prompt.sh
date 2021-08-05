@@ -92,7 +92,7 @@ decideBySize() {
 # Configure and deploy Git regular setup command
 setupGitRegular() {
 	git rev-parse &> /dev/null || {RPROMPT=""; return;}
-	useDiffIndicator=$(decideBySize)
+	useDiffIndicator=$osUseDiffIndicator #$(decideBySize)
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)

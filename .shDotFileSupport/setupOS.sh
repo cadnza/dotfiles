@@ -20,6 +20,9 @@ showZshInstallInstructions() {
 	echo "To enable syntax highlighting, run \`$1\` and start a new shell."
 }
 
+# Set default for using git diff indicators
+osUseDiffIndicator=true
+
 # Configure settings per OS
 if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
 # macos
@@ -49,6 +52,8 @@ then
 	source ~/.shDotFileSupport/zshSyntaxHighlightingPull.sh
 	# Add Git Bash SDK to path to give Git for Windows' zsh access to Git Bash's functions
 	export PATH=/c/git-sdk-64/usr/bin:$PATH
+	# Disable git diff indicators
+	osUseDiffIndicator=false
 # Other
 else
 	# Set machine prompt color

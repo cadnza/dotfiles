@@ -89,7 +89,7 @@ decideBySize() {
 	echo true
 }
 
-# Configure and deploy Git regular setup command
+# Configure Git setup command
 setupGitRegular() {
 	git rev-parse &> /dev/null || {RPROMPT=""; return;}
 	useDiffIndicator=$osUseDiffIndicator #$(decideBySize)
@@ -100,6 +100,14 @@ setupGitRegular() {
 	draft='${vcs_info_msg_0_}'
 	RPROMPT=$(echo "$draft $(getCommits $PWD)" | xargs echo -n) # xargs for trimming
 }
-precmd() {
-	setupGitRegular
-}
+
+# Run Git setup command
+# This can be called in precmd if you're using a function to determine whether
+# to show git status indicators. on a per-repo basis. If that's that case, that
+# function should return either `true` or `false` to the `useDiffIndicator`
+# variable in setupGitRegular, and the call should look like this:
+#     precmd() {setupGitRegular}
+# If you're not determining whether to use indicators on a per-repo basis, then
+# you only need to run setupGitRegular once; there's no need to put it in
+# precmd.
+setupGitRegular

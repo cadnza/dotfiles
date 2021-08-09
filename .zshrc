@@ -13,6 +13,9 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
+# Set default text editor
+export EDITOR=nano
+
 # Run color setup
 source ~/.shDotFileSupport/colors.sh
 

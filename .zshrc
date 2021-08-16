@@ -8,8 +8,10 @@ SAVEHIST=1000
 unsetopt nomatch
 bindkey -e
 
-# Set compinstall settings
+# Set compinstall reference
 zstyle :compinstall filename '~/.zshrc'
+
+# Initialize completion
 autoload -Uz compinit
 compinit
 

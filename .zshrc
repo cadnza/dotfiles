@@ -15,6 +15,9 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
+# Enable completion menu selector
+zstyle ':completion:*' menu select
+
 # Set default text editor
 export EDITOR=nano
 

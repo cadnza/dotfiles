@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Add R to path
 export PATH=$PATH:/Library/Frameworks/R.framework/Resources/bin/
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Start a job with a unique ID in a screen and
 # disallow jobs of the same ID until it finishes;
 # Good for hardcoded commands, e.g. in iOS Shortcuts

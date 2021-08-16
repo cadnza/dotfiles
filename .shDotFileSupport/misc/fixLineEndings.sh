@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Verify that we're in the shDotFiles directory
 if [[ $(basename $PWD) = "shDotFiles" ]]
 then

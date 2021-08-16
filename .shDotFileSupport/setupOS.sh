@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Group OSs
 osMacos="darwin"
 osLinux="linux bsd"

@@ -11,12 +11,8 @@ bindkey -e
 # Set compinstall reference
 zstyle :compinstall filename '~/.zshrc'
 
-# Initialize completion
-autoload -Uz compinit
-compinit
-
-# Enable completion menu selector
-zstyle ':completion:*' menu select
+# Run completion settings
+source ~/.shDotFileSupport/completion.sh
 
 # Set default text editor
 export EDITOR=nano

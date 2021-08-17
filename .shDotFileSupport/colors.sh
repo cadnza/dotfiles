@@ -25,10 +25,12 @@ colorUnpulled=10
 # Global separator
 colorSep=8
 
-# Configure LS colors
+# Set Xterm
 export TERM=xterm-256color
+
+# Configure BSD colors
 export CLICOLOR=yes
-#export LSCOLORS=exfxcxdxbxegedabagacad # Commented for now; no need to change the default
+export LSCOLORS=exfxcxdxbxegedabagacad
 
 # Configure man page formatting preferences
 export LESS_TERMCAP_mb=$(print -P "%F{cyan}") # Blink

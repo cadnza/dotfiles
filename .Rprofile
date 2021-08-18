@@ -10,24 +10,41 @@ options(editor="nano")
 # Define function to set prompt ----
 .setPrompt <- function(expr,value,succeeded,visible){
 	# Get function to apply color
-	applyColor <- function(x,fgColor=0,bgColor){
+	applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
+		applyOrReset <- function(colorNum,controlCode){
+			if(!is.na(colorNum))
+				final <- paste0(controlCode,dlm,5,dlm,colorNum)
+			else
+				final <- ""
+			return(final)
+		}
 		ansiStart <- "\033["
 		ansiEnd <- "m"
 		dlm <- ";"
-		fgSeq <- paste0("38",dlm,"5",dlm,fgColor)
-		bgSeq <- paste0("48",dlm,"5",dlm,bgColor)
 		resetSeq <- 0
-		opening <- paste0(ansiStart,fgSeq,dlm,bgSeq,ansiEnd)
+		fgSeq <- applyOrReset(fg,38)
+		bgSeq <- applyOrReset(bg,48)
+		if(bold)
+			fgSeq <- paste0(fgSeq,dlm,1)
+		if(nchar(fgSeq)&nchar(bgSeq))
+			fgbgSeq <- paste0(fgSeq,dlm,bgSeq)
+		else
+			fgbgSeq <- paste0(fgSeq,bgSeq)
+		opening <- paste0(ansiStart,fgbgSeq,ansiEnd)
 		closing <- paste0(ansiStart,resetSeq,ansiEnd)
 		final <- paste0(opening,x,closing)
 		return(final)
 	}
-	# Read environment variables
-	`$USERNAME` <- Sys.getenv("USERNAME")
-	`$COMPUTERNAME` <- Sys.getenv("COMPUTERNAME")
+	# Reset
+	crayon::reset()
 	# Set prompt string
-	#ps1 <- paste0(`$USERNAME`,"@",`$COMPUTERNAME`," ") #TEMP
-	ps1 <- applyColor("Hello",bgColor=208)
+	space <- " "
+	ps1 <- paste0(
+		applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
+		space,
+		applyColor256(">",fg=.colors$colorSep),
+		space
+	)
 	# Formally register prompt
 	options(prompt=ps1)
 	# Return

@@ -8,7 +8,7 @@ then
 	currentlyUntrackeds=$(git ls-files --others --exclude-standard)
 
 	# Get standard list of files
-	fixQueue="$(find . -regex '\.\/\.[A-z0-9]+$')\n$(find -name "*.sh")"
+	fixQueue="$(/usr/bin/find . -regex '\.\/\.[A-z0-9]+$')\n$(/usr/bin/find -name "*.sh")"
 
 	# Start progress bar
 	echo -ne "\r#"

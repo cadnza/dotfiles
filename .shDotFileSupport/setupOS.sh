@@ -48,7 +48,7 @@ then
 	colorMachine=$colorLinux
 	# Enable syntax highlighting
 	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || {
-		showZshInstallInstructions "sudo apt-get install zsh-syntax-highlighting"
+		showZshInstallInstructions "sudo apt install zsh-syntax-highlighting"
 	}
 # Windows
 elif [[ $workingOS = $osWindows ]]

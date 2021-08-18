@@ -11,14 +11,14 @@ bindkey -e
 # Set compinstall reference
 zstyle :compinstall filename '~/.zshrc'
 
+# Run color setup
+source ~/.shDotFileSupport/colors.sh
+
 # Run completion settings
 source ~/.shDotFileSupport/completion.sh
 
 # Set default text editor
 export EDITOR=nano
-
-# Run color setup
-source ~/.shDotFileSupport/colors.sh
 
 # Run settings per OS
 source ~/.shDotFileSupport/setupOS.sh

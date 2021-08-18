@@ -23,3 +23,6 @@ do
 
 # Close loop
 done
+
+# Return to working directory
+cd $OLDPWD

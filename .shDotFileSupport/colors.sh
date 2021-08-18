@@ -10,7 +10,7 @@ colorUser=1
 colorDirectory=69
 # Machine
 colorMacos=7
-colorLinux=green
+colorLinux=2
 colorWindows=208
 colorOther=5
 # Git

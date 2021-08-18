@@ -14,14 +14,14 @@ zstyle :compinstall filename '~/.zshrc'
 # Run color setup
 source ~/.shDotFileSupport/colors.sh
 
+# Run settings per OS
+source ~/.shDotFileSupport/setupOS.sh
+
 # Run completion settings
 source ~/.shDotFileSupport/completion.sh
 
 # Set default text editor
 export EDITOR=nano
-
-# Run settings per OS
-source ~/.shDotFileSupport/setupOS.sh
 
 # Modify path
 source ~/.shDotFileSupport/path.sh

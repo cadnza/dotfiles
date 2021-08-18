@@ -70,8 +70,9 @@ options(editor="nano")
 		error=function(x){
 			return(sourceColors("$HOMEPATH"))
 		},
-		warning=function(x)
+		warning=function(x){
 			return(sourceColors("$HOMEPATH"))
+		}
 	)
 	.colors <- lapply(
 		colorsRaw,

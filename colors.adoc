@@ -50,3 +50,5 @@ Mostly this site <https://geoff.greer.fm/lscolors/>
 | `47`  | Background  | `white`  | `h`  | 2
 
 |===
+
+Note that an argument to `LS_COLORS` gets used as an escape sequence, so if directories are highlighted as `01;34`, then a directory named `Repos` gets echoed as `\e[01;34mRepos\e[0m` (https://unix.stackexchange.com/a/204729[source]). You can put in any escape sequence for any value, _e.g._ `ln=38;5;0;48;5;103` (documentation https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797[here]).

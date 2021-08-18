@@ -36,7 +36,7 @@ if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
 elif [[ $workingOS = $osMacos ]]
 then
 	# Set machine prompt color
-	colorMachine=$colorMacos
+	export colorMachine=$colorMacos
 	# Enable syntax highlighting
 	source $(brew --prefix 2> /dev/null)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || {
 		showZshInstallInstructions "brew install zsh-syntax-highlighting"
@@ -45,7 +45,7 @@ then
 elif [[ $workingOS = $osLinux ]]
 then
 	# Set machine prompt color
-	colorMachine=$colorLinux
+	export colorMachine=$colorLinux
 	# Enable syntax highlighting
 	source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || {
 		showZshInstallInstructions "sudo apt install zsh-syntax-highlighting"
@@ -54,13 +54,13 @@ then
 elif [[ $workingOS = $osWindows ]]
 then
 	# Set machine prompt color
-	colorMachine=$colorWindows
+	export colorMachine=$colorWindows
 	# Enable command to enable zsh-syntax-highlighting
 	source ~/.shDotFileSupport/zshSyntaxHighlightingPull.sh
 # Other
 else
 	# Set machine prompt color
-	colorMachine=$colorOther
+	export colorMachine=$colorOther
 	# Enable command to enable zsh-syntax-highlighting
 	source ~/.shDotFileSupport/zshSyntaxHighlightingPull.sh
 fi

@@ -26,9 +26,6 @@ export EDITOR=nano
 # Modify path
 source ~/.shDotFileSupport/path.sh
 
-# Set aliases
-source ~/.shDotFileSupport/aliases.sh
-
 # Source functions
 source ~/.shDotFileSupport/functions.sh
 

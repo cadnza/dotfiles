@@ -58,8 +58,7 @@ options(editor="nano")
 		final <- system2(
 			"zsh",
 			paste0("-c \"",homeVariable,"/.shDotFileSupport/colors.sh --echo\""),
-			stdout=TRUE,
-			invisible=FALSE
+			stdout=TRUE
 		)
 		return(final)
 	}

@@ -6,24 +6,32 @@ colors
 
 # Configure prompt colors
 # Standard prompt
-colorUser=1
-colorDirectory=69
+export colorUser=1
+export colorDirectory=69
 # Machine
-colorMacos=7
-colorLinux=2
-colorWindows=208
-colorOther=5
+export colorMacos=7
+export colorLinux=2
+export colorWindows=208
+export colorOther=5
 # Git
-colorAction=15
-colorRepo=6
-colorBranch=214
-colorStaged=2
-colorUnstaged=9
-colorUnknown=$colorDirectory
-colorUnpushed=13
-colorUnpulled=10
+export colorAction=15
+export colorRepo=6
+export colorBranch=214
+export colorStaged=2
+export colorUnstaged=9
+export colorUnknown=$colorDirectory
+export colorUnpushed=13
+export colorUnpulled=10
 # Global separator
-colorSep=8
+export colorSep=8
+
+# Echo color variables if requested (for using colors with other interpreters, e.g. R)
+[[ $1 = '--echo' ]] && {
+	cd $(dirname $0)
+	source setupOS.sh --getColorMachine 2> /dev/null
+	typeset | grep '^color'
+	cd $OLDPWD
+}
 
 # Set Xterm
 export TERM=xterm-256color

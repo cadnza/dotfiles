@@ -8,8 +8,11 @@ formals(quit)$save <- formals(q)$save <- "no"
 options(editor="nano")
 # Define function to set prompt
 setPrompt <- function(expr,value,succeeded,visible){
+	# Read environment variables
+	`$USERNAME` <- Sys.getenv("USERNAME")
+	`$COMPUTERNAME` <- Sys.getenv("COMPUTERNAME")
 	# Set prompt string
-	ps1 <- paste(value," ") #TEMP
+	ps1 <- paste0(`$USERNAME`,"@",`$COMPUTERNAME`," ") #TEMP
 	# Formally register prompt
 	options(prompt=ps1)
 	# Return
@@ -18,8 +21,26 @@ setPrompt <- function(expr,value,succeeded,visible){
 
 # Define .First function that's called on startup ----
 .First <- function(){
+	# Get colors from colors.sh
+	tColors <- system2(
+		"zsh",
+		c("-c \"$HOMEPATH/.shDotFileSupport/colors.sh --echo\""),
+		stdout=TRUE,
+		invisible=FALSE
+	)
+	tColors <- lapply(
+		colorsRaw,
+		function(x)
+			strsplit(x,"=")[[1]][2]
+	)
+	names(tColors) <- sapply(
+		colorsRaw,
+		function(x)
+			strsplit(x,"=")[[1]][1],
+		USE.NAMES=FALSE
+	)
 	# Call prompt function with empty parameters
 	setPrompt(NA,NA,NA,NA)
-	# Set prompt function to run every time
+	# Register prompt function as callback (see docs)
 	addTaskCallback(setPrompt)
 }

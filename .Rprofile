@@ -68,9 +68,11 @@ options(editor="nano")
 			sourceColors("$HOME")
 		},
 		error=function(x){
+			print(x) #TEMP
 			return(sourceColors("$HOMEPATH"))
 		},
 		warning=function(x){
+			print(x) #TEMP
 			return(sourceColors("$HOMEPATH"))
 		}
 	)

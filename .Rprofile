@@ -54,11 +54,24 @@ options(editor="nano")
 # Define .First function that's called on startup ----
 .First <- function(){
 	# Get colors from colors.sh
-	colorsRaw <- system2(
-		"zsh",
-		c("-c \"$HOMEPATH/.shDotFileSupport/colors.sh --echo\""),
-		stdout=TRUE,
-		invisible=FALSE
+	sourceColors <- function(homeVariable){
+		final <- system2(
+			"zsh",
+			paste0("-c \"",homeVariable,"/.shDotFileSupport/colors.sh --echo\""),
+			stdout=TRUE,
+			invisible=FALSE
+		)
+		return(final)
+	}
+	colorsRaw <- tryCatch(
+		{
+			sourceColors("$HOME")
+		},
+		error=function(x){
+			return(sourceColors("$HOMEPATH"))
+		},
+		warning=function(x)
+			return(sourceColors("$HOMEPATH"))
 	)
 	.colors <- lapply(
 		colorsRaw,

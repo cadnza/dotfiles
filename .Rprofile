@@ -60,16 +60,16 @@ options(editor="nano")
 	diffDefault <- "?"
 	# Get diff indicators
 	checkForHushdiff <- function(homeVariable)
-		return(file.exists(paste0(homeVariable,"/.hushdiff")))
+		return(file.exists(paste0(Sys.getenv(homeVariable),"/.hushdiff")))
 	hushDiffs <- tryCatch(
 		{
-			checkForHushdiff("$HOME")
+			checkForHushdiff("HOME")
 		},
 		error=function(x){
-			return(checkForHushdiff("$HOMEPATH"))
+			return(checkForHushdiff("HOMEPATH"))
 		},
 		warning=function(x){
-			return(checkForHushdiff("$HOMEPATH"))
+			return(checkForHushdiff("HOMEPATH"))
 		}
 	)
 	if(!hushDiffs){
@@ -145,20 +145,20 @@ options(editor="nano")
 	sourceColors <- function(homeVariable){
 		final <- system2(
 			"zsh",
-			paste0(homeVariable,"/.shDotFileSupport/colors.sh --echo"),
+			paste0(Sys.getenv(homeVariable),"/.shDotFileSupport/colors.sh --echo"),
 			stdout=TRUE
 		)
 		return(final)
 	}
 	colorsRaw <- tryCatch(
 		{
-			sourceColors("$HOME")
+			sourceColors("HOME")
 		},
 		error=function(x){
-			return(sourceColors("$HOMEPATH"))
+			return(sourceColors("HOMEPATH"))
 		},
 		warning=function(x){
-			return(sourceColors("$HOMEPATH"))
+			return(sourceColors("HOMEPATH"))
 		}
 	)
 	.colors <- lapply(

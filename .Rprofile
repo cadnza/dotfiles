@@ -67,19 +67,12 @@ gwd <- function(){
 	diffStaged <- "+"
 	diffDefault <- "?"
 	# Get diff indicators
-	checkForHushdiff <- function(homeVariable)
-		return(file.exists(paste0(Sys.getenv(homeVariable),"/.hushdiff")))
-	hushDiffs <- tryCatch(
-		{
-			checkForHushdiff("HOME")
-		},
-		error=function(x){
-			return(checkForHushdiff("HOMEPATH"))
-		},
-		warning=function(x){
-			return(checkForHushdiff("HOMEPATH"))
-		}
-	)
+	checkForHushdiff <- function(homeVariable){
+		return(file.exists(file.path(Sys.getenv(homeVariable),".hushdiff")))
+	}
+	hushDiffs <- checkForHushdiff("HOME")
+	if(!hushDiffs)
+		hushDiffs <- checkForHushdiff("HOMEPATH")
 	if(!hushDiffs){
 		if(length(system2("git","diff --numstat",stdout=TRUE)))
 			diUnstaged <- .applyColor256(diffUnstaged,.colors$colorUnstaged)

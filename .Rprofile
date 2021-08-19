@@ -7,6 +7,13 @@ formals(quit)$save <- formals(q)$save <- "no"
 # Set text editor ----
 options(editor="nano")
 
+# Define function to quote wd ----
+gwd <- function(){
+	final <- system2("zsh","-c pwd",stdout=TRUE)
+	final <- paste0("\"",final,"\"")
+	return(final)
+}
+
 # Define function to apply color ----
 .applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
 	useColors <- FALSE
@@ -45,7 +52,7 @@ options(editor="nano")
 	# Check for git repo
 	isGitRepo <- tryCatch(
 		{
-			system2("git",c("-C",getwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
+			system2("git",c("-C",gwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
 			TRUE
 		},
 		warning=function(x)
@@ -89,7 +96,7 @@ options(editor="nano")
 	# Get branch string
 	branch <- system2(
 		"git",
-		c("-C",getwd(),"branch -vv","| grep ^\\* | grep -Eo '\\[.+\\]'"),
+		c("-C",gwd(),"branch -vv","| grep ^\\* | grep -Eo '\\[.+\\]'"),
 		stdout=TRUE
 	)
 	# Extract unpushed and unpulled commits

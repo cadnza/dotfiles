@@ -47,9 +47,36 @@ options(editor="nano")
 	)
 	if(isGitRepo){
 		# Set indicators
-		unpushed="↑"
-		unpulled="↓"
-		diff="*"
+		unpushed <- "↑"
+		unpulled <- "↓"
+		diff <- "*"
+		# Get diff indicators
+		checkForHushdiff <- function(homeVariable)
+			return(file.exists(paste0(homeVariable,"/.hushdiff")))
+		hushDiffs <- tryCatch(
+			{
+				checkForHushdiff("$HOME")
+			},
+			error=function(x){
+				return(checkForHushdiff("$HOMEPATH"))
+			},
+			warning=function(x){
+				return(checkForHushdiff("$HOMEPATH"))
+			}
+		)
+		if(!hushDiffs){
+			if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
+				diStaged <- .applyColor256(diff,.colors$colorStaged)
+			else
+				diStaged <- ""
+			if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
+				diUnstaged <- .applyColor256(diff,.colors$colorUnstaged)
+			else
+				diUnstaged <- ""
+			diFull <- paste0(diStaged,diUnstaged)
+		}else{
+			diFull <- ""
+		}
 		# Get branch string
 		branch <- system2(
 			"git",
@@ -79,24 +106,25 @@ options(editor="nano")
 		strUnpushed <- formatNcommits(nCommitsUnpushed,unpushed,.colors$colorUnpushed)
 		strUnpulled <- formatNcommits(nCommitsUnpulled,unpulled,.colors$colorUnpulled)
 		strUnsynced <- paste0(strUnpushed,strUnpulled)
-		# Get diff indicators
-		# ROAD WORK #TEMP
-		return(strUnsynced) #TEMP
+		# Combine git string
+		gitString <- trimws(paste(diFull,strUnsynced))
+		# Return
+		return(gitString)
 	}else{
 		# Return empty string if not a git repo
-		return("")
+		return("") #TEMP
 	}
 }
 
 # Define function to set prompt ----
 .setPrompt <- function(expr,value,succeeded,visible){
-	print(.getGitInfo()) #TEMP
 	# Reset
 	crayon::reset()
 	# Set prompt string
 	space <- " "
 	ps1 <- paste0(
 		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
+		.getGitInfo(),
 		space,
 		.applyColor256(">",fg=.colors$colorSep),
 		space

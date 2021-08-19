@@ -57,7 +57,7 @@ options(editor="nano")
 	sourceColors <- function(homeVariable){
 		final <- system2(
 			"zsh",
-			paste0("-c \"",homeVariable,"/.shDotFileSupport/colors.sh --echo\""),
+			paste0(homeVariable,"/.shDotFileSupport/colors.sh --echo"),
 			stdout=TRUE
 		)
 		return(final)
@@ -67,11 +67,9 @@ options(editor="nano")
 			sourceColors("$HOME")
 		},
 		error=function(x){
-			print(x) #TEMP
 			return(sourceColors("$HOMEPATH"))
 		},
 		warning=function(x){
-			print(x) #TEMP
 			return(sourceColors("$HOMEPATH"))
 		}
 	)

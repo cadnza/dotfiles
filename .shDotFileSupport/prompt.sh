@@ -15,8 +15,8 @@ PS1='%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirect
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' stagedstr '*'
 zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '+'
 
 # Get function to check commits
 getCommits() {
@@ -49,7 +49,7 @@ getCommits() {
 buildRightPrompt() {
 	sep=→
 	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%F{$colorBranch}%b%f
-	indicatorsString=%F{$colorStaged}%c%f%F{$colorUnstaged}%u%f
+	indicatorsString=%F{$colorUnstaged}%u%f%F{$colorStaged}%c%f
 	indicatorDefault=?
 	indicatorDefaultString=%F{$colorUnknown}%B$indicatorDefault%%b%f
 	if [ $1 = "action" ]

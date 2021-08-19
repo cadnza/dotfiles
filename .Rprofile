@@ -56,7 +56,8 @@ options(editor="nano")
 	# Set symbols
 	unpushed <- "↑"
 	unpulled <- "↓"
-	diff <- "*"
+	diffUnstaged <- "*"
+	diffStaged <- "+"
 	diffDefault <- "?"
 	# Get diff indicators
 	checkForHushdiff <- function(homeVariable)
@@ -73,15 +74,15 @@ options(editor="nano")
 		}
 	)
 	if(!hushDiffs){
-		if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
-			diStaged <- .applyColor256(diff,.colors$colorStaged)
-		else
-			diStaged <- ""
-		if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
-			diUnstaged <- .applyColor256(diff,.colors$colorUnstaged)
+		if(length(system2("git","diff --numstat",stdout=TRUE)))
+			diUnstaged <- .applyColor256(diffUnstaged,.colors$colorUnstaged)
 		else
 			diUnstaged <- ""
-		diFull <- paste0(diStaged,diUnstaged)
+		if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
+			diStaged <- .applyColor256(diffStaged,.colors$colorStaged)
+		else
+			diStaged <- ""
+		diFull <- paste0(diUnstaged,diStaged)
 	}else{
 		diFull <- .applyColor256(diffDefault,fg=.colors$colorUnknown,bold=TRUE)
 	}
@@ -102,7 +103,7 @@ options(editor="nano")
 	)[[1]][2]
 	# Format unpushed and unpulled indicators
 	formatNcommits <- function(nCommits,ind,colorNum){
-		if(nchar(nCommits))
+		if(!is.na(nCommits))
 			final <- paste0(
 				.applyColor256(paste0(ind),fg=colorNum,bold=TRUE),
 				.applyColor256(paste0(nCommits),fg=colorNum)
@@ -173,7 +174,7 @@ options(editor="nano")
 		USE.NAMES=FALSE
 	)
 	.GlobalEnv$.colors <- .colors
-	#setwd("/Users/cadnza/Repos/testRepo") #TEMP
+	#setwd("/Users/cadnza/Repos/shDotFiles") #TEMP
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)

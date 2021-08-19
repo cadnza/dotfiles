@@ -127,7 +127,6 @@ options(editor="nano")
 	# Set prompt string
 	space <- " "
 	ps1 <- paste0(
-		"\n",
 		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
 		.getGitInfo(TRUE),
 		space,

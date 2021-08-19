@@ -169,7 +169,7 @@ options(editor="nano")
 		USE.NAMES=FALSE
 	)
 	.GlobalEnv$.colors <- .colors
-	setwd("/Users/cadnza/Repos/testRepo") #TEMP
+	#setwd("/Users/cadnza/Repos/testRepo") #TEMP
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)

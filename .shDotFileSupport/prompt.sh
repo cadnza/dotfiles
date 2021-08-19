@@ -51,7 +51,7 @@ buildRightPrompt() {
 	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%F{$colorBranch}%b%f
 	indicatorsString=%F{$colorUnstaged}%u%f%F{$colorStaged}%c%f
 	indicatorDefault=?
-	indicatorDefaultString=%F{$colorUnknown}%B$indicatorDefault%%b%f
+	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
 	if [ $1 = "action" ]
 	then
 		base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")

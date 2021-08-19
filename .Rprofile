@@ -84,7 +84,7 @@ options(editor="nano")
 			diStaged <- ""
 		diFull <- paste0(diUnstaged,diStaged)
 	}else{
-		diFull <- .applyColor256(diffDefault,fg=.colors$colorUnknown,bold=TRUE)
+		diFull <- .applyColor256(paste0("_",diffDefault),fg=.colors$colorUnknown,bold=TRUE)
 	}
 	# Get branch string
 	branch <- system2(
@@ -119,6 +119,7 @@ options(editor="nano")
 	strUnsynced <- paste0(strUnpushed,strUnpulled)
 	# Combine git string
 	gitString <- trimws(paste(diFull,strUnsynced))
+	gitString <- gsub("_"," ",gitString)
 	# Return
 	return(gitString)
 }

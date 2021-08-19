@@ -89,9 +89,11 @@ gwd <- function(){
 	# Get branch string
 	branch <- system2(
 		"git",
-		c("-C",gwd(),"branch -vv","| grep ^\\* | grep -Eo '\\[.+\\]'"),
+		paste("-C",getwd(),"branch -vv"),
 		stdout=TRUE
 	)
+	branch <- branch[grepl("^\\*",branch)]
+	branch <- stringr::str_match(branch,"\\[.+\\]")[1,1]
 	# Extract unpushed and unpulled commits
 	nCommitsUnpushed <- strsplit(
 		stringr::str_match(branch,"ahead \\d+")[1,1],

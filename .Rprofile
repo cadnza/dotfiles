@@ -9,6 +9,9 @@ options(editor="nano")
 
 # Define function to apply color ----
 .applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
+	useColors <- FALSE
+	if(!useColors)
+		return(x)
 	applyOrReset <- function(colorNum,controlCode){
 		if(!is.na(colorNum))
 			final <- paste0(controlCode,dlm,5,dlm,colorNum)
@@ -124,8 +127,9 @@ options(editor="nano")
 	# Set prompt string
 	space <- " "
 	ps1 <- paste0(
+		"\n",
 		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
-		.getGitInfo(FALSE),
+		.getGitInfo(TRUE),
 		space,
 		.applyColor256(">",fg=.colors$colorSep),
 		space

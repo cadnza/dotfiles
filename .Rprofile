@@ -138,6 +138,8 @@ gwd <- function(){
 	)
 	# Formally register prompt
 	options(prompt=ps1)
+	# Formally register continued prompt as blank spaces of same length as prompt
+	options(continue=strrep(" ",nchar(ps1)))
 	# Return
 	return(TRUE)
 }

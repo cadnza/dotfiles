@@ -5,6 +5,8 @@ autoload -U colors
 colors
 
 # Configure prompt colors
+# Global separator
+export colorSep=8
 # Standard prompt
 export colorUser=1
 export colorDirectory=69
@@ -19,11 +21,9 @@ export colorRepo=6
 export colorBranch=214
 export colorStaged=2
 export colorUnstaged=9
-export colorUnknown=$colorDirectory
+export colorUnknown=$colorSep
 export colorUnpushed=13
 export colorUnpulled=10
-# Global separator
-export colorSep=8
 
 # Echo color variables if requested (for using colors with other interpreters, e.g. R)
 [[ $1 = '--echo' ]] && {

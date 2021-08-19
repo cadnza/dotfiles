@@ -10,7 +10,7 @@ options(editor="nano")
 # Define function to quote wd ----
 gwd <- function(){
 	final <- system2("zsh","-c pwd",stdout=TRUE)
-	final <- paste0("'",final,"'")
+	final <- paste0("\"",final,"\"")
 	return(final)
 }
 

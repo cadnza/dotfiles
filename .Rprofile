@@ -7,42 +7,98 @@ formals(quit)$save <- formals(q)$save <- "no"
 # Set text editor ----
 options(editor="nano")
 
-# Define function to set prompt ----
-.setPrompt <- function(expr,value,succeeded,visible){
-	# Get function to apply color
-	applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
-		applyOrReset <- function(colorNum,controlCode){
-			if(!is.na(colorNum))
-				final <- paste0(controlCode,dlm,5,dlm,colorNum)
+# Define function to apply color ----
+.applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
+	applyOrReset <- function(colorNum,controlCode){
+		if(!is.na(colorNum))
+			final <- paste0(controlCode,dlm,5,dlm,colorNum)
+		else
+			final <- ""
+		return(final)
+	}
+	ansiStart <- "\033["
+	ansiEnd <- "m"
+	dlm <- ";"
+	resetSeq <- 0
+	fgSeq <- applyOrReset(fg,38)
+	bgSeq <- applyOrReset(bg,48)
+	if(bold)
+		fgSeq <- paste0(fgSeq,dlm,1)
+	if(nchar(fgSeq)&nchar(bgSeq))
+		fgbgSeq <- paste0(fgSeq,dlm,bgSeq)
+	else
+		fgbgSeq <- paste0(fgSeq,bgSeq)
+	opening <- paste0(ansiStart,fgbgSeq,ansiEnd)
+	closing <- paste0(ansiStart,resetSeq,ansiEnd)
+	final <- paste0(opening,x,closing)
+	return(final)
+}
+
+# Define function to get git info ----
+.getGitInfo <- function(){
+	# Check for git repo
+	isGitRepo <- tryCatch(
+		{
+			system2("git",c("-C",getwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
+			TRUE
+		},
+		warning=function(x)
+			return(FALSE)
+	)
+	if(isGitRepo){
+		# Set indicators
+		unpushed="↑"
+		unpulled="↓"
+		diff="*"
+		# Get branch string
+		branch <- system2(
+			"git",
+			c("-C",getwd(),"branch -vv","| grep ^\\* | grep -Eo '\\[.+\\]'"),
+			stdout=TRUE
+		)
+		# Extract unpushed and unpulled commits
+		nCommitsUnpushed <- strsplit(
+			stringr::str_match(branch,"ahead \\d+")[1,1],
+			" "
+		)[[1]][2]
+		nCommitsUnpulled <- strsplit(
+			stringr::str_match(branch,"behind \\d+")[1,1],
+			" "
+		)[[1]][2]
+		# Format unpushed and unpulled indicators
+		formatNcommits <- function(nCommits,ind,colorNum){
+			if(nchar(nCommits))
+				final <- paste0(
+					.applyColor256(paste0(ind),fg=colorNum,bold=TRUE),
+					.applyColor256(paste0(nCommits),fg=colorNum)
+				)
 			else
 				final <- ""
 			return(final)
 		}
-		ansiStart <- "\033["
-		ansiEnd <- "m"
-		dlm <- ";"
-		resetSeq <- 0
-		fgSeq <- applyOrReset(fg,38)
-		bgSeq <- applyOrReset(bg,48)
-		if(bold)
-			fgSeq <- paste0(fgSeq,dlm,1)
-		if(nchar(fgSeq)&nchar(bgSeq))
-			fgbgSeq <- paste0(fgSeq,dlm,bgSeq)
-		else
-			fgbgSeq <- paste0(fgSeq,bgSeq)
-		opening <- paste0(ansiStart,fgbgSeq,ansiEnd)
-		closing <- paste0(ansiStart,resetSeq,ansiEnd)
-		final <- paste0(opening,x,closing)
-		return(final)
+		strUnpushed <- formatNcommits(nCommitsUnpushed,unpushed,.colors$colorUnpushed)
+		strUnpulled <- formatNcommits(nCommitsUnpulled,unpulled,.colors$colorUnpulled)
+		strUnsynced <- paste0(strUnpushed,strUnpulled)
+		# Get diff indicators
+		# ROAD WORK #TEMP
+		return(strUnsynced) #TEMP
+	}else{
+		# Return empty string if not a git repo
+		return("")
 	}
+}
+
+# Define function to set prompt ----
+.setPrompt <- function(expr,value,succeeded,visible){
+	print(.getGitInfo()) #TEMP
 	# Reset
 	crayon::reset()
 	# Set prompt string
 	space <- " "
 	ps1 <- paste0(
-		applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
+		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
 		space,
-		applyColor256(">",fg=.colors$colorSep),
+		.applyColor256(">",fg=.colors$colorSep),
 		space
 	)
 	# Formally register prompt
@@ -85,6 +141,7 @@ options(editor="nano")
 		USE.NAMES=FALSE
 	)
 	.GlobalEnv$.colors <- .colors
+	setwd("/Users/cadnza/Repos/testRepo") #TEMP
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)

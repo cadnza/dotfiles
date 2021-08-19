@@ -35,7 +35,10 @@ options(editor="nano")
 }
 
 # Define function to get git info ----
-.getGitInfo <- function(){
+.getGitInfo <- function(include=TRUE){
+	# Return if not included
+	if(!include)
+		return("")
 	# Check for git repo
 	isGitRepo <- tryCatch(
 		{
@@ -45,75 +48,73 @@ options(editor="nano")
 		warning=function(x)
 			return(FALSE)
 	)
-	if(isGitRepo){
-		# Set indicators
-		unpushed <- "↑"
-		unpulled <- "↓"
-		diff <- "*"
-		# Get diff indicators
-		checkForHushdiff <- function(homeVariable)
-			return(file.exists(paste0(homeVariable,"/.hushdiff")))
-		hushDiffs <- tryCatch(
-			{
-				checkForHushdiff("$HOME")
-			},
-			error=function(x){
-				return(checkForHushdiff("$HOMEPATH"))
-			},
-			warning=function(x){
-				return(checkForHushdiff("$HOMEPATH"))
-			}
-		)
-		if(!hushDiffs){
-			if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
-				diStaged <- .applyColor256(diff,.colors$colorStaged)
-			else
-				diStaged <- ""
-			if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
-				diUnstaged <- .applyColor256(diff,.colors$colorUnstaged)
-			else
-				diUnstaged <- ""
-			diFull <- paste0(diStaged,diUnstaged)
-		}else{
-			diFull <- ""
+	if(!isGitRepo)
+		return("")
+	# Set symbols
+	unpushed <- "↑"
+	unpulled <- "↓"
+	diff <- "*"
+	diffDefault <- "?"
+	# Get diff indicators
+	checkForHushdiff <- function(homeVariable)
+		return(file.exists(paste0(homeVariable,"/.hushdiff")))
+	hushDiffs <- tryCatch(
+		{
+			checkForHushdiff("$HOME")
+		},
+		error=function(x){
+			return(checkForHushdiff("$HOMEPATH"))
+		},
+		warning=function(x){
+			return(checkForHushdiff("$HOMEPATH"))
 		}
-		# Get branch string
-		branch <- system2(
-			"git",
-			c("-C",getwd(),"branch -vv","| grep ^\\* | grep -Eo '\\[.+\\]'"),
-			stdout=TRUE
-		)
-		# Extract unpushed and unpulled commits
-		nCommitsUnpushed <- strsplit(
-			stringr::str_match(branch,"ahead \\d+")[1,1],
-			" "
-		)[[1]][2]
-		nCommitsUnpulled <- strsplit(
-			stringr::str_match(branch,"behind \\d+")[1,1],
-			" "
-		)[[1]][2]
-		# Format unpushed and unpulled indicators
-		formatNcommits <- function(nCommits,ind,colorNum){
-			if(nchar(nCommits))
-				final <- paste0(
-					.applyColor256(paste0(ind),fg=colorNum,bold=TRUE),
-					.applyColor256(paste0(nCommits),fg=colorNum)
-				)
-			else
-				final <- ""
-			return(final)
-		}
-		strUnpushed <- formatNcommits(nCommitsUnpushed,unpushed,.colors$colorUnpushed)
-		strUnpulled <- formatNcommits(nCommitsUnpulled,unpulled,.colors$colorUnpulled)
-		strUnsynced <- paste0(strUnpushed,strUnpulled)
-		# Combine git string
-		gitString <- trimws(paste(diFull,strUnsynced))
-		# Return
-		return(gitString)
+	)
+	if(!hushDiffs){
+		if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
+			diStaged <- .applyColor256(diff,.colors$colorStaged)
+		else
+			diStaged <- ""
+		if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
+			diUnstaged <- .applyColor256(diff,.colors$colorUnstaged)
+		else
+			diUnstaged <- ""
+		diFull <- paste0(diStaged,diUnstaged)
 	}else{
-		# Return empty string if not a git repo
-		return("") #TEMP
+		diFull <- .applyColor256(diffDefault,fg=.colors$colorUnknown,bold=TRUE)
 	}
+	# Get branch string
+	branch <- system2(
+		"git",
+		c("-C",getwd(),"branch -vv","| grep ^\\* | grep -Eo '\\[.+\\]'"),
+		stdout=TRUE
+	)
+	# Extract unpushed and unpulled commits
+	nCommitsUnpushed <- strsplit(
+		stringr::str_match(branch,"ahead \\d+")[1,1],
+		" "
+	)[[1]][2]
+	nCommitsUnpulled <- strsplit(
+		stringr::str_match(branch,"behind \\d+")[1,1],
+		" "
+	)[[1]][2]
+	# Format unpushed and unpulled indicators
+	formatNcommits <- function(nCommits,ind,colorNum){
+		if(nchar(nCommits))
+			final <- paste0(
+				.applyColor256(paste0(ind),fg=colorNum,bold=TRUE),
+				.applyColor256(paste0(nCommits),fg=colorNum)
+			)
+		else
+			final <- ""
+		return(final)
+	}
+	strUnpushed <- formatNcommits(nCommitsUnpushed,unpushed,.colors$colorUnpushed)
+	strUnpulled <- formatNcommits(nCommitsUnpulled,unpulled,.colors$colorUnpulled)
+	strUnsynced <- paste0(strUnpushed,strUnpulled)
+	# Combine git string
+	gitString <- trimws(paste(diFull,strUnsynced))
+	# Return
+	return(gitString)
 }
 
 # Define function to set prompt ----
@@ -124,7 +125,7 @@ options(editor="nano")
 	space <- " "
 	ps1 <- paste0(
 		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
-		.getGitInfo(),
+		.getGitInfo(FALSE),
 		space,
 		.applyColor256(">",fg=.colors$colorSep),
 		space

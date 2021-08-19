@@ -57,6 +57,8 @@ then
 	export colorMachine=$colorWindows
 	# Enable command to enable zsh-syntax-highlighting
 	source ~/.shDotFileSupport/zshSyntaxHighlightingPull.sh
+	# Make sure /usr/bin is first in path
+	export PATH=/usr/bin:$PATH
 # Other
 else
 	# Set machine prompt color

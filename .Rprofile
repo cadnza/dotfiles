@@ -10,7 +10,7 @@ options(editor="nano")
 # Define function to quote wd ----
 gwd <- function(){
 	final <- system2("zsh","-c pwd",stdout=TRUE)
-	final <- paste0("\"",final,"\"")
+	final <- paste0("'",final,"'")
 	return(final)
 }
 
@@ -52,7 +52,7 @@ gwd <- function(){
 	# Check for git repo
 	isGitRepo <- tryCatch(
 		{
-			system2("git",c("-C",gwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
+			system2("env",paste("git -C",gwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
 			TRUE
 		},
 		warning=function(x)

@@ -176,7 +176,6 @@ gwd <- function(){
 		USE.NAMES=FALSE
 	)
 	.GlobalEnv$.colors <- .colors
-	#setwd("/Users/cadnza/Repos/shDotFiles") #TEMP
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)

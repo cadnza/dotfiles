@@ -8,7 +8,7 @@ formals(quit)$save <- formals(q)$save <- "no"
 options(editor="nano")
 
 # Define function to quote wd ----
-gwd <- function(){
+.gwd <- function(){
 	final <- system2("zsh","-c pwd",stdout=TRUE)
 	final <- paste0("\"",final,"\"")
 	return(final)
@@ -52,7 +52,7 @@ gwd <- function(){
 	# Check for git repo
 	isGitRepo <- tryCatch(
 		{
-			system2("env",paste("git -C",gwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
+			system2("env",paste("git -C",.gwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
 			TRUE
 		},
 		warning=function(x)
@@ -89,7 +89,7 @@ gwd <- function(){
 	# Get branch string
 	branch <- system2(
 		"git",
-		paste("-C",getwd(),"branch -vv"),
+		paste("-C",.gwd(),"branch -vv"),
 		stdout=TRUE
 	)
 	branch <- branch[grepl("^\\*",branch)]

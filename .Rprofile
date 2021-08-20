@@ -61,8 +61,12 @@ options(editor="nano")
 	if(!isGitRepo)
 		return("")
 	# Set symbols
-	unpushed <- "/" #intToUtf8(8593)
-	unpulled <- "\\" #intToUtf8(8595)
+	unpushed <- intToUtf8(8593)
+	unpulled <- intToUtf8(8595)
+	if(nchar(unpushed)>1){
+		unpushed <- "/"
+		unpulled <- "\\"
+	}
 	diffUnstaged <- "*"
 	diffStaged <- "+"
 	diffDefault <- "?"

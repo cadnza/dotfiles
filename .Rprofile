@@ -19,7 +19,20 @@ options(editor="nano")
 	useColors <- TRUE
 	if(!useColors)
 		return(x)
-	cd <- readRDS("~/.shDotFileSupport/colorData.rds")
+	readColorData <- function(homeVariable)
+		readRDS(
+			file.path(
+				Sys.getenv(homeVariable),
+				".shDotFileSupport/colorData.rds"
+			)
+		)
+	cd <- tryCatch(
+		readColorData("HOME"),
+		error=function(x)
+			readColorData("HOMEPATH"),
+		warning=function(x)
+			readColorData("HOMEPATH")
+	)
 	final <- x
 	if(!is.na(fg))
 		final <- crayon::make_style(cd$hex[cd$xterm==fg])(final)

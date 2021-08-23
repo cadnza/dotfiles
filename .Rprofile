@@ -16,7 +16,7 @@ options(editor="nano")
 
 # Define function to apply color ----
 .applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
-	useColors <- FALSE
+	useColors <- TRUE
 	if(!useColors)
 		return(x)
 	cd <- readRDS("~/.shDotFileSupport/colorData.rds")

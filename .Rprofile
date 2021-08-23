@@ -121,7 +121,6 @@ options(editor="nano")
 	strUnsynced <- paste0(strUnpushed,strUnpulled)
 	# Combine git string
 	gitString <- trimws(paste0(diFull,"_",strUnsynced))
-	gitString <- gsub("_+"," ",gitString)
 	# Return
 	return(gitString)
 }
@@ -131,7 +130,7 @@ options(editor="nano")
 	# Reset
 	crayon::reset()
 	# Set prompt string
-	space <- " "
+	space <- "_"
 	ps1 <- paste0(
 		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
 		.getGitInfo(TRUE),
@@ -139,6 +138,7 @@ options(editor="nano")
 		.applyColor256(">",fg=.colors$colorSep),
 		space
 	)
+	ps1 <- gsub("_+"," ",ps1)
 	# Formally register prompt
 	options(prompt=ps1)
 	# Formally register continued prompt as blank spaces of same length as prompt

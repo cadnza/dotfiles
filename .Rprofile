@@ -57,9 +57,8 @@ options(editor="nano")
 	diffStaged <- "+"
 	diffDefault <- "?"
 	# Get diff indicators
-	checkForHushdiff <- function(homeVariable){
+	checkForHushdiff <- function(homeVariable)
 		return(file.exists(file.path(Sys.getenv(homeVariable),".hushdiff")))
-	}
 	hushDiffs <- checkForHushdiff("HOME")
 	if(!hushDiffs)
 		hushDiffs <- checkForHushdiff("HOMEPATH")

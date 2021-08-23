@@ -19,28 +19,14 @@ options(editor="nano")
 	useColors <- FALSE
 	if(!useColors)
 		return(x)
-	applyOrReset <- function(colorNum,controlCode){
-		if(!is.na(colorNum))
-			final <- paste0(controlCode,dlm,5,dlm,colorNum)
-		else
-			final <- ""
-		return(final)
-	}
-	ansiStart <- "\033["
-	ansiEnd <- "m"
-	dlm <- ";"
-	resetSeq <- 0
-	fgSeq <- applyOrReset(fg,38)
-	bgSeq <- applyOrReset(bg,48)
-	if(bold)
-		fgSeq <- paste0(fgSeq,dlm,1)
-	if(nchar(fgSeq)&nchar(bgSeq))
-		fgbgSeq <- paste0(fgSeq,dlm,bgSeq)
-	else
-		fgbgSeq <- paste0(fgSeq,bgSeq)
-	opening <- paste0(ansiStart,fgbgSeq,ansiEnd)
-	closing <- paste0(ansiStart,resetSeq,ansiEnd)
-	final <- paste0(opening,x,closing)
+	cd <- readRDS("~/.shDotFileSupport/colorData.rds")
+	final <- x
+	if(!is.na(fg))
+		final <- crayon::make_style(cd$hex[cd$xterm==fg])(final)
+	if(!is.na(bg))
+		final <- crayon::make_style(cd$hex[cd$xterm==bg],bg=TRUE)(final)
+	if(!is.na(bold))
+		final <- crayon::bold(final)
 	return(final)
 }
 

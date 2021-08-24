@@ -16,7 +16,7 @@ options(editor="nano")
 
 # Define function to apply color ----
 .applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
-	useColors <- TRUE
+	useColors <- Sys.info()["sysname"]!="Windows" # Because Windows can't read the symlinks to access colorData.rds
 	if(!useColors)
 		return(x)
 	readColorData <- function(homeVariable)

@@ -38,7 +38,7 @@ options(editor="nano")
 	.colors <- lapply(
 		colorsRaw,
 		function(x)
-			strsplit(x,"=")[[1]][2]
+			as.integer(strsplit(x,"=")[[1]][2])
 	)
 	names(.colors) <- sapply(
 		colorsRaw,

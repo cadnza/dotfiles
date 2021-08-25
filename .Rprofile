@@ -14,6 +14,41 @@ options(editor="nano")
 	return(final)
 }
 
+# Define function to get colors from colors.sh ----
+.getColors <- function(){
+	sourceColors <- function(homeVariable){
+		final <- system2(
+			"zsh",
+			paste0(Sys.getenv(homeVariable),"/.shDotFileSupport/colors.sh --echo"),
+			stdout=TRUE
+		)
+		return(final)
+	}
+	colorsRaw <- tryCatch(
+		{
+			sourceColors("HOME")
+		},
+		error=function(x){
+			return(sourceColors("HOMEPATH"))
+		},
+		warning=function(x){
+			return(sourceColors("HOMEPATH"))
+		}
+	)
+	.colors <- lapply(
+		colorsRaw,
+		function(x)
+			strsplit(x,"=")[[1]][2]
+	)
+	names(.colors) <- sapply(
+		colorsRaw,
+		function(x)
+			strsplit(x,"=")[[1]][1],
+		USE.NAMES=FALSE
+	)
+	.GlobalEnv$.colors <- .colors
+}
+
 # Define function to apply color ----
 .applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
 	useColors <- Sys.info()["sysname"]!="Windows" # Because Windows can't read the symlinks to access colorData.rds
@@ -150,37 +185,7 @@ options(editor="nano")
 # Define .First function that's called on startup ----
 .First <- function(){
 	# Get colors from colors.sh
-	sourceColors <- function(homeVariable){
-		final <- system2(
-			"zsh",
-			paste0(Sys.getenv(homeVariable),"/.shDotFileSupport/colors.sh --echo"),
-			stdout=TRUE
-		)
-		return(final)
-	}
-	colorsRaw <- tryCatch(
-		{
-			sourceColors("HOME")
-		},
-		error=function(x){
-			return(sourceColors("HOMEPATH"))
-		},
-		warning=function(x){
-			return(sourceColors("HOMEPATH"))
-		}
-	)
-	.colors <- lapply(
-		colorsRaw,
-		function(x)
-			strsplit(x,"=")[[1]][2]
-	)
-	names(.colors) <- sapply(
-		colorsRaw,
-		function(x)
-			strsplit(x,"=")[[1]][1],
-		USE.NAMES=FALSE
-	)
-	.GlobalEnv$.colors <- .colors
+	.getColors()
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)

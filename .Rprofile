@@ -77,9 +77,10 @@ options(editor="nano")
 		return()
 	# Check for required packages ----
 	reqd <- c(
-			devtools="https://devtools.r-lib.org/",
-			quickColor="https://github.com/cadnza/quickColor"
-		)
+		devtools="https://devtools.r-lib.org/",
+		quickColor="https://github.com/cadnza/quickColor",
+		crayon="https://www.r-project.org/nosvn/pandoc/crayon.html"
+	)
 	blank <- ""
 	for(i in 1:length(reqd))
 		if(!names(reqd)[i]%in%rownames(utils::installed.packages())){

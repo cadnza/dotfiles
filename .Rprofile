@@ -76,23 +76,20 @@ options(editor="nano")
 	if(!interactive())
 		return()
 	# Check for required packages ----
-	reqd <- data.frame(
-		name=c("devtools","quickColor"),
-		url=c(
-			"https://devtools.r-lib.org/",
-			"https://github.com/cadnza/quickColor"
+	reqd <- c(
+			devtools="https://devtools.r-lib.org/",
+			quickColor="https://github.com/cadnza/quickColor"
 		)
-	)
 	blank <- ""
-	for(i in 1:nrow(reqd))
-		if(!reqd$name[i]%in%rownames(utils::installed.packages())){
+	for(i in 1:length(reqd))
+		if(!names(reqd)[i]%in%rownames(utils::installed.packages())){
 			warning(
 				paste(
 					blank,
-					paste("The .Rprofile from shDotFiles needs",reqd$name[i],"to run,"),
+					paste("The .Rprofile from shDotFiles needs",names(reqd)[i],"to run,"),
 					"so it's been disabled for this session.",
 					blank,
-					reqd$url[i],
+					reqd[i],
 					blank,
 					sep="\n"
 				),

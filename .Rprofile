@@ -70,7 +70,6 @@ options(editor="nano")
 		return()
 	# Check for required packages ----
 	reqd <- c(
-		devtools="https://devtools.r-lib.org/",
 		quickColor="https://github.com/cadnza/quickColor",
 		crayon="https://www.r-project.org/nosvn/pandoc/crayon.html"
 	)

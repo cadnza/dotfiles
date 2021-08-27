@@ -49,117 +49,6 @@ options(editor="nano")
 	.GlobalEnv$.colors <- .colors
 }
 
-# Define function to apply color ----
-.applyColor256 <- function(x,fg=NA,bg=NA,bold=FALSE){
-	useColors <- Sys.info()["sysname"]!="Windows" # Because Windows can't read the symlinks to access colorData.rds
-	if(!useColors)
-		return(x)
-	readColorData <- function(homeVariable)
-		readRDS(
-			file.path(
-				Sys.getenv(homeVariable),
-				".shDotFileSupport/colorData.rds"
-			)
-		)
-	cd <- tryCatch(
-		readColorData("HOME"),
-		error=function(x)
-			readColorData("HOMEPATH"),
-		warning=function(x)
-			readColorData("HOMEPATH")
-	)
-	final <- x
-	if(!is.na(fg))
-		final <- crayon::make_style(cd$hex[cd$xterm==fg])(final)
-	if(!is.na(bg))
-		final <- crayon::make_style(cd$hex[cd$xterm==bg],bg=TRUE)(final)
-	if(!is.na(bold))
-		final <- crayon::bold(final)
-	return(final)
-}
-
-# Define function to get git info ----
-.getGitInfo <- function(include=TRUE){
-	# Return if not included
-	if(!include)
-		return("")
-	# Check for git repo
-	isGitRepo <- tryCatch(
-		{
-			system2("env",paste("git -C",.gwd(),"rev-parse"),stdout=TRUE,stderr=FALSE)
-			TRUE
-		},
-		warning=function(x)
-			return(FALSE)
-	)
-	if(!isGitRepo)
-		return("")
-	# Set symbols
-	unpushed <- intToUtf8(8593)
-	unpulled <- intToUtf8(8595)
-	if(nchar(unpushed)>1){
-		unpushed <- "/"
-		unpulled <- "\\"
-	}
-	diffUnstaged <- "*"
-	diffStaged <- "+"
-	diffDefault <- "?"
-	# Get diff indicators
-	checkForHushdiff <- function(homeVariable)
-		return(file.exists(file.path(Sys.getenv(homeVariable),".hushdiff")))
-	hushDiffs <- checkForHushdiff("HOME")
-	if(!hushDiffs)
-		hushDiffs <- checkForHushdiff("HOMEPATH")
-	if(!hushDiffs){
-		if(length(system2("git","diff --numstat",stdout=TRUE)))
-			diUnstaged <- .applyColor256(diffUnstaged,.colors$colorUnstaged)
-		else
-			diUnstaged <- ""
-		if(length(system2("git","diff --cached --numstat",stdout=TRUE)))
-			diStaged <- .applyColor256(diffStaged,.colors$colorStaged)
-		else
-			diStaged <- ""
-		diFull <- paste0(diUnstaged,diStaged)
-	}else{
-		diFull <- .applyColor256(diffDefault,fg=.colors$colorUnknown,bold=TRUE)
-	}
-	# Get branch string
-	branch <- system2(
-		"git",
-		paste("-C",.gwd(),"branch -vv"),
-		stdout=TRUE
-	)
-	branch <- branch[grepl("^\\*",branch)]
-	branch <- stringr::str_match(branch,"\\[.+\\]")[1,1]
-	# Extract unpushed and unpulled commits
-	nCommitsUnpushed <- strsplit(
-		stringr::str_match(branch,"ahead \\d+")[1,1],
-		" "
-	)[[1]][2]
-	nCommitsUnpulled <- strsplit(
-		stringr::str_match(branch,"behind \\d+")[1,1],
-		" "
-	)[[1]][2]
-	# Format unpushed and unpulled indicators
-	formatNcommits <- function(nCommits,ind,colorNum){
-		if(!is.na(nCommits))
-			final <- paste0(
-				.applyColor256(paste0(ind),fg=colorNum,bold=TRUE),
-				.applyColor256(paste0(nCommits),fg=colorNum)
-			)
-		else
-			final <- ""
-		return(final)
-	}
-	strUnpushed <- formatNcommits(nCommitsUnpushed,unpushed,.colors$colorUnpushed)
-	strUnpulled <- formatNcommits(nCommitsUnpulled,unpulled,.colors$colorUnpulled)
-	strUnsynced <- paste0(strUnpushed,strUnpulled)
-	# Combine git string
-	gitString <- trimws(paste0(diFull,"_",strUnsynced))
-	# Return
-	return(gitString)
-}
-
 # Define function to set prompt ----
 .setPrompt <- function(expr,value,succeeded,visible){
 	# Reset
@@ -167,10 +56,9 @@ options(editor="nano")
 	# Set prompt string
 	space <- "_"
 	ps1 <- paste0(
-		.applyColor256("R",fg=.colors$colorMachine,bold=TRUE),
-		.getGitInfo(TRUE),
+		quickColor::quickColor("R",fg=.colors$colorMachine,bold=TRUE),
 		space,
-		.applyColor256(">",fg=.colors$colorSep),
+		quickColor::quickColor(">",fg=.colors$colorSep),
 		space
 	)
 	ps1 <- gsub("_+"," ",ps1)
@@ -184,8 +72,37 @@ options(editor="nano")
 
 # Define .First function that's called on startup ----
 .First <- function(){
+	# Source only if interactive ----
+	if(!interactive())
+		return()
+	# Check for required packages ----
+	reqd <- data.frame(
+		name=c("devtools","quickColor"),
+		url=c(
+			"https://devtools.r-lib.org/",
+			"https://github.com/cadnza/quickColor"
+		)
+	)
+	blank <- ""
+	for(i in 1:nrow(reqd))
+		if(!reqd$name[i]%in%rownames(utils::installed.packages())){
+			warning(
+				paste(
+					blank,
+					paste("The .Rprofile from shDotFiles needs",reqd$name[i],"to run,"),
+					"so it's been disabled for this session.",
+					blank,
+					reqd$url[i],
+					blank,
+					sep="\n"
+				),
+				call.=FALSE
+			)
+			invisible(return())
+		}
 	# Get colors from colors.sh
 	.getColors()
+	rm(.getColors,envir=.GlobalEnv)
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)

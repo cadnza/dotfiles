@@ -7,13 +7,6 @@ formals(quit)$save <- formals(q)$save <- "no"
 # Set text editor ----
 options(editor="nano")
 
-# Define function to quote wd ----
-.gwd <- function(){
-	final <- system2("zsh","-c pwd",stdout=TRUE)
-	final <- paste0("\"",final,"\"")
-	return(final)
-}
-
 # Define function to get colors from colors.sh ----
 .getColors <- function(){
 	sourceColors <- function(homeVariable){
@@ -100,9 +93,12 @@ options(editor="nano")
 		}
 	# Get colors from colors.sh
 	.getColors()
-	rm(.getColors,envir=.GlobalEnv)
 	# Call prompt function with empty parameters
 	.setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)
 	addTaskCallback(.setPrompt)
+	# Clean up global environment
+	rm(.getColors,envir=.GlobalEnv)
+	rm(.setPrompt,envir=.GlobalEnv)
+	rm(.First,envir=.GlobalEnv)
 }

@@ -27,7 +27,7 @@ export colorUnpulled=10
 
 # Echo color variables if requested (for using colors with other interpreters, e.g. R)
 [[ $1 = '--echo' ]] && {
-	cd $(dirname $0)
+	cd $(dirname $0:A)
 	source setupOS.sh --getColorMachine 2> /dev/null
 	typeset | grep '^color'
 	cd $OLDPWD

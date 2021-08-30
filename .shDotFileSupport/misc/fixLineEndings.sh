@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Go to shDotFiles directory
-cd $(git -C $(dirname $0) rev-parse --show-toplevel)
+cd $(git -C $(dirname $0:A) rev-parse --show-toplevel)
 
 # Get currently untracked files
 currentlyUntrackeds=$(git ls-files --others --exclude-standard)

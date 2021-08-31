@@ -26,9 +26,11 @@ export colorUnpushed=13
 export colorUnpulled=10
 
 # Echo color variables if requested (for using colors with other interpreters, e.g. R)
+# (The cd logic here is a little weird, but it has to be for Windows.)
 [[ $1 = '--echo' ]] && {
 	cd $(dirname $0:A)
-	source setupOS.sh --getColorMachine 2> /dev/null
+	cd $(git rev-parse --show-toplevel)
+	source ./.shDotFileSupport/setupOS.sh --getColorMachine 2> /dev/null
 	typeset | grep '^color'
 	cd $OLDPWD
 }

@@ -65,10 +65,10 @@ options(editor="nano")
 
 # Define .First function that's called on startup ----
 .First <- function(){
-	# Source only if interactive ----
+	# Source only if interactive
 	if(!interactive())
 		return()
-	# Check for required packages ----
+	# Check for required packages
 	reqd <- c(
 		quickColor="https://github.com/cadnza/quickColor",
 		crayon="https://www.r-project.org/nosvn/pandoc/crayon.html"

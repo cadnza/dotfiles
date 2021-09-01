@@ -71,7 +71,8 @@ options(editor="nano")
 	# Check for required packages
 	reqd <- c(
 		quickColor="https://github.com/cadnza/quickColor",
-		crayon="https://www.r-project.org/nosvn/pandoc/crayon.html"
+		crayon="https://www.rdocumentation.org/packages/crayon/versions/1.4.1/topics/crayon",
+		lintr="https://www.rdocumentation.org/packages/lintr/versions/1.0.3"
 	)
 	blank <- ""
 	for(i in 1:length(reqd))
@@ -101,3 +102,30 @@ options(editor="nano")
 	rm(.setPrompt,envir=.GlobalEnv)
 	rm(.First,envir=.GlobalEnv)
 }
+
+# Set linting defaults
+.lintClone <- lintr::lint
+.lintrDefaults <- lintr::with_defaults(
+	no_tab_linter=function(x){},
+	infix_spaces_linter=function(x){},
+	paren_brace_linter=function(x){},
+	object_usage_linter=function(x){},
+	commas_linter=function(){}
+)
+.lintCustom <- function(
+	filename,
+	linters=NULL,
+	cache=FALSE,
+	...,
+	parse_settings=TRUE
+){
+	.lintClone(
+		filename=filename,
+		linters=.lintrDefaults,
+		cache=FALSE,
+		...,
+		parse_settings=TRUE
+	)
+}
+environment(.lintCustom) <- asNamespace("lintr")
+utils::assignInNamespace("lint",.lintCustom,ns="lintr")

@@ -8,7 +8,7 @@ formals(quit)$save <- formals(q)$save <- "no"
 options(editor="nano")
 
 # Define function to get colors from colors.sh ----
-.getColors <- function(){
+getColors <- function(){
 	sourceColors <- function(homeVariable){
 		final <- system2(
 			"zsh",
@@ -43,7 +43,7 @@ options(editor="nano")
 }
 
 # Define function to set prompt ----
-.setPrompt <- function(expr,value,succeeded,visible){
+setPrompt <- function(expr,value,succeeded,visible){
 	# Reset
 	crayon::reset()
 	# Set prompt string
@@ -92,49 +92,50 @@ options(editor="nano")
 			invisible(return())
 		}
 	# Get colors from colors.sh
-	.getColors()
+	getColors()
 	# Call prompt function with empty parameters
-	.setPrompt(NA,NA,NA,NA)
+	setPrompt(NA,NA,NA,NA)
 	# Register prompt function as callback (see docs)
-	addTaskCallback(.setPrompt)
+	addTaskCallback(setPrompt)
 	# Clean up global environment
-	rm(.getColors,envir=.GlobalEnv)
-	rm(.setPrompt,envir=.GlobalEnv)
+	rm(getColors,envir=.GlobalEnv)
+	rm(setPrompt,envir=.GlobalEnv)
 	rm(.First,envir=.GlobalEnv)
 }
 
 # Set linting defaults ----
 if("lintr"%in%rownames(utils::installed.packages())){
 	.GlobalEnv$.lintEnv <- new.env(parent=.GlobalEnv)
-	.lintEnv$.lintClone <- lintr::lint
-	.lintEnv$.lintrDefaults <- lintr::with_defaults(
-		closed_curly_linter=function(x){},
-		commas_linter=function(x){},
-		commented_code_linter=function(x){},
-		infix_spaces_linter=function(x){},
-		line_length_linter=function(x){},
-		no_tab_linter=function(x){},
-		object_name_linter=function(x){},
-		open_curly_linter=function(x){},
-		paren_brace_linter=function(x){},
-		seq_linter=function(x){},
-		spaces_left_parentheses_linter=function(x){}
+	.lintEnv$lintClone <- lintr::lint
+	.lintEnv$emptyF <- function(x){}
+	.lintEnv$lintrDefaults <- lintr::with_defaults(
+		closed_curly_linter=.lintEnv$emptyF,
+		commas_linter=.lintEnv$emptyF,
+		commented_code_linter=.lintEnv$emptyF,
+		infix_spaces_linter=.lintEnv$emptyF,
+		line_length_linter=.lintEnv$emptyF,
+		no_tab_linter=.lintEnv$emptyF,
+		object_name_linter=.lintEnv$emptyF,
+		open_curly_linter=.lintEnv$emptyF,
+		paren_brace_linter=.lintEnv$emptyF,
+		seq_linter=.lintEnv$emptyF,
+		spaces_left_parentheses_linter=.lintEnv$emptyF
 	)
-	.lintEnv$.lintCustom <- function(
+	.lintEnv$lintCustom <- function(
 		filename,
 		linters=NULL,
 		cache=FALSE,
 		...,
 		parse_settings=TRUE
 	){
-		.lintEnv$.lintClone(
+		.lintEnv$lintClone(
 			filename=filename,
-			linters=.lintEnv$.lintrDefaults,
+			linters=.lintEnv$lintrDefaults,
 			cache=FALSE,
 			...,
 			parse_settings=TRUE
 		)
 	}
-	environment(.lintEnv$.lintCustom) <- asNamespace("lintr")
-	utils::assignInNamespace("lint",.lintEnv$.lintCustom,ns="lintr")
+	environment(.lintEnv$lintCustom) <- asNamespace("lintr")
+	utils::assignInNamespace("lint",.lintEnv$lintCustom,ns="lintr")
 }

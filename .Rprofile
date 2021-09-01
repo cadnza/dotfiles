@@ -103,29 +103,38 @@ options(editor="nano")
 	rm(.First,envir=.GlobalEnv)
 }
 
-# Set linting defaults
-.lintClone <- lintr::lint
-.lintrDefaults <- lintr::with_defaults(
-	no_tab_linter=function(x){},
-	infix_spaces_linter=function(x){},
-	paren_brace_linter=function(x){},
-	object_usage_linter=function(x){},
-	commas_linter=function(){}
-)
-.lintCustom <- function(
-	filename,
-	linters=NULL,
-	cache=FALSE,
-	...,
-	parse_settings=TRUE
-){
-	.lintClone(
-		filename=filename,
-		linters=.lintrDefaults,
+# Set linting defaults ----
+if("lintr"%in%rownames(utils::installed.packages())){
+	.GlobalEnv$.lintEnv <- new.env(parent=.GlobalEnv)
+	.lintEnv$.lintClone <- lintr::lint
+	.lintEnv$.lintrDefaults <- lintr::with_defaults(
+		closed_curly_linter=function(x){},
+		commas_linter=function(x){},
+		commented_code_linter=function(x){},
+		infix_spaces_linter=function(x){},
+		line_length_linter=function(x){},
+		no_tab_linter=function(x){},
+		object_name_linter=function(x){},
+		open_curly_linter=function(x){},
+		paren_brace_linter=function(x){},
+		seq_linter=function(x){},
+		spaces_left_parentheses_linter=function(x){}
+	)
+	.lintEnv$.lintCustom <- function(
+		filename,
+		linters=NULL,
 		cache=FALSE,
 		...,
 		parse_settings=TRUE
-	)
+	){
+		.lintEnv$.lintClone(
+			filename=filename,
+			linters=.lintEnv$.lintrDefaults,
+			cache=FALSE,
+			...,
+			parse_settings=TRUE
+		)
+	}
+	environment(.lintEnv$.lintCustom) <- asNamespace("lintr")
+	utils::assignInNamespace("lint",.lintEnv$.lintCustom,ns="lintr")
 }
-environment(.lintCustom) <- asNamespace("lintr")
-utils::assignInNamespace("lint",.lintCustom,ns="lintr")

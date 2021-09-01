@@ -21,36 +21,8 @@ options(editor="nano")
 
 # Define function to get colors from colors.sh ----
 getColors <- function(){
-	sourceColors <- function(homeVariable){
-		final <- system2(
-			"zsh",
-			paste0(Sys.getenv(homeVariable),"/.shDotFileSupport/colors.sh --echo"),
-			stdout=TRUE
-		)
-		return(final)
-	}
-	colorsRaw <- tryCatch(
-		{
-			sourceColors("HOME")
-		},
-		error=function(x){
-			return(sourceColors("HOMEPATH"))
-		},
-		warning=function(x){
-			return(sourceColors("HOMEPATH"))
-		}
-	)
-	colorList <- lapply(
-		colorsRaw,
-		function(x)
-			as.integer(strsplit(x,"=")[[1]][2])
-	)
-	names(colorList) <- sapply(
-		colorsRaw,
-		function(x)
-			strsplit(x,"=")[[1]][1],
-		USE.NAMES=FALSE
-	)
+	envVars <- Sys.getenv(names=TRUE)
+	colorList <- lapply(as.list(envVars[grepl("^color",names(envVars))]),as.integer)
 	.ShadowEnv$colorList <- colorList
 }
 

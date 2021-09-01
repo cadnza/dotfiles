@@ -26,6 +26,14 @@ getColors <- function(){
 	.ShadowEnv$colorList <- colorList
 }
 
+# Define function to try to get a color from the list and return NA otherwise ----
+.ShadowEnv$tryColor <- function(name){
+	clr <- .ShadowEnv$colorList[[name]]
+	if(is.null(clr))
+		return(NA)
+	return(clr)
+}
+
 # Define function to set prompt ----
 setPrompt <- function(expr,value,succeeded,visible){
 	# Reset
@@ -33,9 +41,9 @@ setPrompt <- function(expr,value,succeeded,visible){
 	# Set prompt string
 	space <- "_"
 	ps1 <- paste0(
-		quickColor::quickColor("R",fg=.ShadowEnv$colorList$colorMachine,bold=TRUE),
+		quickColor::quickColor("R",fg=.ShadowEnv$tryColor("colorMachine"),bold=TRUE),
 		space,
-		quickColor::quickColor(">",fg=.ShadowEnv$colorList$colorSep),
+		quickColor::quickColor(">",fg=.ShadowEnv$tryColor("colorSep")),
 		space
 	)
 	ps1 <- gsub("_+"," ",ps1)

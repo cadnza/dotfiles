@@ -1,6 +1,9 @@
 # Set language (just in case) ----
 #Sys.setenv(LANG="en")
 
+# Open environment for variables that need to be available throughout ----
+.GlobalEnv$.ShadowEnv <- new.env(parent=.GlobalEnv)
+
 # Remove save dialog for quit ----
 formals(quit)$save <- formals(q)$save <- "no"
 
@@ -28,18 +31,18 @@ getColors <- function(){
 			return(sourceColors("HOMEPATH"))
 		}
 	)
-	.colors <- lapply(
+	colorList <- lapply(
 		colorsRaw,
 		function(x)
 			as.integer(strsplit(x,"=")[[1]][2])
 	)
-	names(.colors) <- sapply(
+	names(colorList) <- sapply(
 		colorsRaw,
 		function(x)
 			strsplit(x,"=")[[1]][1],
 		USE.NAMES=FALSE
 	)
-	.GlobalEnv$.colors <- .colors
+	.ShadowEnv$colorList <- colorList
 }
 
 # Define function to set prompt ----
@@ -49,9 +52,10 @@ setPrompt <- function(expr,value,succeeded,visible){
 	# Set prompt string
 	space <- "_"
 	ps1 <- paste0(
-		quickColor::quickColor("R",fg=.colors$colorMachine,bold=TRUE),
+		quickColor::quickColor("R",fg=.ShadowEnv$colorList$colorMachine,bold=TRUE),
+		quickColor::quickColor("TEST",fg=.ShadowEnv$colorList[[i]],bold=TRUE),
 		space,
-		quickColor::quickColor(">",fg=.colors$colorSep),
+		quickColor::quickColor(">",fg=.ShadowEnv$colorList$colorSep),
 		space
 	)
 	ps1 <- gsub("_+"," ",ps1)
@@ -105,37 +109,36 @@ setPrompt <- function(expr,value,succeeded,visible){
 
 # Set linting defaults ----
 if("lintr"%in%rownames(utils::installed.packages())){
-	.GlobalEnv$.lintEnv <- new.env(parent=.GlobalEnv)
-	.lintEnv$lintClone <- lintr::lint
-	.lintEnv$emptyF <- function(x){}
-	.lintEnv$lintrDefaults <- lintr::with_defaults(
-		closed_curly_linter=.lintEnv$emptyF,
-		commas_linter=.lintEnv$emptyF,
-		commented_code_linter=.lintEnv$emptyF,
-		infix_spaces_linter=.lintEnv$emptyF,
-		line_length_linter=.lintEnv$emptyF,
-		no_tab_linter=.lintEnv$emptyF,
-		object_name_linter=.lintEnv$emptyF,
-		open_curly_linter=.lintEnv$emptyF,
-		paren_brace_linter=.lintEnv$emptyF,
-		seq_linter=.lintEnv$emptyF,
-		spaces_left_parentheses_linter=.lintEnv$emptyF
+	.ShadowEnv$lintClone <- lintr::lint
+	.ShadowEnv$emptyF <- function(x){}
+	.ShadowEnv$lintrDefaults <- lintr::with_defaults(
+		closed_curly_linter=.ShadowEnv$emptyF,
+		commas_linter=.ShadowEnv$emptyF,
+		commented_code_linter=.ShadowEnv$emptyF,
+		infix_spaces_linter=.ShadowEnv$emptyF,
+		line_length_linter=.ShadowEnv$emptyF,
+		no_tab_linter=.ShadowEnv$emptyF,
+		object_name_linter=.ShadowEnv$emptyF,
+		open_curly_linter=.ShadowEnv$emptyF,
+		paren_brace_linter=.ShadowEnv$emptyF,
+		seq_linter=.ShadowEnv$emptyF,
+		spaces_left_parentheses_linter=.ShadowEnv$emptyF
 	)
-	.lintEnv$lintCustom <- function(
+	.ShadowEnv$lintCustom <- function(
 		filename,
 		linters=NULL,
 		cache=FALSE,
 		...,
 		parse_settings=TRUE
 	){
-		.lintEnv$lintClone(
+		.ShadowEnv$lintClone(
 			filename=filename,
-			linters=.lintEnv$lintrDefaults,
+			linters=.ShadowEnv$lintrDefaults,
 			cache=FALSE,
 			...,
 			parse_settings=TRUE
 		)
 	}
-	environment(.lintEnv$lintCustom) <- asNamespace("lintr")
-	utils::assignInNamespace("lint",.lintEnv$lintCustom,ns="lintr")
+	environment(.ShadowEnv$lintCustom) <- asNamespace("lintr")
+	utils::assignInNamespace("lint",.ShadowEnv$lintCustom,ns="lintr")
 }

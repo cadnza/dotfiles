@@ -53,7 +53,6 @@ setPrompt <- function(expr,value,succeeded,visible){
 	space <- "_"
 	ps1 <- paste0(
 		quickColor::quickColor("R",fg=.ShadowEnv$colorList$colorMachine,bold=TRUE),
-		quickColor::quickColor("TEST",fg=.ShadowEnv$colorList[[i]],bold=TRUE),
 		space,
 		quickColor::quickColor(">",fg=.ShadowEnv$colorList$colorSep),
 		space

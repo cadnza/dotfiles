@@ -138,7 +138,7 @@ if("lintr"%in%rownames(utils::installed.packages())){
 		cache=FALSE,
 		...,
 		parse_settings=TRUE
-	){
+	)
 		.ShadowEnv$lintClone(
 			filename=filename,
 			linters=.ShadowEnv$lintrDefaults,
@@ -146,7 +146,6 @@ if("lintr"%in%rownames(utils::installed.packages())){
 			...,
 			parse_settings=TRUE
 		)
-	}
 	environment(.ShadowEnv$lintCustom) <- asNamespace("lintr")
 	utils::assignInNamespace("lint",.ShadowEnv$lintCustom,ns="lintr")
 }

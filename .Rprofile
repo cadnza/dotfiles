@@ -5,7 +5,16 @@
 .GlobalEnv$.ShadowEnv <- new.env(parent=.GlobalEnv)
 
 # Remove save dialog for quit ----
-formals(quit)$save <- formals(q)$save <- "no"
+.ShadowEnv$quitClone <- quit
+.ShadowEnv$quitCustom <- function(
+	save="default",
+	status=0,
+	runLast=TRUE
+)
+	.ShadowEnv$quitClone(save="no")
+environment(.ShadowEnv$quitCustom) <- asNamespace("base")
+utils::assignInNamespace("quit",.ShadowEnv$quitCustom,ns="base")
+utils::assignInNamespace("q",.ShadowEnv$quitCustom,ns="base")
 
 # Set text editor ----
 options(editor="nano")

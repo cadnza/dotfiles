@@ -19,7 +19,7 @@ utils::assignInNamespace("q",.ShadowEnv$quitCustom,ns="base")
 # Set text editor ----
 options(editor="nano")
 
-# Define function to get colors shell environment ----
+# Define function to get colors from shell environment ----
 getColors <- function(){
 	envVars <- Sys.getenv(names=TRUE)
 	colorList <- lapply(as.list(envVars[grepl("^color",names(envVars))]),as.integer)

@@ -44,6 +44,9 @@ include "~/.shDotFileSupport/R.nanorc"
 # Enable Swift syntax highlighting
 include "~/.shDotFileSupport/swift.nanorc"
 
+# Enable AsciiDoc syntax highlighting
+include "~/.shDotFileSupport/asciidoc.nanorc"
+
 # Enable standard syntax highlighting
 include "/usr/local/share/nano/asm.nanorc"
 include "/usr/local/share/nano/autoconf.nanorc"

@@ -89,3 +89,7 @@ include "/usr/local/share/nano/tcl.nanorc"
 include "/usr/local/share/nano/tex.nanorc"
 include "/usr/local/share/nano/texinfo.nanorc"
 include "/usr/local/share/nano/xml.nanorc"
+
+# Bind keys
+bind M-+ "[B[A" main
+bind M-_ "[A[A" main

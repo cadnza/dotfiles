@@ -20,7 +20,7 @@ color brightblue "^\+\+\+\++$"
 
 # attributes
 color brightgreen ":.*:"
-color brightred "\{[a-z0-9_]*\}"
+color magenta "\{[a-z0-9_]*\}"
 color red "\\\{[a-z0-9_]*\}"
 color red "\+\+\+\{[a-z0-9_]*\}\+\+\+"
 
@@ -40,7 +40,7 @@ color yellow "\^[^\^]+\^"
 color yellow "~[^~]+~"
 #color yellow "'[^']+'"
 
-color cyan "`{1,2}[^']+'{1,2}"
+#color cyan "`{1,2}[^']+'{1,2}"
 
 # bullets
 color brightmagenta "^[[:space:]]*[\*\.-]{1,5}[[:space:]]"
@@ -58,8 +58,8 @@ color orange "\{[a-z0-9_]\}"
 color yellow "\{l\}[^\{\}]*\{r\}"
 
 # Quotes
-color orange "\""
-color yellow "\"[^\"]+\""
+color orange "(\"`|`\")"
+color yellow "\"`[^\"]+`\""
 
 # Horizontal rules
 color brightblue "^---$"

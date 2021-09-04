@@ -51,14 +51,17 @@ color brightwhite "<<.*>>"
 
 # Mine ----
 
-# Single-lettered attribute calls
-color orange "\{[a-z0-9_]\}"
+# {l} and {r} files on different lines
+color orange "\{l\}[^\{\}]*$"
+color orange "^[^\{\}]*\{r\}"
 
 # Quotes starting with {l} and ending with {r}
 color yellow "\{l\}[^\{\}]*\{r\}"
 
 # Quotes
 color orange "(\"`|`\")"
+color orange "\"`[^\"`]*$"
+color orange "^[^`\"]*`\""
 color yellow "\"`[^\"]+`\""
 
 # Horizontal rules

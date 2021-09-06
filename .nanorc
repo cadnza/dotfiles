@@ -18,9 +18,6 @@ set indicator
 # Enable state flags in top right
 set stateflags
 
-# Enable mouse for mousable systems
-set mouse
-
 # Enable deleting selected text
 set zap
 

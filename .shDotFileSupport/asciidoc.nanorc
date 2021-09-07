@@ -1,17 +1,6 @@
-# https://github.com/scopatz/nanorc/blob/master/asciidoc.nanorc
-# I've made a few tweaks, so run a diff before updating!
-
 syntax "AsciiDoc" "\.(asc|asciidoc|adoc)$"
 
-# anchors
-color brightwhite "\[\[.*\]\]"
-color brightwhite "<<.*>>"
-
 # System
-
-	# Comment blocks
-	color magenta "^\/\/.*"
-	color magenta start="\/\/\/\/" end="\/\/\/\/"
 
 	# Headers
 	color black,red "^= .+$"
@@ -21,11 +10,11 @@ color brightwhite "<<.*>>"
 	color black,peach "^===== .+$"
 	color black,white "^====== .+$"
 
-	# Bullets and numbers
-	color bold,brightwhite "^\s*(\*|-|\.)+ "
-
 	# Illegal headers
-	color brightred,magenta "^=======+ .*$"
+	color italic,brightred,magenta "^=======+ .*$"
+
+	# Bullets and numbers
+	color bold,white "^\s*(\*|-|\.)+ "
 
 	# Roles and settings
 	color brightred "^\[[^\[]+\]$"
@@ -61,16 +50,16 @@ color brightwhite "<<.*>>"
 # High-priority character formatting
 
 	# Highlight
-	color black,mint "#[^#]+#"
+	color black,mint "#\S[^#]+\S#|#[^\s\#]#"
 
 	# Bold
-	color white,blue "\*[^\*]+\*"
+	color bold,white,blue "\*[^\*]+\*"
 
 	# Italic
-	color blue,cyan "_[^_]+_"
+	color italic,blue,cyan "_[^_]+_"
 
 	# Bold italic
-	color mint,blue "\*_[^\*_]+_\*"
+	color bold,italic,mint,blue "\*_[^\*_]+_\*"
 
 	# Superscript
 	color latte,peach "\^[^\^]+\^"
@@ -79,22 +68,22 @@ color brightwhite "<<.*>>"
 	color peach,latte "~[^~]+~"
 
 	# Attribute
-	color brightmagenta "\{[a-z0-9_]{2,}\}|\{\}|\{[A-Zabcdefghijkmnopqstuvwxyz]\}"
-	#color brightmagenta "\{[a-z0-9_]*\}" # Commented out to allow exclude of {l} and {r}
+	color bold,brightmagenta "\{[a-z0-9_]{2,}\}|\{\}|\{[A-Zabcdefghijkmnopqstuvwxyz]\}"
+	#color bold,brightmagenta "\{[a-z0-9_]*\}" # Commented out to allow exclude of {l} and {r}
 
 	# Literal
-	color red "\+[^\+]+\+"
+	color bold,red "\+[^\+]+\+"
 
 # Important to review
 
 	# Footnotes
-	color black,green "footnote:\[[^]\[]*\]"
-	color white,red "footnote:"
+	color italic,black,green "footnote:\[[^]\[]*\]"
+	color bold,brightwhite,red "footnote:"
 
 # Easily overlooked
 
 	# Hard breaks
-	color yellow,red " \+$"
+	color bold,yellow,red " \+$"
 
 	# Horizontal rules
 	color black,cyan "^---$"
@@ -104,3 +93,14 @@ color brightwhite "<<.*>>"
 
 	# Trailing whitespace
 	color red,red "\s+$"
+
+# Of highest priority
+
+	# Anchors
+	color lagoon "<<.+>>"
+
+	# Commented lines
+	color italic,magenta "^\/\/.*"
+
+	# Comment blocks
+	color italic,magenta start="\/\/\/\/" end="\/\/\/\/"

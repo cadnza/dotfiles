@@ -90,6 +90,9 @@ include "/usr/local/share/nano/tex.nanorc"
 include "/usr/local/share/nano/texinfo.nanorc"
 include "/usr/local/share/nano/xml.nanorc"
 
+# Extend Python syntax to include formatter
+extendsyntax python formatter "formatPython.sh"
+
 # Bind keys
 bind M-+ "[B[A" main
 bind M-_ "[A[A" main

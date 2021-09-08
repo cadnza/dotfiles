@@ -11,7 +11,7 @@ syntax "AsciiDoc" "\.(asc|asciidoc|adoc)$"
 	color black,white "^====== .+$"
 
 	# Illegal headers
-	color italic,brightred,magenta "^=======+ .*$"
+	color brightred,magenta "^=======+ .*$"
 
 	# Bullets and numbers
 	color bold,white "^\s*(\*|-|\.)+ "
@@ -56,10 +56,10 @@ syntax "AsciiDoc" "\.(asc|asciidoc|adoc)$"
 	color bold,white,blue "\*[^\*]+\*"
 
 	# Italic
-	color italic,blue,cyan "_[^_]+_"
+	color blue,cyan "_[^_]+_"
 
 	# Bold italic
-	color bold,italic,mint,blue "\*_[^\*_]+_\*"
+	color bold,mint,blue "\*_[^\*_]+_\*"
 
 	# Superscript
 	color latte,peach "\^[^\^]+\^"
@@ -77,7 +77,7 @@ syntax "AsciiDoc" "\.(asc|asciidoc|adoc)$"
 # Important to review
 
 	# Footnotes
-	color italic,black,green "footnote:\[[^]\[]*\]"
+	color black,green "footnote:\[[^]\[]*\]"
 	color bold,brightwhite,red "footnote:"
 
 # Easily overlooked
@@ -100,7 +100,7 @@ syntax "AsciiDoc" "\.(asc|asciidoc|adoc)$"
 	color lagoon "<<.+>>"
 
 	# Commented lines
-	color italic,magenta "^\/\/.*"
+	color magenta "^\/\/.*"
 
 	# Comment blocks
-	color italic,magenta start="\/\/\/\/" end="\/\/\/\/"
+	color magenta start="\/\/\/\/" end="\/\/\/\/"

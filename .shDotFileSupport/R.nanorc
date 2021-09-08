@@ -29,6 +29,7 @@
 ##
 syntax "R" "\.(([Rr][Mm]?[Dd]?)|(Rprofile))$"
 header "^#!.*/Rscript"
+linter "lint.R" # cadnza
 
 ## Asciibetical list of reserved words, including '...', '..1' etc.
 color brightgreen "(\<(break|else|for|function|if|in|next|repeat|return|while)\>|[.]{3,3}|[.]{2,2}[0-9]+)"

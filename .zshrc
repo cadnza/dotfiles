@@ -21,6 +21,7 @@ source ~/.shDotFileSupport/setupOS.sh
 source ~/.shDotFileSupport/completion.sh
 
 # Set default text editor
+export VISUAL=nano
 export EDITOR=nano
 
 # Modify path

@@ -50,7 +50,9 @@ extendsyntax html formatter "prettier_html.sh"
 extendsyntax javascript formatter "prettier_javascript.sh"
 extendsyntax json formatter "prettier_json.sh"
 extendsyntax markdown formatter "prettier_markdown.sh"
-extendsyntax python formatter "autopep8_python.sh"
+#extendsyntax python formatter "autopep8"
+extendsyntax python formatter "autopep8 --in-place --aggressive --ignore=E101,E11"
+#extendsyntax python formatter "autopep8_python.sh"
 
 # Add linters
 extendsyntax R linter "lintr_r.R"

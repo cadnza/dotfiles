@@ -1,0 +1,3 @@
+From https://pypi.org/project/autopep8/#configuration:
+
+By default, if $HOME/.config/pycodestyle (~\.pycodestyle in Windows environment) exists, it will be used as global configuration file. Alternatively, you can specify the global configuration file with the --global-config option.

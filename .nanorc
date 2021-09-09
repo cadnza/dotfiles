@@ -32,20 +32,14 @@ set keycolor orange
 set scrollercolor latte
 set selectedcolor white,blue
 
-# Enable R syntax highlighting
-include "~/.shDotFileSupport/nano/syntax/R.nanorc"
-
-# Enable Swift syntax highlighting
-include "~/.shDotFileSupport/nano/syntax/swift.nanorc"
-
-# Enable AsciiDoc syntax highlighting
-include "~/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
-
-# Enable YAML syntax highlighting
-include "~/.shDotFileSupport/nano/syntax/yaml.nanorc"
-
 # Enable standard syntax highlighting
 include "/usr/local/share/nano/*.nanorc"
+
+# Enable non-standard syntax highlighting
+include "~/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
+include "~/.shDotFileSupport/nano/syntax/R.nanorc"
+include "~/.shDotFileSupport/nano/syntax/swift.nanorc"
+include "~/.shDotFileSupport/nano/syntax/yaml.nanorc"
 
 # Add formatters
 extendsyntax css formatter "prettier_css.sh"

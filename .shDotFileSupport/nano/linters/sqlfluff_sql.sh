@@ -18,7 +18,7 @@ do
 done
 
 # Echo
-echo $final
+echo -n $final
 
 # Exit
 exit 0

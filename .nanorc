@@ -50,7 +50,11 @@ include "/usr/local/share/nano/*.nanorc"
 # Add custom formatters and linters
 extendsyntax python formatter "format_python.sh"
 extendsyntax R linter "lint_R.R"
+extendsyntax html formatter "prettier_html.sh"
+extendsyntax css formatter "prettier_css.sh"
 extendsyntax javascript formatter "prettier_javascript.sh"
+extendsyntax json formatter "prettier_json.sh"
+extendsyntax markdown formatter "prettier_markdown.sh"
 
 # Bind keys
 bind M-+ "[B[A" main

@@ -45,7 +45,7 @@ include "~/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
 include "/usr/local/share/nano/*.nanorc"
 
 # Add custom formatters and linters
-extendsyntax python formatter "format_python.sh"
+extendsyntax python formatter "autopep8_python.sh"
 extendsyntax R linter "lint_R.R"
 extendsyntax html formatter "prettier_html.sh"
 extendsyntax css formatter "prettier_css.sh"

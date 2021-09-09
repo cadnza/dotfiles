@@ -44,15 +44,17 @@ include "~/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
 # Enable standard syntax highlighting
 include "/usr/local/share/nano/*.nanorc"
 
-# Add custom formatters and linters
-extendsyntax python formatter "autopep8_python.sh"
-extendsyntax R linter "lintr_r.R"
-extendsyntax sql linter "sqlfluff_sql.sh"
-extendsyntax html formatter "prettier_html.sh"
+# Add formatters
 extendsyntax css formatter "prettier_css.sh"
+extendsyntax html formatter "prettier_html.sh"
 extendsyntax javascript formatter "prettier_javascript.sh"
 extendsyntax json formatter "prettier_json.sh"
 extendsyntax markdown formatter "prettier_markdown.sh"
+extendsyntax python formatter "autopep8_python.sh"
+
+# Add linters
+extendsyntax R linter "lintr_r.R"
+extendsyntax sql linter "sqlfluff_sql.sh"
 
 # Bind keys
 bind M-+ "[B[A" main

@@ -93,8 +93,6 @@ include "/usr/local/share/nano/xml.nanorc"
 # Add custom formatters and linters
 extendsyntax python formatter "format_python.sh"
 extendsyntax R linter "lint_R.R"
-
-# Add Prettier
 extendsyntax javascript formatter "prettier_javascript.sh"
 
 # Bind keys

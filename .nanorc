@@ -32,9 +32,6 @@ set keycolor orange
 set scrollercolor latte
 set selectedcolor white,blue
 
-# Highlight my name
-#include "~/.shDotFileSupport/myName.nanorc" # Not working yet
-
 # Enable R syntax highlighting
 include "~/.shDotFileSupport/nano/syntax/R.nanorc"
 

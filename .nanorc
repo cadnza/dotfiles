@@ -36,13 +36,13 @@ set selectedcolor white,blue
 #include "~/.shDotFileSupport/myName.nanorc" # Not working yet
 
 # Enable R syntax highlighting
-include "~/.shDotFileSupport/R.nanorc"
+include "~/.shDotFileSupport/nano/syntax/R.nanorc"
 
 # Enable Swift syntax highlighting
-include "~/.shDotFileSupport/swift.nanorc"
+include "~/.shDotFileSupport/nano/syntax/swift.nanorc"
 
 # Enable AsciiDoc syntax highlighting
-include "~/.shDotFileSupport/asciidoc.nanorc"
+include "~/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
 
 # Enable standard syntax highlighting
 include "/usr/local/share/nano/asm.nanorc"

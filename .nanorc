@@ -49,6 +49,7 @@ extendsyntax json formatter "prettier_json.sh"
 extendsyntax markdown formatter "prettier_markdown.sh"
 extendsyntax python formatter "autopep8 --in-place"
 extendsyntax Swift formatter "swiftlint --fix --quiet"
+extendsyntax YAML formatter "prettier_yaml.sh"
 
 # Add linters
 extendsyntax python linter "pylint_python.sh"

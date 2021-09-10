@@ -58,9 +58,6 @@ do
 	# Get analyzer-capable
 	isAnalyzable=$(echo $line | cut -d "|" -f 6)
 
-	# Get link from title
-	link="https://realm.github.io/SwiftLint/$ruleName.html"
-
 	# Set light characters
 	lightOn="\u25CF"
 	lightOff="\u25CB"
@@ -94,7 +91,7 @@ do
 	border="|"
 	newRow="$border $final_isCorrectable $final_ruleNameUntrimmed $final_kindUntrimmed$border"
 
-	# Add link to final
+	# Add string to final
 	final=$final$newRow"\n"
 
 # Close loop

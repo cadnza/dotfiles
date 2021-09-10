@@ -21,7 +21,7 @@ _Zsh_ dotfiles, specifically. Here's what you get:
 
 ### A very handy `.nanorc`
 
--   Highlighting for most languages (special thanks to [Benjamin Chan](https://github.com/benjamin-chan) for [R](https://gist.github.com/benjamin-chan/4ef37955eabf5fa8b9e70053c80b7d76#file-r-nanorc) and [Anthony Scopatz](https://github.com/scopatz) for [Swift](https://github.com/scopatz/nanorc/blob/master/swift.nanorc))
+-   Highlighting for most languages (special thanks to [Benjamin Chan](https://github.com/benjamin-chan) for [R](https://gist.github.com/benjamin-chan/4ef37955eabf5fa8b9e70053c80b7d76) and [Anthony Scopatz](https://github.com/scopatz) for [Swift](https://github.com/scopatz/nanorc/blob/master/swift.nanorc))
 -   Line numbering
 -   High contrast without giving you a headache
 -   A nice ruler at 80 characters

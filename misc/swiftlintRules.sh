@@ -17,33 +17,62 @@ do
 	# Skip drawn borders
 	[[ $(echo $line | grep -c "^\+") = 1 ]] && continue
 
-	# Get rule name
-	ruleName=$(echo $line | cut -d "|" -f 2 | sed "s/^ *//g" | sed "s/ *$//g")
+	# Get untrimmed name
+	ruleNameUntrimmed=$(echo $line | cut -d "|" -f 2 | sed "s/^ *//g")
+
+	# Get trimmed name
+	ruleName=$(echo $ruleNameUntrimmed | sed "s/ *$//g")
+
+	# Get untrimmed kind
+	kindUntrimmed=$(echo $line | cut -d "|" -f 6 | sed "s/^ *//g")
+
+	# Remove whitespace from line
+	line=$(echo $line | sed "s/ //g")
 
 	# Skip header row
 	[[ $ruleName = "identifier" ]] && continue
 
 	# Get opt-in value
-	isOptIn=$(echo $line | cut -d "|" -f 3 | sed "s/^ *//g" | sed "s/ *$//g")
+	isOptIn=$(echo $line | cut -d "|" -f 3)
 
 	# Get enabled value
-	isEnabled=$(echo $line | cut -d "|" -f 5 | sed "s/^ *//g" | sed "s/ *$//g")
+	isEnabled=$(echo $line | cut -d "|" -f 5)
 
-	# Format title into link
+	# Get correctable-capable
+	isCorrectable=$(echo $line | cut -d "|" -f 4)
+
+	# Get analyzer-capable
+	isAnalyzable=$(echo $line | cut -d "|" -f 6)
+
+	# Get link from title
 	link="https://realm.github.io/SwiftLint/$ruleName.html"
 
-	# Format link according to opt-in and enabled status
+	# Set light characters
+	lightOn="\u25CF"
+	lightOff="\u25CB"
+
+	# Format name by opt-in and enabled
 	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "yes" ]] && \
-		link="\033[38;5;0;48;5;10m"$link"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;0;48;5;10m"$ruleNameUntrimmed"\033[0m"
 	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "no" ]] && \
-		link="\033[38;5;10m"$link"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;10m"$ruleNameUntrimmed"\033[0m"
 	[[ $isOptIn = "no" ]] && [[ $isEnabled = "yes" ]] && \
-		link="\033[38;5;0;48;5;9m"$link"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;0;48;5;9m"$ruleNameUntrimmed"\033[0m"
 	[[ $isOptIn = "no" ]] && [[ $isEnabled = "no" ]] && \
-		link="\033[38;5;9m"$link"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;9m"$ruleNameUntrimmed"\033[0m"
+
+	# Format correctable
+	[[ $isCorrectable = "yes" ]] && \
+		final_isCorrectable="\033[38;5;11m$lightOn\033[0m" \
+	|| \
+		final_isCorrectable="\033[38;5;8m$lightOff\033[0m"
+	final_isCorrectable="\033[38;5;11m$final_isCorrectable\033[0m"
+
+	# Build string
+	newRow="$final_isCorrectable $final_ruleNameUntrimmed"
 
 	# Add link to final
-	final=$final$link"\n"
+	final=$final$newRow"\n"
 
 # Close loop
 done

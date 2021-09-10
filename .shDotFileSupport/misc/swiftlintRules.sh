@@ -8,14 +8,11 @@
 # Go to shDotFiles directory
 cd $(git -C $(dirname $0:A) rev-parse --show-toplevel)
 
-# Get master rules table
-t=$(swiftlint rules)
-
 # Open final variable
 final=""
 
 # Open loop through rows
-echo $t | while read -r line
+swiftlint rules | while read -r line
 do
 	# Skip drawn borders
 	[[ $(echo $line | grep -c "^\+") = 1 ]] && continue

@@ -29,18 +29,18 @@ do
 	# Get enabled value
 	isEnabled=$(echo $line | cut -d "|" -f 5 | sed "s/^ *//g" | sed "s/ *$//g")
 
-	# Skip rules that are either opt-in and enabled or opt-out and disabled
-	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "yes" ]] && continue
-	[[ $isOptIn = "no" ]] && [[ $isEnabled = "no" ]] && continue
-
 	# Format title into link
 	link="https://realm.github.io/SwiftLint/$ruleName.html"
 
 	# Format link according to opt-in and enabled status
-	[[ $isOptIn = "yes" ]] && \
-		link="\033[38;5;10m"$link"\033[0m" \
-	|| \
+	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "yes" ]] && \
+		link="\033[38;5;0;48;5;10m"$link"\033[0m"
+	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "no" ]] && \
+		link="\033[38;5;10m"$link"\033[0m"
+	[[ $isOptIn = "no" ]] && [[ $isEnabled = "yes" ]] && \
 		link="\033[38;5;0;48;5;9m"$link"\033[0m"
+	[[ $isOptIn = "no" ]] && [[ $isEnabled = "no" ]] && \
+		link="\033[38;5;9m"$link"\033[0m"
 
 	# Add link to final
 	final=$final$link"\n"

@@ -30,7 +30,7 @@ do
 	isOptIn=$(echo $line | cut -d "|" -f 3 | sed "s/^ *//g" | sed "s/ *$//g")
 
 	# Get enabled value
-	isEnabled=$(echo $line | cut -d "|" -f 4 | sed "s/^ *//g" | sed "s/ *$//g")
+	isEnabled=$(echo $line | cut -d "|" -f 5 | sed "s/^ *//g" | sed "s/ *$//g")
 
 	# Skip rules that are either opt-in and enabled or opt-out and disabled
 	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "yes" ]] && continue

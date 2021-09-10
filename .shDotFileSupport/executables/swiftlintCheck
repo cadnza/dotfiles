@@ -89,7 +89,7 @@ do
 	# Format kind
 	[[ $kind = "idiomatic" ]] && kindColor=3
 	[[ $kind = "lint" ]] && kindColor=7
-	[[ $kind = "metrics" ]] && kindColor=9 #change #TEMP
+	[[ $kind = "metrics" ]] && kindColor=9
 	[[ $kind = "performance" ]] && kindColor=13
 	[[ $kind = "style" ]] && kindColor=14
 	final_kindUntrimmed="\033[38;5;"$kindColor"m$kindUntrimmed\033[0m"

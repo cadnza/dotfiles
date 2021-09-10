@@ -12,6 +12,9 @@ set smarthome
 # Enable 80-character guide stripe
 set guidestripe 81
 
+# Enable multiple buffers
+set multibuffer
+
 # Enable scroll bar indicator
 set indicator
 
@@ -57,6 +60,9 @@ extendsyntax R linter "lintr_r.R"
 extendsyntax sql linter "sqlfluff_sql.sh"
 extendsyntax Swift linter "swiftlint"
 
-# Bind keys
+# Bind keys for rearranging lines
 bind M-+ "[B[A" main
 bind M-_ "[A[A" main
+
+# Bind key to run nExecute
+bind F5 "nExecute" main

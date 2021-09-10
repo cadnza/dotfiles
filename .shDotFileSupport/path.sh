@@ -6,6 +6,9 @@ export PATH=/usr/local/sbin:$PATH
 # Add user binaries to path
 export PATH=$HOME/bin:$PATH
 
+# Add included executables to path
+export PATH=$HOME/.shDotFileSupport/executables:$PATH
+
 # Add hidden local to path (needed for some executables)
 export PATH=$HOME/.local/bin:$PATH
 

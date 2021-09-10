@@ -1,18 +1,29 @@
 #!/usr/bin/env zsh
 
-# This script shows swiftlint rules according to how they stand with the global
-# swiftlint configuration in the shDotFiles repo. It only shows rules that are
-# either opt-in and disabled or opt-out and enabled. Opt-in are green; opt-out
-# are red. Happy configuring!
+# This script shows swiftlint rules according to how they stand with the a given
+# swiftlint configuration file. Highlighting means the rule is enabled, and the
+# yellow light means that swiftlint --fix will autocorrect it. The rule type
+# shows to the right. Happy configuring!
 
-# Go to shDotFiles directory
-cd $(git -C $(dirname $0:A) rev-parse --show-toplevel)
+# Validate argument
+[[ $1 = "" ]] && {
+	echo "Please supply a swiftlint config file."
+	exit 1
+}
+
+# Run rules on argument if possible
+rules=$(swiftlint rules --config $1) 2> /dev/null
+exitStatus=$?
+[[ $exitStatus = 0 ]] || {
+	echo "$1 isn't formatted like a swiftlint config file."
+	exit $exitStatus
+}
 
 # Open final variable
 final=""
 
 # Open loop through rows
-swiftlint rules | while read -r line
+echo $rules | while read -r line
 do
 	# Skip drawn borders
 	[[ $(echo $line | grep -c "^\+") = 1 ]] && continue

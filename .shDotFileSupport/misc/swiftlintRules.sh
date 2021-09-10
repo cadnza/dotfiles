@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+# This script shows swiftlint rules according to how they stand with the global
+# swiftlint configuration in the shDotFiles repo. It only shows rules that are
+# either opt-in and disabled or opt-out and enabled. Opt-in are green; opt-out
+# are red. Happy configuring!
+
 # Go to shDotFiles directory
 cd $(git -C $(dirname $0:A) rev-parse --show-toplevel)
 

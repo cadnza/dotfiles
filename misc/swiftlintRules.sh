@@ -26,6 +26,9 @@ do
 	# Get untrimmed kind
 	kindUntrimmed=$(echo $line | cut -d "|" -f 6 | sed "s/^ *//g")
 
+	# Get trimmed kind
+	kind=$(echo $kindUntrimmed | sed "s/ *$//g")
+
 	# Remove whitespace from line
 	line=$(echo $line | sed "s/ //g")
 
@@ -53,13 +56,13 @@ do
 
 	# Format name by opt-in and enabled
 	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "yes" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;0;48;5;10m"$ruleNameUntrimmed"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;0;48;5;2m"$ruleNameUntrimmed"\033[0m"
 	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "no" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;10m"$ruleNameUntrimmed"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;2m"$ruleNameUntrimmed"\033[0m"
 	[[ $isOptIn = "no" ]] && [[ $isEnabled = "yes" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;0;48;5;9m"$ruleNameUntrimmed"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;0;48;5;1m"$ruleNameUntrimmed"\033[0m"
 	[[ $isOptIn = "no" ]] && [[ $isEnabled = "no" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;9m"$ruleNameUntrimmed"\033[0m"
+		final_ruleNameUntrimmed="\033[38;5;1m"$ruleNameUntrimmed"\033[0m"
 
 	# Format correctable
 	[[ $isCorrectable = "yes" ]] && \
@@ -68,8 +71,17 @@ do
 		final_isCorrectable="\033[38;5;8m$lightOff\033[0m"
 	final_isCorrectable="\033[38;5;11m$final_isCorrectable\033[0m"
 
+	# Format kind
+	[[ $kind = "idiomatic" ]] && kindColor=3
+	[[ $kind = "lint" ]] && kindColor=7
+	[[ $kind = "metrics" ]] && kindColor=9 #change #TEMP
+	[[ $kind = "performance" ]] && kindColor=13
+	[[ $kind = "style" ]] && kindColor=14
+	final_kindUntrimmed="\033[38;5;"$kindColor"m$kindUntrimmed\033[0m"
+
 	# Build string
-	newRow="$final_isCorrectable $final_ruleNameUntrimmed"
+	border="|"
+	newRow="$border $final_isCorrectable $final_ruleNameUntrimmed $final_kindUntrimmed$border"
 
 	# Add link to final
 	final=$final$newRow"\n"

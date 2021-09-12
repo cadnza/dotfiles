@@ -12,9 +12,6 @@ set smarthome
 # Enable 80-character guide stripe
 set guidestripe 81
 
-# Enable multiple buffers
-set multibuffer
-
 # Enable scroll bar indicator
 set indicator
 
@@ -64,5 +61,11 @@ extendsyntax Swift linter "swiftlint"
 bind M-+ "[B[A" main
 bind M-_ "[A[A" main
 
+# Now we're going to enable using nExecute. We'll need backups for it.
+
+# Enable backups
+set backup
+set backupdir /tmp
+
 # Bind key to run nExecute
-bind F5 "nExecute" main
+bind F5 "nExecute" main

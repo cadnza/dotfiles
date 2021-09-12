@@ -20,9 +20,13 @@
 # Check for driver script in working directory and run if found
 drv=".nExecute"
 [[ -f $drv ]] && {
-	eval "./$drv"
+	chmod +x ./$drv
+	./$drv
 	exit 0
-} || {
-	echo "No .nExecute file found"
-	exit 1
 }
+
+# Run file if not found
+backupDir="/tmp"
+targetFile=$backupDir/$(ls -At /tmp | head -n 1)
+chmod +x $targetFile
+screen sh -c "$targetFile; read -n 1 -rs -p 'Press any key to continue'"

@@ -1,17 +1,18 @@
 {
-	"basename": true,
-	"colorcolumn": 80,
-	"diffgutter": true,
-	"indentchar": "\t",
-	"initlua": true,
-	"pluginchannels": [
-		"https://raw.githubusercontent.com/micro-editor/plugin-channel/master/channel.json"
-	],
-	"pluginrepos": [],
-	"rmtrailingws": true,
-	"scrollbar": true,
-	"softwrap": true,
-	"statusformatl": "$(filename)$(modified) | $(opt:filetype) | $(opt:status.branch) | $(opt:encoding)",
-	"statusformatr": "($(line),$(col))",
-	"wordwrap": true
+    "basename": true,
+    "colorcolumn": 80,
+    "colorscheme": "cadnza",
+    "diffgutter": true,
+    "indentchar": "\t",
+    "initlua": true,
+    "pluginchannels": [
+        "https://raw.githubusercontent.com/micro-editor/plugin-channel/master/channel.json"
+    ],
+    "pluginrepos": [],
+    "rmtrailingws": true,
+    "scrollbar": true,
+    "softwrap": true,
+    "statusformatl": "$(filename)$(modified) | $(opt:filetype) | $(opt:status.branch) | $(opt:encoding)",
+    "statusformatr": "($(line),$(col))",
+    "wordwrap": true
 }

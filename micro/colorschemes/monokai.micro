@@ -1,3 +1,8 @@
+# This is a modified copy of monokai, micro's default theme.
+# Windows can't read custom micro themes yet, so I've named this file "monokai"
+# and set "monokai" as the theme so that when Windows can't find this theme, it
+# falls back on micro's default monokai, which is close enough.
+
 color-link default "white"
 color-link comment "grey"
 color-link identifier "#66D9EF"

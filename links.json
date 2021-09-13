@@ -1,5 +1,17 @@
 [
 	{
+		"file": "micro/settings.json",
+		"link": "$HOME/.config/micro/$f"
+	},
+	{
+		"file": "micro/bindings.json",
+		"link": "$HOME/.config/micro/$f"
+	},
+	{
+		"file": "micro/colorschemes",
+		"link": "$HOME/.config/micro/$d"
+	},
+	{
 		"file": "pycodestyle",
 		"link": "$HOME/.config/$f",
 		"link_windows": "$HOME/.$f"

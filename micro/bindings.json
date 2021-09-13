@@ -1,4 +1,6 @@
 {
 	"Alt-/": "lua:comment.comment",
-	"CtrlUnderscore": "lua:comment.comment"
+	"CtrlUnderscore": "lua:comment.comment",
+	"Alt-Shift-F": "Find",
+	"CtrlF": "FindLiteral"
 }

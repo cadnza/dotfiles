@@ -93,7 +93,7 @@ decideBySize() {
 
 # Configure and run one-time and regular Git setup commands
 setupGitOnce() {
-	[[ -f ~/.hushdiff ]] && useDiffIndicator=false || useDiffIndicator=true
+	[[ -f $HOME/.hushdiff ]] && useDiffIndicator=false || useDiffIndicator=true
 	zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
 	zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)

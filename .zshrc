@@ -2,33 +2,33 @@
 # .hushdiff silences git buffer diff indicators. This can speed things up on a machine with large repos.
 
 # Set zsh-newuser-install settings
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt nomatch
 bindkey -e
 
 # Set compinstall reference
-zstyle :compinstall filename '~/.zshrc'
+zstyle :compinstall filename $HOME/.zshrc
 
 # Run color setup
-source ~/.shDotFileSupport/colors.sh
+source $HOME/.shDotFileSupport/colors.sh
 
 # Run settings per OS
-source ~/.shDotFileSupport/setupOS.sh
+source $HOME/.shDotFileSupport/setupOS.sh
 
 # Run completion settings
-source ~/.shDotFileSupport/completion.sh
+source $HOME/.shDotFileSupport/completion.sh
 
 # Set default text editor
 export VISUAL=nano
 export EDITOR=nano
 
 # Modify path
-source ~/.shDotFileSupport/path.sh
+source $HOME/.shDotFileSupport/path.sh
 
 # Source functions
-source ~/.shDotFileSupport/functions.sh
+source $HOME/.shDotFileSupport/functions.sh
 
 # Run prompt setup
-source ~/.shDotFileSupport/prompt.sh
+source $HOME/.shDotFileSupport/prompt.sh

@@ -18,7 +18,7 @@ tryOSmatch() {
 
 # Record OS string for fast checking
 workingOSfileName=.com.jondayley.shDotFilesOS.txt
-workingOSfile=~/$workingOSfileName
+workingOSfile=$HOME/$workingOSfileName
 workingOS=$(cat $workingOSfile) 2> /dev/null || {
 	workingOS="$(tryOSmatch $osMacos)$(tryOSmatch $osLinux)$(tryOSmatch $osWindows)"
 	echo $workingOS > $workingOSfile
@@ -56,7 +56,7 @@ then
 	# Set machine prompt color
 	export colorMachine=$colorWindows
 	# Enable command to enable zsh-syntax-highlighting
-	source ~/.shDotFileSupport/zshSyntaxHighlightingPull.sh
+	source $HOME/.shDotFileSupport/zshSyntaxHighlightingPull.sh
 	# Make sure /usr/bin is first in path
 	export PATH=/usr/bin:$PATH
 # Other
@@ -64,7 +64,7 @@ else
 	# Set machine prompt color
 	export colorMachine=$colorOther
 	# Enable command to enable zsh-syntax-highlighting
-	source ~/.shDotFileSupport/zshSyntaxHighlightingPull.sh
+	source $HOME/.shDotFileSupport/zshSyntaxHighlightingPull.sh
 fi
 
 # Add aliases for non-macos machines

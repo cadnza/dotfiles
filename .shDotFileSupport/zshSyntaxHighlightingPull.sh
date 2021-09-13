@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Record reference to temporary directory containing repo
-fileZshSynHighRef=~/.zshSyntaxHighlightingDirectoryReference
+fileZshSynHighRef=$HOME/.zshSyntaxHighlightingDirectoryReference
 
 # Get function to create a temporary directory and record its location
 getAndRecordTempDir() {

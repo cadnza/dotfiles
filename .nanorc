@@ -36,10 +36,10 @@ set selectedcolor white,blue
 include "/usr/local/share/nano/*.nanorc"
 
 # Enable non-standard syntax highlighting
-include "~/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
-include "~/.shDotFileSupport/nano/syntax/R.nanorc"
-include "~/.shDotFileSupport/nano/syntax/swift.nanorc"
-include "~/.shDotFileSupport/nano/syntax/yaml.nanorc"
+include "$HOME/.shDotFileSupport/nano/syntax/asciidoc.nanorc"
+include "$HOME/.shDotFileSupport/nano/syntax/R.nanorc"
+include "$HOME/.shDotFileSupport/nano/syntax/swift.nanorc"
+include "$HOME/.shDotFileSupport/nano/syntax/yaml.nanorc"
 
 # Add formatters
 extendsyntax css formatter "prettier_css.sh"
@@ -68,4 +68,6 @@ set backup
 set backupdir /tmp
 
 # Bind key to run nExecute
-bind F5 "nExecute" main
+bind F5 "
+nExecute
+" main

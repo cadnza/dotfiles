@@ -1,5 +1,6 @@
 {
     "basename": true,
+    "clipboard": "terminal",
     "colorcolumn": 80,
     "colorscheme": "monokai",
     "diffgutter": true,

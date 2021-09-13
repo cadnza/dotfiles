@@ -23,6 +23,7 @@ source $HOME/.shDotFileSupport/completion.sh
 # Set default text editor
 export VISUAL=micro
 export EDITOR=micro
+git config --global core.editor micro
 
 # Modify path
 source $HOME/.shDotFileSupport/path.sh

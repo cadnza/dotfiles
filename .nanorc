@@ -56,18 +56,3 @@ extendsyntax python linter "pylint_python.sh"
 extendsyntax R linter "lintr_r.R"
 extendsyntax sql linter "sqlfluff_sql.sh"
 extendsyntax Swift linter "swiftlint"
-
-# Bind keys for rearranging lines
-bind M-+ "[B[A" main
-bind M-_ "[A[A" main
-
-# Now we're going to enable using nExecute. We'll need backups for it.
-
-# Enable backups
-set backup
-set backupdir /tmp
-
-# Bind key to run nExecute
-bind F5 "
-nExecute
-" main

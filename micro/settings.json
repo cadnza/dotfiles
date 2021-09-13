@@ -1,7 +1,7 @@
 {
     "basename": true,
     "colorcolumn": 80,
-    "colorscheme": "cadnza",
+    "colorscheme": "monokai",
     "diffgutter": true,
     "indentchar": "\t",
     "initlua": true,

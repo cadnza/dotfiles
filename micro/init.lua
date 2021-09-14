@@ -35,4 +35,16 @@ function init()
 		0,
 		0
 	)
+	linter.makeLinter(
+		"swiftlint",
+		"swift",
+		"swiftlint",
+		{"%f"},
+		"%f:%l:%c: %m",
+		{},
+		false,
+		false,
+		0,
+		0
+	)
 end

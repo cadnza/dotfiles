@@ -6,10 +6,10 @@ local shell = import("micro/shell")
 local config = import("micro/config")
 
 function init()
-	config.MakeCommand("xc", _xc, config.OptionComplete)
+	config.MakeCommand("mxc", _mxc, config.OptionComplete)
 end
 
-function _xc()
+function _mxc()
 	local fPath = micro.CurPane().Buf.AbsPath
 	local str, err = shell.RunInteractiveShell(fPath, true, false)
 	micro.InfoBar():Message(err) --TEMP

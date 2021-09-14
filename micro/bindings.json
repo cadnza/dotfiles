@@ -4,6 +4,6 @@
 	"Alt-Shift-F": "Find",
 	"Ctrl-F": "FindLiteral",
 	"Ctrl-X": "Quit",
-	"Alt-Q": "FindPrevious",
-	"Alt-W": "FindNext"
+	"Alt-q": "FindPrevious",
+	"Alt-w": "FindNext"
 }

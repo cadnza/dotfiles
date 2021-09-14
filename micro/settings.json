@@ -5,7 +5,6 @@
     "colorscheme": "monokai",
     "diffgutter": true,
     "indentchar": "\t",
-    "initlua": true,
     "pluginchannels": [
         "https://raw.githubusercontent.com/micro-editor/plugin-channel/master/channel.json"
     ],

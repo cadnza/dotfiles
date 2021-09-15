@@ -9,9 +9,19 @@ local util = import("micro/util")
 function init()
 	config.MakeCommand("mxc", mxc, config.OptionComplete)
 	config.TryBindKey("F5","lua:mxc.mxc",false)
+	config.MakeCommand("mxc", mxcX, config.OptionComplete)
+	config.TryBindKey("F6","lua:mxc.mxcX",false)
 end
 
 function mxc()
+	driver(false)
+end
+
+function mxcX()
+	driver(true)
+end
+
+function driver(lookForMxcFile)
 	-- Get current pane
 	local bp = micro.CurPane()
 	-- Save buffer -- Make this optional --TEMP
@@ -21,7 +31,13 @@ function mxc()
 	local fPath = bp.Buf.AbsPath
 	-- Run main script
 	local mainScript = os.getenv( "HOME" ).."/.config/micro/plug/mxc/main.sh"
-	local str, err = shell.RunInteractiveShell(mainScript.." "..fPath, true, false)
+	local scriptString
+	if lookForMxcFile then
+		scriptString = mainScript.." "..fPath.." ".."1"
+	else
+		scriptString = mainScript.." "..fPath
+	end
+	local str, err = shell.RunInteractiveShell(scriptString, true, false)
 	-- Show any error
 	if err ~= nil then
 		micro.InfoBar():Error(err)

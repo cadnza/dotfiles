@@ -14,13 +14,13 @@ end
 function _mxc()
 	-- Get current pane
 	local bp = micro.CurPane()
-	-- Save buffer
+	-- Save buffer -- Make this optional --TEMP
 	bp:Save()
 	micro.InfoBar():ClearInfo()
 	-- Get path of current file in buffer
 	local fPath = bp.Buf.AbsPath
-	-- Run file in perl
-	local str, err = shell.RunInteractiveShell("perl "..fPath, true, false)
+	-- Run main script
+	local str, err = shell.RunInteractiveShell(os.getenv( "HOME" ).."/.config/micro/plug/mxc/main.sh "..fPath, true, false)
 	-- Show any error
 	if err ~= nil then
 		micro.InfoBar():Error(err)

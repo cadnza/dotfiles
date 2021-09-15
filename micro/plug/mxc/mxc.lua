@@ -7,11 +7,11 @@ local config = import("micro/config")
 local util = import("micro/util")
 
 function init()
-	config.MakeCommand("mxc", _mxc, config.OptionComplete)
-	config.TryBindKey("F5","lua:mxc._mxc",false)
+	config.MakeCommand("mxc", mxc, config.OptionComplete)
+	config.TryBindKey("F5","lua:mxc.mxc",false)
 end
 
-function _mxc()
+function mxc()
 	-- Get current pane
 	local bp = micro.CurPane()
 	-- Save buffer -- Make this optional --TEMP

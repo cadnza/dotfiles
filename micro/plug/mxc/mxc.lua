@@ -20,7 +20,8 @@ function _mxc()
 	-- Get path of current file in buffer
 	local fPath = bp.Buf.AbsPath
 	-- Run main script
-	local str, err = shell.RunInteractiveShell(os.getenv( "HOME" ).."/.config/micro/plug/mxc/main.sh "..fPath, true, false)
+	local mainScript = os.getenv( "HOME" ).."/.config/micro/plug/mxc/main.sh"
+	local str, err = shell.RunInteractiveShell(mainScript.." "..fPath, true, false)
 	-- Show any error
 	if err ~= nil then
 		micro.InfoBar():Error(err)

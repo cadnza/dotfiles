@@ -1,7 +1,7 @@
 # See https://docs.sqlfluff.com/en/stable/rules.html
 
 [sqlfluff]
-exclude_rules = L011,L012,L013,L014,L022,L031,L034,L036
+exclude_rules = L011,L012,L013,L014,L016,L022,L031,L034,L036
 
 [sqlfluff:indentation]
 indented_joins = True

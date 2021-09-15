@@ -9,15 +9,15 @@ local util = import("micro/util")
 function init()
 	config.MakeCommand("mxc", mxc, config.OptionComplete)
 	config.TryBindKey("F5","lua:mxc.mxc",false)
-	config.MakeCommand("mxc", mxcX, config.OptionComplete)
-	config.TryBindKey("F6","lua:mxc.mxcX",false)
+	config.MakeCommand("mxc", mxcx, config.OptionComplete)
+	config.TryBindKey("F6","lua:mxc.mxcx",false)
 end
 
 function mxc()
 	driver(false)
 end
 
-function mxcX()
+function mxcx()
 	driver(true)
 end
 

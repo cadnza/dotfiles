@@ -15,3 +15,6 @@ export PATH=$HOME/.local/bin:$PATH
 # Add nano linter and formatter directories to path
 export PATH=$HOME/.shDotFileSupport/nano/linters:$PATH
 export PATH=$HOME/.shDotFileSupport/nano/formatters:$PATH
+
+# Add dotnet tools to path
+export PATH=$PATH:$HOME/.dotnet/tools

@@ -26,25 +26,41 @@ function mxcx()
 end
 
 function driver(lookForMxcFile)
+	-- Set plugin directory
+	local d = os.getenv("HOME").."/.config/micro/plug/mxc/"
 	-- Get current pane
 	local bp = micro.CurPane()
+	-- Get path of current file in buffer
+	local fPath = bp.Buf.AbsPath
+	-- Run parse script
+	local parseScript = d.."parse.sh"
+	local targetFile, err
+	if lookForMxcFile then
+		targetFile, err = shell.ExecCommand(parseScript, fPath, "1")
+	else
+		targetFile, err = shell.ExecCommand(parseScript, fPath)
+	end
+	if err ~= nil then
+		local msg = "mxc: .mxc not found"
+		micro.InfoBar():Error(msg)
+		return
+	end
+	-- Run validation script
+	local validateScript = d.."validate.sh"
+	local msg, err = shell.ExecCommand(validateScript, targetFile)
+	if err ~= nil then
+		micro.InfoBar():Error(msg)
+		return
+	end
 	-- Save buffer if option set
 	local doSave = config.GetGlobalOption("mxc.saveOnRun")
 	if doSave then
 		bp:Save()
 	end
-	-- Get path of current file in buffer
-	local fPath = bp.Buf.AbsPath
-	-- Run main script
-	local mainScript = os.getenv( "HOME" ).."/.config/micro/plug/mxc/main.sh"
-	local scriptString
-	if lookForMxcFile then
-		scriptString = mainScript.." "..fPath.." ".."1"
-	else
-		scriptString = mainScript.." "..fPath
-	end
-	local str, err = shell.RunInteractiveShell(scriptString, true, false)
-	-- Show any error
+	-- Run execute script
+	local executeScript = d.."execute.sh"
+	local executeScriptString = executeScript.." ".."'"..targetFile.."'"
+	local str, err = shell.RunInteractiveShell(executeScriptString, true, false)
 	if err ~= nil then
 		micro.InfoBar():Error(err)
 	end

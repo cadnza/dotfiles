@@ -51,5 +51,4 @@ extendsyntax YAML formatter "prettier_yaml.sh"
 # Add linters
 extendsyntax python linter "pylint_python.sh"
 extendsyntax R linter "lintr_r.R"
-extendsyntax sql linter "sqlfluff_sql.sh"
 extendsyntax Swift linter "swiftlint"

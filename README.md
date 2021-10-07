@@ -28,6 +28,13 @@ _Zsh_ dotfiles, specifically. Here's what you get:
 -   A scroll bar (Well, an indicator anyway. You can't scroll with it.)
 -   Formatters and linters for a number of languages
 
+### Universal RC files for various tools
+
+-   [Prettier](https://prettier.io/)
+-   [Pylint](https://pylint.org/)
+-   [R](https://www.r-project.org/)
+-   [SwiftLint](https://realm.github.io/SwiftLint/)
+
 ### Short files and easy setup
 
 -   Because short files are happy files. 🙂

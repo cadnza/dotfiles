@@ -26,6 +26,7 @@ _Zsh_ dotfiles, specifically. Here's what you get:
 -   High contrast without giving you a headache
 -   A nice ruler at 80 characters
 -   A scroll bar (Well, an indicator anyway. You can't scroll with it.)
+-   Formatters and linters for a number of languages
 
 ### Short files and easy setup
 
@@ -44,5 +45,6 @@ _Zsh_ dotfiles, specifically. Here's what you get:
 Nice and easy. Here's what you do:
 
 1. Pull the repo
-2. Symlink `.zshrc`, `.nanorc`, and `.shDotFileSupport` into `~` by those names (and `.Rprofile` if you want)
-3. Start your zsh 😎
+2. Symlink `.zshrc` and `.shDotFileSupport` into `~` by those names
+3. Follow `links.json` for more customization (optional)
+4. Start your zsh 😎

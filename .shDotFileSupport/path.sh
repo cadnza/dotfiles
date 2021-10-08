@@ -18,6 +18,3 @@ export PATH=$HOME/.shDotFileSupport/nano/formatters:$PATH
 
 # Add dotnet tools to path
 export PATH=$PATH:$HOME/.dotnet/tools
-
-# Add GNU symlinks to coreutils binaries to path
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH

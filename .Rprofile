@@ -134,3 +134,6 @@ if("lintr"%in%rownames(utils::installed.packages())){
 	environment(.ShadowEnv$lintCustom) <- asNamespace("lintr")
 	utils::assignInNamespace("lint",.ShadowEnv$lintCustom,ns="lintr")
 }
+
+# Set browser to launch by default with Shiny ----
+options(shiny.launch.browser=TRUE)

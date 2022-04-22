@@ -19,5 +19,6 @@ dS=[[:digit:]]
 	ct=$(($ct-$ctAttached))
 	screensWord="\033[1mscreen\033[22m"
 	[[ $ct = 1 ]] || screensWord=$screensWord"s"
-	echo -e "\033[48;5;4m$ct detached $screensWord\033[0m"
+	[[ $ct -ge 1 ]] && \
+		echo -e "\033[48;5;4m$ct detached $screensWord\033[0m"
 }

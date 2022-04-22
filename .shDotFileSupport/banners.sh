@@ -3,9 +3,10 @@
 # Count and banner tmux sessions
 tmux ls &> /dev/null && {
 	ct=$(tmux ls | grep -c .)
-	[[ $ct = 1 ]] && sessionsWord=session || sessionsWord=sessions
 	ctAttached=$(tmux ls | grep -cEo "\(attached\)$")
 	ct=$(($ct-$ctAttached))
+	sessionsWord=session
+	[[ $ct = 1 ]] || sessionsWord=$sessionsWord"s"
 	[[ $ct -ge 1 ]] && \
 		echo -e "\033[48;5;9m$ct unattached \033[1mtmux\033[22m $sessionsWord open\033[0m"
 }

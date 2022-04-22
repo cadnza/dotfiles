@@ -31,5 +31,8 @@ source $HOME/.shDotFileSupport/path.sh
 # Source functions
 source $HOME/.shDotFileSupport/functions.sh
 
+# Display banners
+source $HOME/.shDotFileSupport/banners.sh
+
 # Run prompt setup
 source $HOME/.shDotFileSupport/prompt.sh

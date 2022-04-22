@@ -8,7 +8,7 @@ tmux ls &> /dev/null && {
 	sessionsWord=session
 	[[ $ct = 1 ]] || sessionsWord=$sessionsWord"s"
 	[[ $ct -ge 1 ]] && \
-		echo -e "\033[48;5;9m$ct detached \033[1mtmux\033[22m $sessionsWord open\033[0m"
+		echo -e "\033[48;5;9m$ct detached \033[1mtmux\033[22m $sessionsWord\033[0m"
 }
 
 # Count and banner screen sessions
@@ -19,5 +19,5 @@ dS=[[:digit:]]
 	ct=$(($ct-$ctAttached))
 	screensWord="\033[1mscreen\033[22m"
 	[[ $ct = 1 ]] || screensWord=$screensWord"s"
-	echo -e "\033[48;5;4m$ct detached $screensWord open\033[0m"
+	echo -e "\033[48;5;4m$ct detached $screensWord\033[0m"
 }

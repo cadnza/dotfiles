@@ -33,3 +33,6 @@ source $HOME/.shDotFileSupport/functions.sh
 
 # Run prompt setup
 source $HOME/.shDotFileSupport/prompt.sh
+
+# Source commands for Secure ShellFish
+source $HOME/.shDotFileSupport/shellfishrc.sh

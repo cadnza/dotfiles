@@ -15,10 +15,10 @@ zstyle :compinstall filename $HOME/.zshrc
 source $HOME/.shDotFileSupport/colors.sh
 
 # Run settings per OS
-source $HOME/.shDotFileSupport/setupOS.sh
+source $HOME/.shDotFileSupport/setupOS.sh # Currently profiling on EngineRoom at ~0.08s
 
 # Run completion settings
-source $HOME/.shDotFileSupport/completion.sh
+source $HOME/.shDotFileSupport/completion.sh # Currently profiling on EngineRoom at ~0.11s
 
 # Set default text editor
 export VISUAL=micro

@@ -24,3 +24,6 @@ export PATH=$PATH:$HOME/.flutter/bin
 
 # Add pub to path (for Flutter)
 export PATH=$PATH:$HOME/.pub-cache/bin
+
+# Add gcloud to path
+export PATH=$PATH:$HOME/.google-cloud-sdk/bin

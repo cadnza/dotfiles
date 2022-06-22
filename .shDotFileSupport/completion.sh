@@ -14,3 +14,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} $(echo "ma=38;5;0;48;5;$co
 # Enable op completion if op is installed
 eval "$(op completion zsh 2> /dev/null)" &> /dev/null
 compdef _op op &> /dev/null
+
+# Enable completion for gcloud
+compsgcloud="$HOME/.google-cloud-sdk/completion.zsh.inc"
+[ -f $compsgcloud ] && source $compsgcloud

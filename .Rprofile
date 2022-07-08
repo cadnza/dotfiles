@@ -21,43 +21,28 @@ try(
 	silent=TRUE
 )
 
+# Define exit function for convenience ----
+exit <- function(
+	save="no",
+	status=0,
+	runLast=TRUE
+){
+	quit(save,status,runLast)
+}
+
 # Set text editor ----
 options(editor="nano")
 
-# Define function to get colors from shell environment ----
-getColors <- function(){
-	envVars <- Sys.getenv(names=TRUE)
-	colorList <- lapply(as.list(envVars[grepl("^color",names(envVars))]),as.integer)
-	.ShadowEnv$colorList <- colorList
-}
-
-# Define function to try to get a color from the list and return NA otherwise ----
-.ShadowEnv$tryColor <- function(name){
-	clr <- .ShadowEnv$colorList[[name]]
-	if(is.null(clr))
-		return(NA)
-	return(clr)
-}
-
 # Define function to set prompt ----
-setPrompt <- function(expr,value,succeeded,visible){
-	# Reset
-	crayon::reset()
-	# Set prompt string
-	space <- "_"
-	ps1 <- paste0(
-		quickColor::quickColor("R",fg=.ShadowEnv$tryColor("colorMachine"),bold=TRUE),
-		space,
-		quickColor::quickColor(">",fg=.ShadowEnv$tryColor("colorSep")),
-		space
-	)
-	ps1 <- gsub("_+"," ",ps1)
+setPrompt <- function(){
+	# Set prompt
+	ps1 <- "R > "
 	# Formally register prompt
 	options(prompt=ps1)
 	# Formally register continued prompt as blank spaces of same length as prompt
 	options(continue=strrep(" ",nchar(ps1)))
 	# Return
-	return(TRUE)
+	return()
 }
 
 # Define .First function that's called on startup ----
@@ -65,6 +50,10 @@ setPrompt <- function(expr,value,succeeded,visible){
 	# Source only if interactive
 	if(!interactive())
 		return()
+	# Set prompt
+	setPrompt()
+	# Return
+	return()
 }
 
 # Set linting defaults ----

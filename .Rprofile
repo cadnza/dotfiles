@@ -65,39 +65,6 @@ setPrompt <- function(expr,value,succeeded,visible){
 	# Source only if interactive
 	if(!interactive())
 		return()
-	# Check for required packages
-	reqd <- c(
-		quickColor="https://github.com/cadnza/quickColor",
-		crayon="https://www.rdocumentation.org/packages/crayon/versions/1.4.1/topics/crayon",
-		lintr="https://www.rdocumentation.org/packages/lintr/versions/1.0.3"
-	)
-	blank <- ""
-	for(i in 1:length(reqd))
-		if(!names(reqd)[i]%in%rownames(utils::installed.packages())){
-			warning(
-				paste(
-					blank,
-					paste("The .Rprofile from shDotFiles needs",names(reqd)[i],"to run,"),
-					"so it's been disabled for this session.",
-					blank,
-					reqd[i],
-					blank,
-					sep="\n"
-				),
-				call.=FALSE
-			)
-			invisible(return())
-		}
-	# Get colors from colors.sh
-	getColors()
-	# Call prompt function with empty parameters
-	setPrompt(NA,NA,NA,NA)
-	# Register prompt function as callback (see docs)
-	addTaskCallback(setPrompt)
-	# Clean up global environment
-	rm(getColors,envir=.GlobalEnv)
-	rm(setPrompt,envir=.GlobalEnv)
-	rm(.First,envir=.GlobalEnv)
 }
 
 # Set linting defaults ----

@@ -1,5 +1,5 @@
 # Set language (just in case) ----
-#Sys.setenv(LANG="en")
+Sys.setenv(LANG="en_US.UTF-8")
 
 # Open environment for variables that need to be available throughout ----
 .GlobalEnv$.ShadowEnv <- new.env(parent=.GlobalEnv)

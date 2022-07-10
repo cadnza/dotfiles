@@ -60,7 +60,7 @@ setPrompt <- function(){
 if("lintr"%in%rownames(utils::installed.packages())){
 	.ShadowEnv$lintClone <- lintr::lint
 	.ShadowEnv$emptyF <- function(x){}
-	.ShadowEnv$lintrDefaults <- lintr::with_defaults(
+	.ShadowEnv$lintrDefaults <- lintr::linters_with_defaults(
 		closed_curly_linter=.ShadowEnv$emptyF,
 		commas_linter=.ShadowEnv$emptyF,
 		commented_code_linter=.ShadowEnv$emptyF,

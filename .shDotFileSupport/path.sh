@@ -16,12 +16,6 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.shDotFileSupport/nano/linters:$PATH
 export PATH=$HOME/.shDotFileSupport/nano/formatters:$PATH
 
-# Add dotnet tools to path
-export PATH=$PATH:$HOME/.dotnet/tools
-
-# Add flutter to path
-export PATH=$PATH:$HOME/.flutter/bin
-
 # Add pub to path (for Flutter)
 export PATH=$PATH:$HOME/.pub-cache/bin
 

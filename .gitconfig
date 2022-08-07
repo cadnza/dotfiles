@@ -1,0 +1,11 @@
+[core]
+	editor = nano
+[user]
+	name = Jon Dayley
+	email = jonathandayley@gmail.com
+[advice]
+	addIgnoredFile = false
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

@@ -39,3 +39,6 @@ source $HOME/.shDotFileSupport/prompt.sh
 
 # Source commands for Secure ShellFish
 source $HOME/.shDotFileSupport/shellfishrc.sh
+
+# Initialize shell integration if running in VS Code
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"

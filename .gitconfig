@@ -9,3 +9,7 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[merge]
+	tool = code
+[mergetool "code"]
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED

@@ -2,8 +2,8 @@
 
 # Quit if the last window just closed
 tell application "Terminal"
-	if count windows is 0 then quit
-	if count windows is 1 then
+	if (count windows) is 0 then quit
+	if (count windows) is 1 then
 		if processes of window 1 is {"login", "-zsh", "screen"} then quit
 	end if
 end tell

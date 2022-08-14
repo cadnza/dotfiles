@@ -12,7 +12,7 @@ gd() {
 # Quite Apple Terminal on exiting the last window
 [ "$TERM_PROGRAM" = "Apple_Terminal" ] && {
 	exit() {
-		screen $HOME/.shDotFileSupport/scripts/exit.sh
+		screen -d -m $HOME/.shDotFileSupport/scripts/exit.sh
 		builtin exit "$@"
 	}
 }

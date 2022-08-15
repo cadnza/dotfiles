@@ -14,7 +14,7 @@ gd() {
 	exit() {
 
 		# Exit normally if in screen session
-		[ -n $STY ] && builtin exit "$@"
+		[ -n $STY ] || builtin exit "$@"
 
 		# Exit normally if in anything other than base Apple Terminal
 		# (checking here too to spare non- Apple Terminal emulators from having to define the alias)

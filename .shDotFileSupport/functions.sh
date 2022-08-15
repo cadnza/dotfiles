@@ -16,7 +16,7 @@ gd() {
 		# Exit normally if in screen session
 		[ -n $STY ] || builtin exit "$@"
 
-		# Exit normally if in anything other than base Apple Terminal
+		# Exit normally if in anything other than base Apple Terminal, e.g. tmux
 		# (checking here too to spare non- Apple Terminal emulators from having to define the alias)
 		[ "$TERM_PROGRAM" = "Apple_Terminal" ] || builtin exit "$@"
 

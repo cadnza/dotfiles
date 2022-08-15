@@ -21,7 +21,7 @@ gd() {
 		[ "$TERM_PROGRAM" = "Apple_Terminal" ] || builtin exit "$@"
 
 		# Run Applescript for checking Apple Terminal windows and closing the application
-		screen -d -m $HOME/.shDotFileSupport/scripts/exit.sh
+		screen -d -m $HOME/.shDotFileSupport/scripts/quitAppleTerminal.sh
 
 		# Exit normally
 		builtin exit "$@"

@@ -21,3 +21,7 @@ export PATH=$PATH:$HOME/.pub-cache/bin
 
 # Add gcloud to path
 export PATH=$PATH:$HOME/.google-cloud-sdk/bin
+
+# Add local homebrew path and source eval script
+export PATH=$PATH:$HOME/.homebrew
+[ -d $HOME/.homebrew ] && eval "$($HOME/.homebrew/bin/brew shellenv)"

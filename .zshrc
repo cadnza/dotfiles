@@ -1,6 +1,9 @@
 # Note optional files
 # .hushdiff silences git buffer diff indicators. This can speed things up on a machine with large repos.
 
+# Source local scripts
+source $HOME/.localrc
+
 # Set zsh-newuser-install settings
 HISTFILE=$HOME/.histfile
 HISTSIZE=1000

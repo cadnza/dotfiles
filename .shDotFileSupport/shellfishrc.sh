@@ -2,7 +2,7 @@
 # another shell startup file with:
 #   source $HOME/.shellfishrc
 
-# this script does nothing outside ShellFish
+# this part does nothing outside ShellFish
 if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
   ios_printURIComponent() {
     awk 'BEGIN {while (y++ < 125) z[sprintf("%c", y)] = y
@@ -35,6 +35,27 @@ if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
      OUTPUT=$(
       ios_printf '\033]'
       echo -n "$1" | tr -d '[:space:]'
+      ios_printf '\a' )
+    fi
+    if [ -t 1 ] ; then
+      echo -n $OUTPUT
+    elif [[ -n "$SSH_TTY" ]]; then
+      echo -n $OUTPUT > $SSH_TTY
+    else
+      echo >&2 'Standard output is not tty and there is no $SSH_TTY'
+    fi
+  }
+  
+  ios_sequence_spaced() {
+    if [[ -n "$TMUX" ]]; then
+     OUTPUT=$(
+      ios_printf '\033Ptmux;\033\033]'
+      echo -n "$1"
+      ios_printf '\a\033\\' )
+    else
+     OUTPUT=$(
+      ios_printf '\033]'
+      echo -n "$1"
       ios_printf '\a' )
     fi
     if [ -t 1 ] ; then
@@ -204,26 +225,13 @@ EOF
     else
       local name=$(ios_printURIComponent "$1")
       shift
-      local input=$(ios_printURIComponent "$*")
+      if [[ $* == "-" ]]; then
+        local text=$(cat -)
+        local input=$(ios_printURIComponent "$text")
+      else
+        local input=$(ios_printURIComponent "$*")
+      fi
       openUrl "$baseUrl?name=$name&input=$input"
-    fi
-  }
-
-  notify() {
-    if [[ $# -eq 0 ]]; then
-      cat <<EOF
-Usage: notify <title> [body]
-
-Show notification on iOS device.
-Title cannot contain semicolon.
-EOF
-    else
-      local title="${1-}" body="${2-}"
-      OUTPUT=$(
-        echo $title | awk -F";" 'BEGIN {printf "777;notify;"} {printf "%s;", $1}'
-        echo $body
-      )
-      ios_sequence "$OUTPUT"
     fi
   }
 
@@ -276,3 +284,75 @@ EOF
     fi
   fi
 fi
+
+
+# Updates Terminal Data widget in Secure ShellFish
+#
+# This command sends encrypted data through push notifications such
+# that it doesn't need to run from a Secure ShellFish terminal.
+widget() {
+  if [[ $# -eq 0 ]]; then
+    cat <<EOF
+Usage: widget <data> ...
+
+Update widget on device from which this function was installed with a
+number of content parameters that can be string, progress, icon or colors.
+
+Each argument type is derived from input.
+
+Progress has the form: 50% or 110/220
+
+Icon must match valid SF Symbol name such as globe or terminal.fill
+
+Colors must be hex colours such as #000 #ff00ff where the color is used
+for later content and 'foreground' switches back to default colour
+
+String is the fallback type if nothing else matches, but content type can be forced
+for next parameter with --progress, --icon, --color or --text with something like:
+  widget --text "50/100"
+
+EOF
+    return 0
+  fi
+  
+  local key=c2b45985ca705cdfb3054fb25ae6d961506c38762dd5632d38f5c5a00afcc869
+  local user=ofwbx9Hf0r6TSywXbgRYpH8h1VZD5vDy07z8X19S
+  local iv=ab5bbeb426015da7eedcee8bee3dffb7
+
+  local plain=$(
+  echo Secure ShellFish Widget 1.0
+  for var in "$@"
+  do
+      echo "$var"
+  done)
+  local base64=$(echo "$plain" | openssl enc -aes-256-cbc -base64 -K $key -iv $iv)
+  curl -X POST -H "Content-Type: text/plain" --data "$base64" "https://secureshellfish.app/push/?user=$user"
+}
+
+
+# Shows notification on your device with Secure ShellFish installed.
+#
+# This command sends encrypted data through push notifications such
+# that it doesn't need to run from a Secure ShellFish terminal.
+notify() {
+  if [[ $# -eq 0 ]]; then
+    cat <<EOF
+Usage: notify [title] <body> ...
+
+EOF
+    return 0
+  fi
+  
+  local key=c2b45985ca705cdfb3054fb25ae6d961506c38762dd5632d38f5c5a00afcc869
+  local user=ofwbx9Hf0r6TSywXbgRYpH8h1VZD5vDy07z8X19S
+  local iv=ab5bbeb426015da7eedcee8bee3dffb7
+
+  local plain=$(
+  echo Secure ShellFish Notify 1.0
+  for var in "$@"
+  do
+      echo "$var"
+  done)
+  local base64=$(echo "$plain" | openssl enc -aes-256-cbc -base64 -K $key -iv $iv)
+  curl -X POST -H "Content-Type: text/plain" --data "$base64" "https://secureshellfish.app/push/?user=$user"
+}

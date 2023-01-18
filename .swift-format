@@ -13,7 +13,7 @@
 	"indentSwitchCaseLabels": false,
 	"lineBreakAroundMultilineExpressionChainComponents": false,
 	"lineBreakBeforeControlFlowKeywords": false,
-	"lineBreakBeforeEachArgument": false,
+	"lineBreakBeforeEachArgument": true,
 	"lineBreakBeforeEachGenericRequirement": false,
 	"prioritizeKeepingFunctionOutputTogether": false,
 	"rules": {

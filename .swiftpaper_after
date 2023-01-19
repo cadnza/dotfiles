@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+# Link support files
+ln -s $HOME/Repos/shDotFiles/.swift-format
+ln -s $HOME/Repos/shDotFiles/.swiftlint.yml
+
+# Add to .gitignore
+echo .swift-format >> .gitignore
+echo .swiftlint.yml >> .gitignore
+
+# Initialize repo
+git init &> /dev/null

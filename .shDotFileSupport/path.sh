@@ -30,3 +30,6 @@ export PATH=$PATH:$HOME/.homebrew/bin
 # You can list registered URI scheme bindings with `lsregister -dump URLSchemeBinding`.
 # Optionally throw on a `| sort` to sort the output.
 export PATH=$PATH:/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/
+
+# Add swiftpaper to path
+export PATH=$PATH:$HOME/Repos/swiftpaper

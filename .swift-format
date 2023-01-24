@@ -10,8 +10,8 @@
 		"accessLevel": "private"
 	},
 	"indentConditionalCompilationBlocks": true,
-	"indentSwitchCaseLabels": false,
-	"lineBreakAroundMultilineExpressionChainComponents": false,
+	"indentSwitchCaseLabels": true,
+	"lineBreakAroundMultilineExpressionChainComponents": true,
 	"lineBreakBeforeControlFlowKeywords": false,
 	"lineBreakBeforeEachArgument": true,
 	"lineBreakBeforeEachGenericRequirement": false,

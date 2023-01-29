@@ -1,8 +1,8 @@
 disabled_rules:
-    - identifier_name
     - function_body_length
-    - type_body_length
+    - identifier_name
     - trailing_comma # Disabled until swift-format makes MultiLineTrailingCommas configurable
+    - type_body_length
 opt_in_rules:
     - anyobject_protocol
     - array_init

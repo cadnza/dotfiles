@@ -3,6 +3,8 @@ disabled_rules:
     - force_try
     - function_body_length
     - identifier_name
+    - large_tuple
+    - switch_case_alignment
     - trailing_comma # Disabled until swift-format makes MultiLineTrailingCommas configurable
     - type_body_length
 opt_in_rules:
@@ -34,7 +36,7 @@ opt_in_rules:
     - explicit_enum_raw_value
     - explicit_init
     # - explicit_top_level_acl
-    - explicit_type_interface
+    # - explicit_type_interface
     - extension_access_modifier
     - fallthrough
     - fatal_error_message
@@ -112,7 +114,7 @@ opt_in_rules:
     - unowned_variable_capture
     - untyped_error_in_catch
     - vertical_parameter_alignment_on_call
-    - vertical_whitespace_between_cases
+    # - vertical_whitespace_between_cases
     - xct_specific_matcher
     - yoda_condition
 excluded:

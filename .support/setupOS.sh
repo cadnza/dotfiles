@@ -56,7 +56,7 @@ then
 	# Set machine prompt color
 	export colorMachine=$colorWindows
 	# Enable command to enable zsh-syntax-highlighting
-	source $HOME/.shDotFileSupport/zshSyntaxHighlightingPull.sh
+	source $HOME/.support/zshSyntaxHighlightingPull.sh
 	# Make sure /usr/bin is first in path
 	export PATH=/usr/bin:$PATH
 # Other
@@ -64,7 +64,7 @@ else
 	# Set machine prompt color
 	export colorMachine=$colorOther
 	# Enable command to enable zsh-syntax-highlighting
-	source $HOME/.shDotFileSupport/zshSyntaxHighlightingPull.sh
+	source $HOME/.support/zshSyntaxHighlightingPull.sh
 fi
 
 # Add aliases for non-macos machines

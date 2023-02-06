@@ -7,14 +7,14 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 
 # Add included executables to path
-export PATH=$HOME/.shDotFileSupport/executables:$PATH
+export PATH=$HOME/.support/executables:$PATH
 
 # Add hidden local to path (needed for some executables)
 export PATH=$HOME/.local/bin:$PATH
 
 # Add nano linter and formatter directories to path
-export PATH=$HOME/.shDotFileSupport/nano/linters:$PATH
-export PATH=$HOME/.shDotFileSupport/nano/formatters:$PATH
+export PATH=$HOME/.support/nano/linters:$PATH
+export PATH=$HOME/.support/nano/formatters:$PATH
 
 # Add pub to path (for Flutter)
 export PATH=$PATH:$HOME/.pub-cache/bin

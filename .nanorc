@@ -36,7 +36,7 @@ set selectedcolor white,blue
 include "/usr/local/share/nano/*.nanorc"
 
 # Enable non-standard syntax highlighting
-include "~/.shDotFileSupport/nano/syntax/*"
+include "~/.support/nano/syntax/*"
 
 # Add formatters
 extendsyntax css formatter "prettier_css.sh"

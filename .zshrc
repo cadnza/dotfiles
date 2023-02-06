@@ -15,13 +15,13 @@ bindkey -e
 zstyle :compinstall filename $HOME/.zshrc
 
 # Run color setup
-source $HOME/.shDotFileSupport/colors.sh
+source $HOME/.support/colors.sh
 
 # Run settings per OS
-source $HOME/.shDotFileSupport/setupOS.sh # Currently profiling on EngineRoom at ~0.08s
+source $HOME/.support/setupOS.sh # Currently profiling on EngineRoom at ~0.08s
 
 # Run completion settings
-source $HOME/.shDotFileSupport/completion.sh # Currently profiling on EngineRoom at ~0.11s
+source $HOME/.support/completion.sh # Currently profiling on EngineRoom at ~0.11s
 
 # Set default text editor
 export VISUAL=micro
@@ -29,19 +29,19 @@ export EDITOR=micro
 git config --global core.editor nano
 
 # Modify path
-source $HOME/.shDotFileSupport/path.sh
+source $HOME/.support/path.sh
 
 # Source functions
-source $HOME/.shDotFileSupport/functions.sh
+source $HOME/.support/functions.sh
 
 # Display banners
-source $HOME/.shDotFileSupport/banners.sh
+source $HOME/.support/banners.sh
 
 # Run prompt setup
-source $HOME/.shDotFileSupport/prompt.sh
+source $HOME/.support/prompt.sh
 
 # Source commands for Secure ShellFish
-source $HOME/.shDotFileSupport/shellfishrc.sh
+source $HOME/.support/shellfishrc.sh
 
 # Initialize shell integration if running in VS Code
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"

@@ -52,6 +52,6 @@ _Zsh_ dotfiles, specifically. Here's what you get:
 Nice and easy. Here's what you do:
 
 1. Pull the repo
-2. Symlink `.zshrc` and `.shDotFileSupport` into `~` by those names
+2. Symlink `.zshrc` and `.support` into `~` by those names
 3. Follow `links.json` for more customization (optional)
 4. Start your zsh 😎

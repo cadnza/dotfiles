@@ -1,6 +1,6 @@
 # Shell Dotfiles
 
-_Zsh_ dotfiles, specifically. Here's what you get:
+**Zsh** dotfiles, specifically. Here's what you get:
 
 ### A beautiful prompt
 

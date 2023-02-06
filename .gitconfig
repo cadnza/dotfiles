@@ -1,5 +1,6 @@
 [core]
 	editor = nano
+	excludesfile = ~/.gitignore_global
 [user]
 	name = Jon Dayley
 	email = jonathandayley@gmail.com

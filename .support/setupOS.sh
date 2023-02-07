@@ -17,7 +17,7 @@ tryOSmatch() {
 }
 
 # Record OS string for fast checking
-workingOSfileName=.com.cadnza.shDotFilesOS.txt
+workingOSfileName=.com.cadnza.dotfilesOS.txt
 workingOSfile=$HOME/$workingOSfileName
 workingOS=$(cat $workingOSfile) 2> /dev/null || {
 	workingOS="$(tryOSmatch $osMacos)$(tryOSmatch $osLinux)$(tryOSmatch $osWindows)"

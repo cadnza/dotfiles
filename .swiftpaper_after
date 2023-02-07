@@ -1,6 +1,6 @@
 # Link support files
-ln -s $HOME/Repos/shDotFiles/.swift-format
-ln -s $HOME/Repos/shDotFiles/.swiftlint.yml
+ln -s $HOME/Repos/dotfiles/.swift-format
+ln -s $HOME/Repos/dotfiles/.swiftlint.yml
 
 # Add to support files to .gitignore
 echo .swift-format >> .gitignore

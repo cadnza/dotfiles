@@ -47,6 +47,11 @@ cask "bricklink-studio"
 cask "plex"
 cask "kindle"
 
+# Games
+cask "otto-matic"
+cask "bugdom"
+cask "nanosaur"
+
 # Languages and SDKs
 brew "asciidoctor"
 brew "bash"

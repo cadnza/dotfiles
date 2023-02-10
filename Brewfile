@@ -11,6 +11,7 @@ tap "mas-cli/tap"
 
 # Developer tools
 brew "coreutils"
+brew "packer"
 brew "swiftlint"
 brew "swift-format"
 cask "1password-cli"

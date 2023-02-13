@@ -37,8 +37,8 @@ brew "zsh"
 brew "zsh-syntax-highlighting"
 cask "1password"
 cask "alfred"
-cask "brave-browser"
 cask "cleanmymac"
+cask "google-chrome"
 cask "istat-menus"
 mas "BetterSnapTool", id: 417375580
 

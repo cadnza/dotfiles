@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 # Initialize completion
+fpath=($HOME/Repos/dotfiles/.support/completion_functions $fpath)
 autoload -Uz compinit
 compinit
 

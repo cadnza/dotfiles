@@ -3,14 +3,14 @@
 # Add sbin to path
 export PATH=/usr/local/sbin:$PATH
 
-# Add user binaries to path
+# Add hidden local to path (this is where user executables go)
+export PATH=$HOME/.local/bin:$PATH
+
+# Add user binaries to path (for canonicity's sake; don't deliberately put any user executables here)
 export PATH=$HOME/bin:$PATH
 
 # Add included executables to path
 export PATH=$HOME/.support/executables:$PATH
-
-# Add hidden local to path (needed for some executables)
-export PATH=$HOME/.local/bin:$PATH
 
 # Add nano linter and formatter directories to path
 export PATH=$HOME/.support/nano/linters:$PATH

@@ -28,11 +28,11 @@ export VISUAL=micro
 export EDITOR=micro
 git config --global core.editor nano
 
-# Modify path
-source $HOME/.support/path.sh
-
 # Source functions
 source $HOME/.support/functions.sh
+
+# Modify path
+source $HOME/.support/path.sh
 
 # Display banners
 source $HOME/.support/banners.sh

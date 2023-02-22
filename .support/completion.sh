@@ -3,8 +3,11 @@
 # Generate completions from commands with zsh-specific completion generation
 addCompletions bookmarks "--generate-completion-script zsh"
 
+# Add static and dynamc completion directories to fpath
+fpath=($HOME/Repos/dotfiles/.support/completion_functions_static $fpath) # Use the addCompletions function to put scripts here
+fpath=($HOME/Repos/dotfiles/.support/completion_functions_dynamic $fpath) # Put static zsh completion scripts here
+
 # Initialize completion
-fpath=($HOME/Repos/dotfiles/.support/completion_functions_dynamic $fpath)
 autoload -Uz compinit
 compinit
 

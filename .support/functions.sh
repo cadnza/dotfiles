@@ -39,7 +39,7 @@ addCompletions() {
 	which $commandName &> /dev/null || return
 
 	# Set file constants
-	dirCompletions=$HOME/.support/completion_functions
+	dirCompletions=$HOME/.support/completion_functions_dynamic
 	fileName="_$commandName"
 	fileFinal="$dirCompletions/$fileName"
 

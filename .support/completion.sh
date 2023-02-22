@@ -4,7 +4,7 @@
 addCompletions bookmarks "--generate-completion-script zsh"
 
 # Initialize completion
-fpath=($HOME/Repos/dotfiles/.support/completion_functions $fpath)
+fpath=($HOME/Repos/dotfiles/.support/completion_functions_dynamic $fpath)
 autoload -Uz compinit
 compinit
 

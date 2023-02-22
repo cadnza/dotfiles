@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Generate completions from commands with zsh-specific completion generation
+addCompletions bookmarks "--generate-completion-script zsh"
+
 # Initialize completion
 fpath=($HOME/Repos/dotfiles/.support/completion_functions $fpath)
 autoload -Uz compinit

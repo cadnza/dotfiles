@@ -14,6 +14,12 @@ bindkey -e
 # Set compinstall reference
 zstyle :compinstall filename $HOME/.zshrc
 
+# Modify path
+source $HOME/.support/path.sh
+
+# Source functions
+source $HOME/.support/functions.sh
+
 # Run color setup
 source $HOME/.support/colors.sh
 
@@ -27,12 +33,6 @@ source $HOME/.support/completion.sh # Currently profiling on EngineRoom at ~0.11
 export VISUAL=micro
 export EDITOR=micro
 git config --global core.editor nano
-
-# Source functions
-source $HOME/.support/functions.sh
-
-# Modify path
-source $HOME/.support/path.sh
 
 # Display banners
 source $HOME/.support/banners.sh

@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Generate completions from commands with zsh-specific completion generation
 addCompletions bookmarks "--generate-completion-script zsh"

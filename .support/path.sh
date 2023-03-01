@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Add sbin to path
 export PATH=/usr/local/sbin:$PATH

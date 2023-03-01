@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Load colors
 autoload -U colors

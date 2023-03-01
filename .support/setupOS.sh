@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Group OSs
 osMacos="darwin"

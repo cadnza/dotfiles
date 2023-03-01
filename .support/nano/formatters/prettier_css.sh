@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
-prettier.sh "css" $1
+prettier.sh "css" "$1"
 exit 0

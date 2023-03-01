@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Count and banner tmux sessions
 tmux ls &> /dev/null && {

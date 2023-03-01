@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Record reference to temporary directory containing repo
 fileZshSynHighRef=$HOME/.zshSyntaxHighlightingDirectoryReference

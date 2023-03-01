@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
-prettier.sh "markdown" $1
+prettier.sh "markdown" "$1"
 exit 0

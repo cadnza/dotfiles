@@ -1,5 +1,5 @@
-#!/usr/bin/env zsh
+#!/bin/false
 
 # Enable completion for gcloud
 compsgcloud="$HOME/.google-cloud-sdk/completion.zsh.inc"
-[ -f $compsgcloud ] && source $compsgcloud
+[ -f "$compsgcloud" ] && source "$compsgcloud"

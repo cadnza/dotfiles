@@ -1,3 +1,5 @@
+#!/bin/false
+
 # include this from .bashrc, .zshrc or
 # another shell startup file with:
 #   source $HOME/.shellfishrc
@@ -10,11 +12,11 @@ if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
     q = y ~ /[a-zA-Z0-9]/ ? q y : q sprintf("%%%02X", z[y])
     printf("%s", q)}' "$1"
   }
-  
+
   ios_printBase64Component() {
     echo -n "$1" | base64
   }
-  
+
   which printf > /dev/null
   ios_hasPrintf=$?
   ios_printf() {
@@ -24,7 +26,7 @@ if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
       awk "BEGIN {printf \"$1\"}"
     fi
   }
-  
+
   ios_sequence() {
     if [[ -n "$TMUX" ]]; then
      OUTPUT=$(
@@ -45,7 +47,7 @@ if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
       echo >&2 'Standard output is not tty and there is no $SSH_TTY'
     fi
   }
-  
+
   ios_sequence_spaced() {
     if [[ -n "$TMUX" ]]; then
      OUTPUT=$(
@@ -66,7 +68,7 @@ if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
       echo >&2 'Standard output is not tty and there is no $SSH_TTY'
     fi
   }
-  
+
   # prepare fifo for communicating result back to shell
   ios_prepareResult() {
     FIFO=$(mktemp)
@@ -74,19 +76,19 @@ if [[ "$LC_TERMINAL" = "ShellFish" ]]; then
     mkfifo $FIFO
     echo $FIFO
   }
-    
+
   # wait for terminal to complete action
   ios_handleResult() {
     FIFO=$1
     if [ -n "$FIFO" ]; then
       read <$FIFO -s
       rm -f $FIFO
-    
+
       if [[ $REPLY = error* ]]; then
         echo "${REPLY#error=}" | base64 >&2 -d
         return 1
       fi
-  
+
       if [[ $REPLY = result* ]]; then
         echo "${REPLY#result=}" | base64 -d
       fi
@@ -129,7 +131,7 @@ EOF
     ios_sequence "$OUTPUT"
     ios_handleResult "$FIFO"
   }
-  
+
   quicklook() {
     if [[ $# -eq 0 ]]; then
       if tty -s; then
@@ -141,7 +143,7 @@ EOF
         return 0
       fi
     fi
-  
+
     FIFO=$(ios_prepareResult)
     OUTPUT=$(
       awk 'BEGIN {printf "6;quicklook://?ver=2&respond="}'
@@ -188,7 +190,7 @@ EOF
       ios_sequence "$OUTPUT"
     fi
   }
-  
+
   openUrl() {
     if [[ $# -eq 0 ]]; then
       cat <<EOF
@@ -247,7 +249,7 @@ EOF
     )
     ios_sequence "$OUTPUT"
   }
-  
+
   # paste from iOS device clipboard to standard output
   pbpaste() {
     FIFO=$(ios_prepareResult)
@@ -261,7 +263,7 @@ EOF
 
   # Secure ShellFish supports 24-bit colors
   export COLORTERM=truecolor
-  
+
   if [[ -z "$INSIDE_EMACS" && $- = *i* ]]; then
     # tmux mouse mode enables scrolling with
     # swipe and mouse wheel
@@ -314,7 +316,7 @@ for next parameter with --progress, --icon, --color or --text with something lik
 EOF
     return 0
   fi
-  
+
   local key=c2b45985ca705cdfb3054fb25ae6d961506c38762dd5632d38f5c5a00afcc869
   local user=ofwbx9Hf0r6TSywXbgRYpH8h1VZD5vDy07z8X19S
   local iv=ab5bbeb426015da7eedcee8bee3dffb7
@@ -342,7 +344,7 @@ Usage: notify [title] <body> ...
 EOF
     return 0
   fi
-  
+
   local key=c2b45985ca705cdfb3054fb25ae6d961506c38762dd5632d38f5c5a00afcc869
   local user=ofwbx9Hf0r6TSywXbgRYpH8h1VZD5vDy07z8X19S
   local iv=ab5bbeb426015da7eedcee8bee3dffb7

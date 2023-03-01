@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 
 # Add sbin to path
 export PATH=/usr/local/sbin:$PATH

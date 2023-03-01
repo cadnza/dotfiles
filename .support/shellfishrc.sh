@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 
 # include this from .bashrc, .zshrc or
 # another shell startup file with:

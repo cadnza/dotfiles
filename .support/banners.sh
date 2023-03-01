@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 
 # Count and banner tmux sessions
 tmux ls &> /dev/null && {

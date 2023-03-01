@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 
 # Load colors
 autoload -U colors

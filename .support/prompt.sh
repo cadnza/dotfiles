@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 
 # Run patch to speed up git completion
 # (I currently don't understand how this works. I'm pending reading into the zsh completion system, but that's not a priority right now.)

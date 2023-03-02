@@ -10,6 +10,9 @@ export colorLinux=2
 export colorWindows=208
 export colorOther=5
 
+# Set dark more variable (true for all platforms except Apple Terminal in macOS light mode)
+export isDarkMode=1
+
 # Set Xterm
 export TERM=xterm-256color
 

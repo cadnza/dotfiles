@@ -9,7 +9,11 @@ __git_files () {
 }
 
 # Source chosen prompt
-source $HOME/.support/prompts/basic.sh
+promptFile="$HOME/.prompt"
+basicPrompt="$HOME/.support/prompts/basic.sh"
+[ -f $promptFile ] && {
+	[ $(cat .prompt | head -n 1) = compact ] && source $HOME/.support/prompts/basic.sh || source $basicPrompt
+} || source $basicPrompt
 
 # Set right prompt VCS options
 setopt PROMPT_SUBST

@@ -4,26 +4,11 @@
 autoload -U colors
 colors
 
-# Configure prompt colors
-# Global separator
-export colorSep=8
-# Standard prompt
-export colorUser=1
-export colorDirectory=69
-# Machine
+# Configure universal machine colors (don't reference these directly; use $colorMachine instead)
 export colorMacos=7
 export colorLinux=2
 export colorWindows=208
 export colorOther=5
-# Git
-export colorAction=15
-export colorRepo=6
-export colorBranch=214
-export colorStaged=2
-export colorUnstaged=9
-export colorUnknown=$colorSep
-export colorUnpushed=13
-export colorUnpulled=10
 
 # Set Xterm
 export TERM=xterm-256color

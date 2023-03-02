@@ -1,5 +1,20 @@
 #!/usr/bin/env false
 
+# Define colors
+# Standard
+export colorUser=1
+export colorDirectory=69
+export colorSep=8
+# Git
+export colorAction=15
+export colorRepo=6
+export colorBranch=214
+export colorStaged=2
+export colorUnstaged=9
+export colorUnknown=$colorSep
+export colorUnpushed=13
+export colorUnpulled=10
+
 # Set PS1
 PS1='%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%1~%f %# '
 

@@ -3,9 +3,12 @@
 # Define colors
 # Standard
 [ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
-export colorUser=13
-export colorMachine=51
-export colorDirectory=63
+export fgUser=1
+export bgUser=213
+export fgMachine=4
+export bgMachine=51
+export fgDirectory=56
+export bgDirectory=189
 export colorSep=8
 # Git
 export colorAction=15
@@ -34,9 +37,18 @@ trn() {
 	echo $final
 }
 
+# Define function to color foreground and background and constant to clear it
+cfb() {
+	colorFg=$1
+	colorBg=$2
+	print -P "%F{$colorFg}%K{$colorBg}"
+}
+nfb=$(print -P "%k%f")
+
+
 # Build PS1 logic
 buildPS1() {
-	PS1="%B%F{$colorUser}$(abp %n)%f%F{$colorMachine}$(abp %m)%f%F{$colorDirectory}$(trn %1~)%f%(!. %F{1}#%f.)%b "
+	PS1="%B$(cfb $fgUser $bgUser)$(abp %n)$nfb$(cfb $fgMachine $bgMachine)$(abp %m)$nfb$(cfb $fgDirectory $bgDirectory)$(trn %1~)$nfb%(!. %F{1}#%f.)%b "
 }
 precmd_functions+=(buildPS1)
 

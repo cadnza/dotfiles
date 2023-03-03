@@ -50,7 +50,7 @@ nfb=$(print -P "%k%f")
 # Build PS1 logic
 buildPS1() {
 	eC=$?
-	PS1="%B$(cfb $fgUser $bgUser $eC)$(abp %n)$nfb$(cfb $fgMachine $bgMachine $eC)$(abp %m)$nfb$(cfb $fgDirectory $bgDirectory $eC)$(trn %1~)$nfb%(!. %F{1}#%f.)%b "
+	PS1="%B%{$(cfb $fgUser $bgUser $eC)%}$(abp %n)%{$nfb%}%{$(cfb $fgMachine $bgMachine $eC)%}$(abp %m)%{$nfb%}%{$(cfb $fgDirectory $bgDirectory $eC)%}$(trn %1~)%{$nfb%}%(!. %F{1}#%f.)%b "
 }
 precmd_functions+=(buildPS1)
 

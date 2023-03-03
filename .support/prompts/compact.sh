@@ -3,9 +3,9 @@
 # Define colors
 # Standard
 [ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
-export fgUser=1
+export fgUser=124
 export bgUser=213
-export fgMachine=4
+export fgMachine=20
 export bgMachine=51
 export fgDirectory=56
 export bgDirectory=189

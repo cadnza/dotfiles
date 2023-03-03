@@ -62,6 +62,4 @@ setupGitRegular() {
 	vcs_info
 }
 setupGitOnce
-precmd() {
-	setupGitRegular
-}
+precmd_functions+=(setupGitRegular)

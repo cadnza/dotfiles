@@ -4,8 +4,8 @@
 # Standard
 [ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
 export colorUser=13
-export colorMachine=208
-export colorDirectory=69
+export colorMachine=51
+export colorDirectory=63
 export colorSep=8
 # Git
 export colorAction=15
@@ -17,14 +17,26 @@ export colorUnknown=$colorSep
 export colorUnpushed=13
 export colorUnpulled=10
 
-# Define abbreviation function
+# Define abbreviation functions
 abp() {
 	print -P $1 | perl -pe 's/((?<=[A-Z])[A-Z]|(?<=[A-Za-z])[a-z]|(?<=[0-9])[0-9]|[^A-Za-z0-9~])//g'
+}
+trn() {
+	nChars=3
+	expanded=$(print -P $1)
+	string=$(echo $expanded | sed 's/[^A-Za-z0-9~]/ /g')
+	elements=(${(s/ /)string})
+	final=""
+	for element in "${elements[@]}"
+	do
+		final=$final$(echo ${element:0:$nChars})
+	done
+	echo $final
 }
 
 # Build PS1 logic
 buildPS1() {
-	PS1="%K{$colorUser}$(abp %n)%k%B%K{$colorMachine}$(abp %m)%k%b%K{$colorDirectory}$(abp %1~)%k%(!. %B%F{1}#%f%b.) "
+	PS1="%B%F{$colorUser}$(abp %n)%f%F{$colorMachine}$(abp %m)%f%F{$colorDirectory}$(trn %1~)%f%(!. %F{1}#%f.)%b "
 }
 precmd_functions+=(buildPS1)
 

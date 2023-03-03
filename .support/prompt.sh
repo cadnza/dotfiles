@@ -12,7 +12,7 @@ __git_files () {
 promptFile="$HOME/.prompt"
 basicPrompt="$HOME/.support/prompts/basic.sh"
 [ -f $promptFile ] && {
-	[ $(cat .prompt | head -n 1) = compact ] && source $HOME/.support/prompts/compact.sh || source $basicPrompt
+	[ $(cat $promptFile | head -n 1) = compact ] && source $HOME/.support/prompts/compact.sh || source $basicPrompt
 } || source $basicPrompt
 
 # Set right prompt VCS options

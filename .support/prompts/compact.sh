@@ -9,7 +9,6 @@ export fgMachine=20
 export bgMachine=51
 export fgDirectory=56
 export bgDirectory=189
-export colorSep=8
 # Git
 export colorAction=15
 export colorRepo=6
@@ -19,6 +18,8 @@ export colorUnstaged=9
 export colorUnknown=$colorSep
 export colorUnpushed=13
 export colorUnpulled=10
+# Misc
+export colorSep=8
 
 # Define abbreviation functions
 abp() {

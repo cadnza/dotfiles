@@ -39,9 +39,48 @@ trn() {
 
 # Define function to color foreground and background and constant to clear it
 cfb() {
-	exitCode=$3
-	colorFg=$1
-	colorBg=$2
+	case $3 in
+		0)
+			colorFg=$1
+			colorBg=$2
+			;;
+		1)
+			colorFg=15
+			colorBg=196
+			;;
+		2)
+			colorFg=0
+			colorBg=11
+			;;
+		126)
+			colorFg=0
+			colorBg=196
+			;;
+		127)
+			colorFg=15
+			colorBg=13
+			;;
+		128)
+			colorFg=0
+			colorBg=208
+			;;
+		130)
+			colorFg=0
+			colorBg=10
+			;;
+		137)
+			colorFg=0
+			colorBg=14
+			;;
+		255)
+			colorFg=15
+			colorBg=226
+			;;
+		*)
+			colorFg=15
+			colorBg=8
+			;;
+	esac
 	echo "%{$(print -P "%F{$colorFg}%K{$colorBg}")%}"
 }
 nfb="%{$(print -P "%k%f")%}"

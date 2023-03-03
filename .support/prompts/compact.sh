@@ -2,10 +2,10 @@
 
 # Define colors
 # Standard
-export fgStandard=0 #TEMP
-export bkUser=13
-export bkMachine=208
-export bkDirectory=69
+[ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
+export colorUser=13
+export colorMachine=208
+export colorDirectory=69
 export colorSep=8
 # Git
 export colorAction=15
@@ -24,7 +24,7 @@ abp() {
 
 # Build PS1 logic
 buildPS1() {
-	PS1="%K{$bkUser}$(abp %n)%k%B%K{$bkMachine}$(abp %m)%k%b%K{$bkDirectory}$(abp %1~)%k%(!. %B%F{1}#%f%b.) "
+	PS1="%K{$colorUser}$(abp %n)%k%B%K{$colorMachine}$(abp %m)%k%b%K{$colorDirectory}$(abp %1~)%k%(!. %B%F{1}#%f%b.) "
 }
 precmd_functions+=(buildPS1)
 

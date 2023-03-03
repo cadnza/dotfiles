@@ -39,6 +39,7 @@ trn() {
 
 # Define function to color foreground and background and constant to clear it
 cfb() {
+	exitCode=$3
 	colorFg=$1
 	colorBg=$2
 	print -P "%F{$colorFg}%K{$colorBg}"
@@ -48,7 +49,8 @@ nfb=$(print -P "%k%f")
 
 # Build PS1 logic
 buildPS1() {
-	PS1="%B$(cfb $fgUser $bgUser)$(abp %n)$nfb$(cfb $fgMachine $bgMachine)$(abp %m)$nfb$(cfb $fgDirectory $bgDirectory)$(trn %1~)$nfb%(!. %F{1}#%f.)%b "
+	eC=$?
+	PS1="%B$(cfb $fgUser $bgUser $eC)$(abp %n)$nfb$(cfb $fgMachine $bgMachine $eC)$(abp %m)$nfb$(cfb $fgDirectory $bgDirectory $eC)$(trn %1~)$nfb%(!. %F{1}#%f.)%b "
 }
 precmd_functions+=(buildPS1)
 

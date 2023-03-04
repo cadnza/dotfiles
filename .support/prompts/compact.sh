@@ -2,8 +2,8 @@
 
 # Define colors
 # Generic
-export fgPurple=56
-export bgPurple=189
+export fgPurple=189
+export bgPurple=56
 export fgCyan=20
 export bgCyan=51
 export fgMint=61
@@ -29,8 +29,8 @@ export bgMachine=$bgCyan
 export fgDirectory=$fgPurple
 export bgDirectory=$bgPurple
 # Git
-export fgAction=15
-export bgAction=0
+export fgAction=$fgRed
+export bgAction=$bgRed
 export fgRepo=$fgPurple
 export bgRepo=$bgPurple
 export fgBranch=$fgDandelion
@@ -131,7 +131,7 @@ buildRightPrompt() {
 	indicatorsString="%B$(cfb $fgUnstaged $bgUnstaged 0)%u$nfb$(cfb $fgStaged $bgStaged 0)%c$nfb%%b"
 	indicatorDefault=?
 	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
-	[ $1 = "action" ] && base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")
+	[ $1 = "action" ] && base=$(echo %B$(cfb $fgAction $bgAction 0)%a$nfb%%b"$base")
 	[ $2 = "true" ] && base=$(echo $base$indicatorsString) || base=$(echo $base$indicatorDefaultString)
 	echo $base
 }

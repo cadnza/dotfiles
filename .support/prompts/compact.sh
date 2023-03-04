@@ -73,40 +73,40 @@ cfb() {
 			colorBg=$2
 			;;
 		1)
-			colorFg=15
-			colorBg=196
+			colorFg=$fgRed
+			colorBg=$bgRed
 			;;
 		2)
-			colorFg=0
-			colorBg=11
+			colorFg=$fgDandelion
+			colorBg=$bgDandelion
 			;;
 		126)
-			colorFg=0
-			colorBg=196
+			colorFg=$fgPurple
+			colorBg=$bgPurple
 			;;
 		127)
-			colorFg=15
-			colorBg=13
+			colorFg=$fgPink
+			colorBg=$bgPink
 			;;
 		128)
-			colorFg=0
-			colorBg=208
+			colorFg=$fgOrange
+			colorBg=$bgOrange
 			;;
 		130)
-			colorFg=0
-			colorBg=10
+			colorFg=$fgGreen
+			colorBg=$bgGreen
 			;;
 		137)
-			colorFg=0
-			colorBg=14
+			colorFg=$fgCyan
+			colorBg=$bgCyan
 			;;
 		255)
-			colorFg=15
-			colorBg=226
+			colorFg=$fgMint
+			colorBg=$bgMint
 			;;
 		*)
-			colorFg=15
-			colorBg=8
+			colorFg=$fgGray
+			colorBg=$bgGray
 			;;
 	esac
 	echo "%{$(print -P "%F{$colorFg}%K{$colorBg}")%}"

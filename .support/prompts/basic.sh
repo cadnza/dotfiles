@@ -25,16 +25,8 @@ buildRightPrompt() {
 	indicatorsString=%F{$colorUnstaged}%u%f%F{$colorStaged}%c%f
 	indicatorDefault=?
 	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
-	if [ $1 = "action" ]
-	then
-		base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")
-	fi
-	if [ $2 = "true" ]
-	then
-		base=$(echo $base$indicatorsString)
-	else
-		base=$(echo $base$indicatorDefaultString)
-	fi
+	[ $1 = "action" ] && base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")
+	[ $2 = "true" ] && base=$(echo $base$indicatorsString) || base=$(echo $base$indicatorDefaultString)
 	echo $base
 }
 

@@ -18,6 +18,10 @@ export colorUnpulled=10
 # Set PS1
 PS1='%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%1~%f %# '
 
+# Set strings for unstaged and staged changes
+zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '+'
+
 # Get function to set right prompt with VCS info
 buildRightPrompt() {
 	sep=→

@@ -22,8 +22,6 @@ basicPrompt="$promptsDir/basic.sh"
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' unstagedstr '*'
-zstyle ':vcs_info:git:*' stagedstr '+'
 
 # Get function to decide whether to show git diff indicators by timeout
 decideByTimeout() {

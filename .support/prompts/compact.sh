@@ -94,6 +94,10 @@ buildPS1() {
 }
 precmd_functions+=(buildPS1)
 
+# Set strings for unstaged and staged changes
+zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '+'
+
 # Get function to set right prompt with VCS info
 buildRightPrompt() {
 	sep=→

@@ -1,6 +1,19 @@
 #!/usr/bin/env false
 
 # Define colors
+# Generic
+export fgPurple=56
+export bgPurple=189
+export fgCyan=20
+export bgCyan=51
+export fgPink=124
+export bgPink=213
+export fgYellow=52
+export bgYellow=214
+export fgGreen=22
+export bgGreen=46
+export fgRed=52
+export bgRed=196
 # Standard
 [ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
 export fgUser=124

@@ -43,8 +43,8 @@ export fgUnknown=$fgGray
 export bgUnknown=$bgGray
 export fgUnpushed=$fgMint
 export bgUnpushed=$bgMint
-export fgUnpulled=10
-export bgUnpulled=10
+export fgUnpulled=$fgMint
+export bgUnpulled=$bgMint
 # Misc
 export colorSep=8
 
@@ -145,7 +145,7 @@ getCommits() {
 	unpushed=↑
 	unpulled=↓
 	strUnpushed="%B$(cfb $fgUnpushed $bgUnpushed 0)$unpushed$nfb%b"
-	strUnpulled=
+	strUnpulled="%B$(cfb $fgUnpulled $bgUnpulled 0)$unpulled$nfb%b"
 	final=""
 	[ ${#nCommitsUnpushed} -gt 0 ] && final=$final$strUnpushed
 	[ ${#nCommitsUnpulled} -gt 0 ] && final=$final$strUnpulled

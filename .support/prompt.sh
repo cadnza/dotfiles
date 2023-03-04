@@ -10,9 +10,12 @@ __git_files () {
 
 # Source chosen prompt
 promptFile="$HOME/.prompt"
-basicPrompt="$HOME/.support/prompts/basic.sh"
+promptsDir="$HOME/.support/prompts"
+basicPrompt="$promptsDir/basic.sh"
 [ -f $promptFile ] && {
-	[ $(cat $promptFile | head -n 1) = compact ] && source $HOME/.support/prompts/compact.sh || source $basicPrompt
+	themeName=$(cat $promptFile | head -n 1)
+	themeFile="$promptsDir/$themeName.sh"
+	[ -f $themeFile ] && source $themeFile || source $basicPrompt
 } || source $basicPrompt
 
 # Set right prompt VCS options

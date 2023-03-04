@@ -6,31 +6,45 @@ export fgPurple=56
 export bgPurple=189
 export fgCyan=20
 export bgCyan=51
+export fgMint=61
+export bgMint=86
 export fgPink=124
 export bgPink=213
-export fgYellow=52
-export bgYellow=214
+export fgOrange=52
+export bgOrange=208
+export fgDandelion=52
+export bgDandelion=214
 export fgGreen=22
 export bgGreen=46
 export fgRed=52
 export bgRed=196
+export fgGray=255
+export bgGray=240
 # Standard
 [ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
-export fgUser=124
-export bgUser=213
-export fgMachine=20
-export bgMachine=51
-export fgDirectory=56
-export bgDirectory=189
+export fgUser=$fgPink
+export bgUser=$bgPink
+export fgMachine=$fgCyan
+export bgMachine=$bgCyan
+export fgDirectory=$fgPurple
+export bgDirectory=$bgPurple
 # Git
-export colorAction=15
-export colorRepo=6
-export colorBranch=214
-export colorStaged=2
-export colorUnstaged=9
-export colorUnknown=$colorSep
-export colorUnpushed=13
-export colorUnpulled=10
+export fgAction=15
+export bgAction=0
+export fgRepo=$fgPurple
+export bgRepo=$bgPurple
+export fgBranch=$fgDandelion
+export bgBranch=$bgDandelion
+export fgStaged=$fgGreen
+export bgStaged=$bgGreen
+export fgUnstaged=$fgRed
+export bgUnstaged=$bgRed
+export fgUnknown=$fgGray
+export bgUnknown=$bgGray
+export fgUnpushed=$fgMint
+export bgUnpushed=$bgMint
+export fgUnpulled=10
+export bgUnpulled=10
 # Misc
 export colorSep=8
 
@@ -113,9 +127,8 @@ zstyle ':vcs_info:git:*' stagedstr '+'
 
 # Get function to set right prompt with VCS info
 buildRightPrompt() {
-	sep=→
-	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%F{$colorBranch}%b%f
-	indicatorsString=%F{$colorUnstaged}%u%f%F{$colorStaged}%c%f
+	base="%B$(cfb $fgRepo $bgRepo 0)%r$nfb$(cfb $fgBranch $bgBranch 0)%b$nfb%%b"
+	indicatorsString="%B$(cfb $fgUnstaged $bgUnstaged 0)%u$nfb$(cfb $fgStaged $bgStaged 0)%c$nfb%%b"
 	indicatorDefault=?
 	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
 	[ $1 = "action" ] && base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")
@@ -131,8 +144,8 @@ getCommits() {
 	nCommitsUnpulled=$(echo $branch | grep -Eo 'behind [[:digit:]]+' | cut -d " " -f 2) # Taking a long time
 	unpushed=↑
 	unpulled=↓
-	strUnpushed=%F{$colorUnpushed}%B$unpushed%b$nCommitsUnpushed%f
-	strUnpulled=%F{$colorUnpulled}%B$unpulled%b$nCommitsUnpulled%f
+	strUnpushed="%B$(cfb $fgUnpushed $bgUnpushed 0)$unpushed$nfb%b"
+	strUnpulled=
 	final=""
 	[ ${#nCommitsUnpushed} -gt 0 ] && final=$final$strUnpushed
 	[ ${#nCommitsUnpulled} -gt 0 ] && final=$final$strUnpulled

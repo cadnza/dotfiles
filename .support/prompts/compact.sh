@@ -6,7 +6,7 @@ export fgPurple=189
 export bgPurple=56
 export fgCyan=20
 export bgCyan=51
-export fgMint=61
+export fgMint=18
 export bgMint=86
 export fgPink=124
 export bgPink=213
@@ -24,8 +24,8 @@ export bgGray=240
 [ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
 export fgUser=$fgPink
 export bgUser=$bgPink
-export fgMachine=$fgCyan
-export bgMachine=$bgCyan
+export fgMachine=$fgMint
+export bgMachine=$bgMint
 export fgDirectory=$fgPurple
 export bgDirectory=$bgPurple
 # Git

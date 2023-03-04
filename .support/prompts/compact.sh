@@ -41,10 +41,10 @@ export fgUnstaged=$fgRed
 export bgUnstaged=$bgRed
 export fgUnknown=$fgGray
 export bgUnknown=$bgGray
-export fgUnpushed=$fgMint
-export bgUnpushed=$bgMint
-export fgUnpulled=$fgMint
-export bgUnpulled=$bgMint
+export fgUnpushed=$fgCyan
+export bgUnpushed=$bgCyan
+export fgUnpulled=$fgCyan
+export bgUnpulled=$bgCyan
 # Misc
 export colorSep=8
 

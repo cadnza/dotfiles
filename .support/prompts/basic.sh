@@ -51,5 +51,5 @@ getCommits() {
 		echo ""
 		return
 	}
-	echo $final
+	echo " $final"
 }

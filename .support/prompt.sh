@@ -62,7 +62,7 @@ setupGitRegular() {
 		return
 	}
 	draft='${vcs_info_msg_0_}'
-	RPROMPT=$(echo "$draft $(getCommits $PWD)" | xargs echo -n) # xargs for trimming
+	RPROMPT=$(echo "$draft$(getCommits $PWD)" | xargs echo -n) # xargs for trimming
 	vcs_info
 }
 setupGitOnce

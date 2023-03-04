@@ -59,7 +59,10 @@ setupGitOnce() {
 	zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)
 }
 setupGitRegular() {
-	git rev-parse &> /dev/null || {RPROMPT=""; return;}
+	git rev-parse &> /dev/null || {
+		RPROMPT=""
+		return
+	}
 	draft='${vcs_info_msg_0_}'
 	RPROMPT=$(echo "$draft $(getCommits $PWD)" | xargs echo -n) # xargs for trimming
 	vcs_info

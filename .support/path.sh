@@ -22,8 +22,10 @@ export PATH=$PATH:$HOME/.pub-cache/bin
 # Add gcloud to path
 export PATH=$PATH:$HOME/.google-cloud-sdk/bin
 
-# Add local homebrew path and source eval script
-export PATH=$PATH:$HOME/.homebrew/bin
+# Source Apple Silicon homebrew eval script (which adds brew to path)
+[ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Source local homebrew eval script (which adds brew to path)
 [ -d $HOME/.homebrew ] && eval "$($HOME/.homebrew/bin/brew shellenv)"
 
 # Add lsregister location to path (for finding URI schemes)

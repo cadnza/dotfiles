@@ -44,7 +44,6 @@ mas "BetterSnapTool", id: 417375580
 # Fun
 brew "figlet"
 brew "lolcat"
-cask "bricklink-studio"
 cask "plex"
 cask "kindle"
 
@@ -92,3 +91,4 @@ mas "PDFOutliner", id: 420874236
 # Unavailable
 # Dorico 3.5.app
 # NotePerformer
+# Bricklink Studio (available, but cask doesn't work on Apple Silicon)

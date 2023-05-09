@@ -34,6 +34,7 @@ set selectedcolor white,blue
 
 # Enable standard syntax highlighting
 include "/usr/local/share/nano/*.nanorc"
+include "/opt/homebrew/share/nano/*.nanorc"
 
 # Enable non-standard syntax highlighting
 include "~/.support/nano/syntax/*"

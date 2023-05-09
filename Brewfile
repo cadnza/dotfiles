@@ -84,6 +84,7 @@ brew "tesseract-lang"
 cask "4k-video-downloader"
 cask "audacity"
 cask "disk-drill"
+cask "mactex" # Run `sudo tlmgr update --self` in new terminal after installing # Run `sudo tlmgr install comment` if missing comment.sty
 cask "openaudible"
 mas "AudioBookBinder", id: 413969927
 mas "PDFOutliner", id: 420874236

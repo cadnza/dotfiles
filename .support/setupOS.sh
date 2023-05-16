@@ -42,7 +42,7 @@ then
 		showZshInstallInstructions "brew install zsh-syntax-highlighting"
 	}
 	# Check for light mode
-	[ $TERM_PROGRAM = Apple_Terminal ] && {
+	[[ $TERM_PROGRAM = Apple_Terminal ]] && {
 		[ $(defaults read -g AppleInterfaceStyle &> /dev/null; echo $?) = 0 ] || export isDarkMode=0
 	}
 # Linux

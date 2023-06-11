@@ -98,7 +98,7 @@ if("styler"%in%rownames(utils::installed.packages())){
 	options(styler.cache_root="styler")
 	styler::cache_clear(ask=FALSE)
 	options(
-		languageserver.formatting_style=function(){
+		languageserver.formatting_style=function(options){
 			styler::create_style_guide(
 				indention=styler::tidyverse_style(indent_by=1L)$indention,
 				style_guide_name="cadnza",

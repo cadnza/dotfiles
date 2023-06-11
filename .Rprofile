@@ -52,6 +52,8 @@ setPrompt <- function(){
 		return()
 	# Set prompt
 	setPrompt()
+	# Remove prompt setting function
+	rm(setPrompt,envir=.GlobalEnv)
 	# Return
 	return()
 }

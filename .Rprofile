@@ -91,5 +91,20 @@ if("lintr"%in%rownames(utils::installed.packages())){
 	utils::assignInNamespace("lint",.ShadowEnv$lintCustom,ns="lintr")
 }
 
+# Configure styler ----
+if("styler"%in%rownames(utils::installed.packages())){
+	styler::cache_clear(ask=FALSE)
+	options(
+		languageserver.formatting_style=function(){
+			styler::create_style_guide(
+				indention=styler::tidyverse_style(indent_by=1L)$indention,
+				style_guide_name="cadnza",
+				style_guide_version="0.1.0",
+				indent_character="\t"
+			)
+		}
+	)
+}
+
 # Set browser to launch by default with Shiny ----
 options(shiny.launch.browser=TRUE)

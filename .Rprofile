@@ -95,6 +95,7 @@ if("lintr"%in%rownames(utils::installed.packages())){
 
 # Configure styler ----
 if("styler"%in%rownames(utils::installed.packages())){
+	options(styler.cache_root="styler")
 	styler::cache_clear(ask=FALSE)
 	options(
 		languageserver.formatting_style=function(){

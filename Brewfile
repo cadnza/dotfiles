@@ -58,7 +58,7 @@ brew "asciidoctor"
 brew "bash"
 brew "node"
 brew "postgresql"
-brew "python@3.9"
+brew "python3"
 cask "flutter"
 cask "r"
 

@@ -76,6 +76,7 @@ mas "Pages", id: 409201541
 
 # Utilities
 brew "csvkit"
+brew "dua-cli"
 brew "exiftool"
 brew "ffmpeg"
 brew "pandoc"

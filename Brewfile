@@ -77,6 +77,7 @@ brew "csvkit"
 brew "dua-cli"
 brew "exiftool"
 brew "ffmpeg"
+brew "latexindent" # Because VSCode can't see /Library/TeX/texbin/latexindent
 brew "pandoc"
 brew "tesseract"
 brew "tesseract-lang"

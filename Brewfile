@@ -79,6 +79,7 @@ brew "exiftool"
 brew "ffmpeg"
 brew "latexindent" # Because VSCode can't see /Library/TeX/texbin/latexindent
 brew "pandoc"
+brew "pdftk-java"
 brew "tesseract"
 brew "tesseract-lang"
 cask "4k-video-downloaderplus"

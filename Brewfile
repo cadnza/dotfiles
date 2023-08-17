@@ -10,6 +10,7 @@ tap "mas-cli/tap"
 # Developer tools
 brew "coreutils"
 brew "packer"
+brew "prettier"
 brew "swiftlint"
 brew "swift-format"
 cask "blender"

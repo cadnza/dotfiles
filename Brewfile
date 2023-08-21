@@ -91,6 +91,9 @@ cask "openaudible"
 mas "AudioBookBinder", id: 413969927
 mas "PDFOutliner", id: 420874236
 
+# Fonts
+cask "font-im-fell-english"
+
 # Unavailable
 # Dorico 3.5.app
 # NotePerformer

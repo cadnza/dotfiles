@@ -48,9 +48,9 @@ cask "plex"
 cask "kindle"
 
 # Games
-cask "otto-matic"
 cask "bugdom"
 cask "nanosaur"
+cask "otto-matic"
 
 # Languages and SDKs
 brew "asciidoctor"

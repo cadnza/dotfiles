@@ -18,16 +18,6 @@ $cMsBlue = "0;164;239"
 $cMsYellow = "255;185;0"
 $cMsGrey = "115;115;115"
 
-# Define Git colors
-$cGitAction = 15
-$cGitRepo = 6
-$cGitBranch = 214
-$cGitStaged = 2
-$cGitUnstaged = 9
-$cGitUnknown = $colorSep
-$cGitUnpushed = 13
-$cGitUnpulled = 10
-
 # Set colors
 $cUser = "$([char]27)[38;2;$cMsOrange" + "m"
 $cSep = "$([char]27)[38;2;$cMsGrey" + "m"

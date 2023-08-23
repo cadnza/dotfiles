@@ -27,10 +27,16 @@ $cDirectory = "$([char]27)[38;2;$cMsBlue" + "m"
 # Define characters
 $charSep = "|"
 $charReset = "$([char]27)[0m"
-$sep = "$cSep$charSep$charReset"
+
+# Source local logic
+$localLogic = "$HOME\.local.ps1"
+if (Test-Path $localLogic) {
+	. $localLogic
+}
 
 # Set prompt
 function prompt {
+	$sep = "$cSep$charSep$charReset"
 	$final = "$cUser$env:USERNAME$charReset $sep $cMachine$env:COMPUTERNAME$charReset $sep $cDirectory$( Split-Path $PWD -Leaf )$charReset "
 
 	return $final

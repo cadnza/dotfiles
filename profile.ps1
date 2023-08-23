@@ -1,7 +1,14 @@
 # Import the Chocolatey Profile (for completions)
-$ChocolateyProfile = "C:\ProgramData\chocoportable\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-	Import-Module "$ChocolateyProfile"
+$modChocolateyProfile = "C:\ProgramData\chocoportable\helpers\chocolateyProfile.psm1"
+if (Test-Path($modChocolateyProfile)) {
+	Import-Module $modChocolateyProfile
+}
+
+# Import Get-ChildItemColor
+$modGetChildItemColor = "$HOME\Repos\Get-ChildItemColor\src\Get-ChildItemColor.psm1"
+if (Test-Path($modGetChildItemColor)) {
+	Import-Module -DisableNameChecking $modGetChildItemColor
+	Set-Alias ls Get-ChildItemColor -Option AllScope
 }
 
 # Define Microsoft colors (https://usbrandcolors.com/microsoft-colors/)

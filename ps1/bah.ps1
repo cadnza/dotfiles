@@ -6,7 +6,7 @@ $cUser = "$([char]27)[38;2;$cBah" + "m"
 $cMachine = "$([char]27)[38;2;255;255;255m"
 $cDirectory = "$([char]27)[3m$([char]27)[38;2;$cBah" + "m"
 
-# Show logo
+# Define logo
 $bahPre = "$([char]27)[1m$([char]27)[48;2;$cBah" + "m$([char]27)[38;2;255;255;255m"
 $bahSpace = "                                      "
 $bahLogo = $bahPre
@@ -23,4 +23,6 @@ $bahLogo += "`n"
 $bahLogo += $bahSpace
 $bahLogo += $charReset
 $bahLogo += "`n"
+
+# Display logo
 Write-Host $bahLogo

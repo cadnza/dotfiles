@@ -1,3 +1,6 @@
+# Remove logo
+Clear-Host
+
 # Import the Chocolatey Profile (for completions)
 $modChocolateyProfile = "C:\ProgramData\chocoportable\helpers\chocolateyProfile.psm1"
 if (Test-Path($modChocolateyProfile)) {

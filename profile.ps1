@@ -13,8 +13,15 @@ $msGrey = "115;115;115"
 
 # Define characters
 $charSep = " | "
+$charReset = "$([char]27)[0m"
+
+# Set colors
+$colorUser = "$([char]27)[38;2;$msOrange" + "m"
+$colorSep = "$([char]27)[38;2;$msGrey" + "m"
+$colorMachine = "$([char]27)[38;2;$msYellow" + "m"
+$colorDirectory = "$([char]27)[38;2;$msBlue" + "m"
 
 # Set prompt
 function prompt {
-	"$([char]27)[38;2;$msOrange" + "m$env:USERNAME$([char]27)[0m$([char]27)[38;2;$msGrey" + "m$charSep$([char]27)[0m$([char]27)[38;2;$msYellow" + "m$env:COMPUTERNAME$([char]27)[0m $([char]27)[38;2;$msBlue" + "m$( Split-Path $PWD -Leaf )$([char]27)[0m "
+	"$colorUser$env:USERNAME$charReset$colorSep$charSep$charReset$colorMachine$env:COMPUTERNAME$charReset $colorDirectory$( Split-Path $PWD -Leaf )$charReset "
 }

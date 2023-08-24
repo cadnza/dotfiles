@@ -64,3 +64,15 @@ function prompt {
 	# Return
 	return $final
 }
+
+# Define function to go to top level of git repo
+function gd {
+	git rev-parse 2> $null
+	$result = $?
+	if ($result -eq $true) {
+		Set-Location $(git rev-parse --show-toplevel)
+	}
+	else {
+		Write-Host "gd only works inside a Git repo."
+	}
+}

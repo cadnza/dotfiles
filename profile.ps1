@@ -32,7 +32,7 @@ $cUser = "$([char]27)[38;2;$cMsOrange" + "m"
 $cSep = "$([char]27)[38;2;$cMsGrey" + "m"
 $cMachine = "$([char]27)[38;2;$cMsYellow" + "m"
 $cDirectory = "$([char]27)[38;2;$cMsBlue" + "m"
-$cGit = "$([char]27)[38;2;$cGitOrange" + "m"
+$cGit = "$([char]27)[5m$([char]27)[38;2;$cGitOrange" + "m"
 
 # Define characters
 $charSep = "|"

@@ -39,8 +39,8 @@ if (Test-Path $localLogic) {
 
 # Set prompt
 function prompt {
-	$sep = "$cSep$charSep$charReset" # Not currently in use
-	$final = "$cUser$env:USERNAME$charReset $cMachine$env:COMPUTERNAME$charReset $cDirectory$( Split-Path $PWD -Leaf )$charReset "
+	# $sep = "$cSep$charSep$charReset" # Not currently in use
+	$final = "$cUser$env:USERNAME$charReset $cMachine$env:COMPUTERNAME$charReset $cDirectory$( Split-Path $PWD -Leaf )$charReset $cGit$charGit$charReset "
 
 	return $final
 }

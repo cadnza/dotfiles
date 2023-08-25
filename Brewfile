@@ -56,6 +56,7 @@ cask "otto-matic"
 # Languages and SDKs
 brew "asciidoctor"
 brew "bash"
+brew "firebase-cli"
 brew "node"
 brew "postgresql"
 brew "python3"

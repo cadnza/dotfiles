@@ -21,11 +21,18 @@ $cMsBlue = "0;164;239"
 $cMsYellow = "255;185;0"
 $cMsGrey = "115;115;115"
 
+# Define git color
+$cGitOrange = "240;60;46"
+
+# Define git character
+$charGit = $([char]182)
+
 # Set colors
 $cUser = "$([char]27)[38;2;$cMsOrange" + "m"
 $cSep = "$([char]27)[38;2;$cMsGrey" + "m"
 $cMachine = "$([char]27)[38;2;$cMsYellow" + "m"
 $cDirectory = "$([char]27)[38;2;$cMsBlue" + "m"
+$cGit = "$([char]27)[5m$([char]27)[38;2;$cGitOrange" + "m"
 
 # Define characters
 $charSep = "|"
@@ -39,8 +46,33 @@ if (Test-Path $localLogic) {
 
 # Set prompt
 function prompt {
-	$sep = "$cSep$charSep$charReset" # Not currently in use
+
+	# Define separator character
+	# $sep = "$cSep$charSep$charReset" # Not currently in use
+
+	# Define prompt
 	$final = "$cUser$env:USERNAME$charReset $cMachine$env:COMPUTERNAME$charReset $cDirectory$( Split-Path $PWD -Leaf )$charReset "
 
+	# Add indicator if we're in a git repo
+	$gitIndicator = ""
+	git rev-parse 2> $null
+	if ($? -eq $true) {
+		$gitIndicator = "$cGit$charGit$charReset "
+	}
+	$final += $gitIndicator
+
+	# Return
 	return $final
+}
+
+# Define function to go to top level of git repo
+function gd {
+	git rev-parse 2> $null
+	$result = $?
+	if ($result -eq $true) {
+		Set-Location $(git rev-parse --show-toplevel)
+	}
+	else {
+		Write-Host "gd only works inside a Git repo."
+	}
 }

@@ -14,6 +14,14 @@ if (Test-Path($modGetChildItemColor)) {
 	Set-Alias ls Get-ChildItemColor -Option AllScope
 }
 
+# Import docker completions
+if (Get-Module -ListAvailable -Name DockerCompletion) {
+	Import-Module DockerCompletion
+}
+else {
+	Write-Host 'For docker completions, run `Install-Module DockerCompletion -Scope CurrentUser`'
+}
+
 # Define Microsoft colors (https://usbrandcolors.com/microsoft-colors/)
 $cMsOrange = "242;80;34"
 $cMsGreen = "127;186;0"

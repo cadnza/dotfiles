@@ -5,6 +5,7 @@ disabled_rules:
     - function_body_length
     - identifier_name
     - large_tuple
+    - line_length
     - nesting
     - switch_case_alignment
     - trailing_comma # Disabled until swift-format makes MultiLineTrailingCommas configurable

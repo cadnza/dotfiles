@@ -39,6 +39,7 @@ brew "zsh-syntax-highlighting"
 cask "1password"
 cask "alfred"
 cask "cleanmymac"
+cask "daisydisk"
 cask "google-chrome"
 cask "istat-menus"
 mas "BetterSnapTool", id: 417375580

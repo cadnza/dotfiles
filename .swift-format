@@ -18,6 +18,7 @@
 	"prioritizeKeepingFunctionOutputTogether": false,
 	"rules": {
 		"AllPublicDeclarationsHaveDocumentation": false,
+		"AlwaysUseLiteralForEmptyCollectionInit": true,
 		"AlwaysUseLowerCamelCase": true,
 		"AmbiguousTrailingClosureOverload": true,
 		"BeginDocumentationCommentWithOneLineSummary": false,
@@ -38,6 +39,7 @@
 		"NoLeadingUnderscores": false,
 		"NoParensAroundConditions": true,
 		"NoVoidReturnOnFunctionSignature": true,
+		"OmitExplicitReturns": true,
 		"OneCasePerLine": true,
 		"OneVariableDeclarationPerLine": true,
 		"OnlyOneTrailingClosureArgument": true,

@@ -94,6 +94,7 @@ cask "mactex" # Run `sudo tlmgr update --self` in new terminal after installing 
 cask "openaudible"
 mas "AudioBookBinder", id: 413969927
 mas "PDFOutliner", id: 420874236
+mas "WireGuard", id: 1451685025
 
 # Fonts
 cask "font-im-fell-english"

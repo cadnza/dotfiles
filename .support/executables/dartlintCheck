@@ -3,6 +3,13 @@
 # Makes sure that all current dart rules are assigned in your
 # analysis_options.yaml (so your config can stay up to date).
 
+# Note that this script assumes the following:
+#	1)	You're using key value syntax in your yaml instead of list syntax (see
+#		https://dart.dev/tools/analysis#disabling-individual-rules) and
+#	2)	You're listing *every available rule* (that's not marked experimental or
+#		deprecated) with a true/false value, ensuring that you've made a
+#		conscious decision on each
+
 # Make sure yq is installed
 which yq &> /dev/null || {
 	echo "Please install yq" >&2

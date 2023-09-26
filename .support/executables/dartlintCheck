@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Makes sure that all current dart rules are assigned in your
 # analysis_options.yaml (so your config can stay up to date).
@@ -25,6 +25,12 @@ wants=analysis_options.yaml
 	exit 1
 }
 
+# Pull description list of rules for later checks
+descList=$(curl -s https://dart.dev/tools/linter-rules)
+
+# Set default exit code to 0
+exitCode=0
+
 # Pull in master list and start to loop through all linter rules
 curl -s https://dart.dev/tools/linter-rules/all | \
 	xmllint --html --xpath "/html/body/main//code[contains(@class,'yaml')]/text()" - \
@@ -39,10 +45,21 @@ do
 			yq -o json ".linter.rules" | \
 			jq -r "has(\"$allRule\")"
 	)
-	# Notify if rule is missing
-	[ $isInConfig = true ] || \
-		echo -e "\033[1;31mMissing rule:\033[0m https://dart.dev/tools/linter-rules/\033[36m$allRule\033[0m"
+	# Continue if rule is in config
+	[ $isInConfig = true ] && continue
+	# Check whether rule is deprecated or experimental and continue if so
+	isDeprecatedOrExperimental=$(
+		echo $descList | \
+			xmllint --html --xpath "//a[@href=\"/tools/linter-rules/$allRule\"]/.." - \
+			2> /dev/null | \
+			grep -Eic "(experimental|deprecated)"
+	)
+	[ $isDeprecatedOrExperimental -gt 0 ] && continue
+	# Set exit code to 1
+	exitCode=1
+	# Notify
+	echo -e "\033[1;31mMissing rule:\033[0m https://dart.dev/tools/linter-rules/\033[36m$allRule\033[0m" >&2
 done
 
 # Exit
-exit 0
+exit $exitCode

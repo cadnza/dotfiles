@@ -8,13 +8,13 @@
 # Validate swiftlint install
 which swiftlint &> /dev/null
 [[ $? = 0 ]] || {
-	echo "\033[32mswiftlint\033[0m not found"
+	echo "\033[32mswiftlint\033[0m not found" >&2
 	exit 1
 }
 
 # Validate argument
 [[ $1 = "" ]] && {
-	echo "Please supply a swiftlint config file."
+	echo "Please supply a swiftlint config file." >&2
 	exit 1
 }
 

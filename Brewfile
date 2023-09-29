@@ -49,7 +49,7 @@ mas "BetterSnapTool", id: 417375580
 brew "figlet"
 brew "lolcat"
 cask "plex"
-cask "kindle"
+mas "Kindle", id: 302584613
 
 # Games
 cask "bugdom"

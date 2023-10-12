@@ -3,7 +3,7 @@
 # Define colors
 # Standard
 export colorUser=1
-export colorDirectory=69
+export colorDirectory=12
 export colorSep=8
 # Git
 export colorAction=15

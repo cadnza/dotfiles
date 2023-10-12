@@ -28,10 +28,10 @@ Mostly this site <https://geoff.greer.fm/lscolors/>
 
 | `00`  | Attribute  | `none`  | `x`  | _Any_
 | `01`  | Attribute  | `bold`  | _Uppercase_  | _Any_
-| `04`  | Attribute  | `underscore`  |   | 
-| `05`  | Attribute  | `blink`  |   | 
-| `07`  | Attribute  | `reverse`  |   | 
-| `08`  | Attribute  | `concealed`  |   | 
+| `04`  | Attribute  | `underscore`  |   |
+| `05`  | Attribute  | `blink`  |   |
+| `07`  | Attribute  | `reverse`  |   |
+| `08`  | Attribute  | `concealed`  |   |
 | `30`  | Foreground  | `black`  | `a`  | 1
 | `31`  | Foreground  | `red`  | `b`  | 1
 | `32`  | Foreground  | `green`  | `c`  | 1

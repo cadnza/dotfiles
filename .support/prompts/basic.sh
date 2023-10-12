@@ -16,7 +16,7 @@ export colorUnpushed=13
 export colorUnpulled=10
 
 # Set PS1
-PS1='%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%1~%f %# '
+PS1=$'%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%{\033[3m%}%1~%{\033[0m%}%f %# '
 
 # Set strings for unstaged and staged changes
 zstyle ':vcs_info:git:*' unstagedstr '*'

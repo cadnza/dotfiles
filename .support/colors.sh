@@ -7,7 +7,7 @@ colors
 # Configure universal machine colors (don't reference these directly; use $colorMachine instead)
 export colorMacos=7
 export colorLinux=2
-export colorWindows=208
+export colorWindows=9
 export colorOther=5
 
 # Set dark more variable (true for all platforms except Apple Terminal in macOS light mode)

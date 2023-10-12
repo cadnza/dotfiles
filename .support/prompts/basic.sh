@@ -8,7 +8,7 @@ export colorSep=8
 # Git
 export colorAction=15
 export colorRepo=6
-export colorBranch=214
+export colorBranch=3
 export colorStaged=2
 export colorUnstaged=9
 export colorUnknown=$colorSep
@@ -25,7 +25,7 @@ zstyle ':vcs_info:git:*' stagedstr '+'
 # Get function to set right prompt with VCS info
 buildRightPrompt() {
 	sep=→
-	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%F{$colorBranch}%b%f
+	base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%B%F{$colorBranch}%b%f%%b
 	indicatorsString=%F{$colorUnstaged}%u%f%F{$colorStaged}%c%f
 	indicatorDefault=?
 	indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f

@@ -15,8 +15,22 @@ export colorUnknown=$colorSep
 export colorUnpushed=13
 export colorUnpulled=10
 
+# Define exit code indicator
+ecI=$(echo '
+%(0?..%F{7})
+%(1?.%F{1}.)
+%(2?.%F{3}.)
+%(126?.%F{5}.)
+%(127?.%F{5}.)
+%(128?.%F{7}.)
+%(130?.%F{2}.)
+%(137?.%F{4}.)
+%(255?.%F{6}.)
+%(0?.%#.⏺%f)
+' | tr '\n' ' ' | sed 's/ *//g')
+
 # Set PS1
-PS1=$'%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%{\033[3m%}%1~%{\033[0m%}%f %# '
+PS1=$'%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%{\033[3m%}%1~%{\033[0m%}%f $ecI '
 
 # Set strings for unstaged and staged changes
 zstyle ':vcs_info:git:*' unstagedstr '*'

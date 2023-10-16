@@ -16,7 +16,6 @@ export colorUnpushed=13
 export colorUnpulled=10
 
 # Define exit code indicator
-promptPlaceholder=PROMPTPLACEHOLDER
 ecI=$(echo '
 %(0?..%F{7})
 %(1?.%F{1}.)

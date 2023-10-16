@@ -27,8 +27,8 @@ ecI=$(echo '
 %(130?.%F{2}.)
 %(137?.%F{4}.)
 %(255?.%F{6}.)
-%(0?.%#.%S$promptPlaceholder%s%f)
-' | tr '\n' ' ' | sed 's/ *//g' | sed 's/$promptPlaceholder/ $? /g')
+%(0?.%#.▐%S$?%s▌%f)
+' | tr '\n' ' ' | sed 's/ *//g')
 
 # Set PS1
 PS1=$'%F{$colorUser}%n%f%F{$colorSep}@%f%F{$colorMachine}%B%m%b%f %F{$colorDirectory}%{\033[3m%}%1~%{\033[0m%}%f'" $ecI "

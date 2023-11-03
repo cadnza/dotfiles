@@ -36,3 +36,6 @@ export PATH=$PATH:/System/Library/Frameworks/CoreServices.framework/Versions/A/F
 
 # Add swiftpaper to path
 export PATH=$PATH:$HOME/Repos/swiftpaper
+
+# Add path to cargo binaries
+export PATH=$PATH:$HOME/.cargo/bin

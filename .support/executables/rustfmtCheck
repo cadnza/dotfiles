@@ -60,7 +60,7 @@ do
 
 	# Color modified, annotate, and break if user setting doesn't match default
 	[ "$setting" = "$settingUser" ] || {
-		echo -e "\033[38;5;$cModified""m$key = $defaultUser\033[0m \033[3mDefault: $default\033[0m"
+		echo -e "\033[38;5;$cModified""m$key = $defaultUser\033[0m  \033[2m\033[3mDefault: $default\033[0m"
 		continue
 	}
 

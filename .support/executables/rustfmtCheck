@@ -32,9 +32,10 @@ wants=.rustfmt.toml
 	exit 1
 }
 
-# Define colors
-cModified=2
-cMissing=1
+# Define formats
+cModified="38;5;2"
+cMissing=2
+cDefault=2
 
 # Loop through default settings
 rustfmt --print-config default | while read -r setting
@@ -49,7 +50,7 @@ do
 
 	# Color missing and break if no user setting
 	[ $keyExists = 1 ] || {
-		echo  -e "\033[38;5;$cMissing""m$setting\033[0m"
+		echo  -e "\033[$cMissing""m$setting\033[0m"
 		continue
 	}
 
@@ -60,12 +61,12 @@ do
 
 	# Color modified, annotate, and break if user setting doesn't match default
 	[ "$setting" = "$settingUser" ] || {
-		echo -e "\033[38;5;$cModified""m$key = $defaultUser\033[0m  \033[2m\033[3mDefault: $default\033[0m"
+		echo -e "\033[$cModified""m$key = $defaultUser\033[0m \033[2m\033[3mDefault: $default\033[0m"
 		continue
 	}
 
 	# Show raw setting
-	echo $setting
+	echo -e "\033[$cDefault""m$setting\033[0m"
 
 done
 

@@ -68,3 +68,6 @@ do
 	echo $setting
 
 done
+
+# Exit
+exit 0

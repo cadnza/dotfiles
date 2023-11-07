@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC2046,SC2086
+# shellcheck disable=SC2028,SC2046,SC2086
+
+# Make sure yq is installed
+which yq &> /dev/null || {
+	echo "Please install yq" >&2
+	exit 1
+}
 
 # Make sure rustfmt is installed
 which rustfmt &> /dev/null || {
@@ -32,43 +38,69 @@ wants=.rustfmt.toml
 	exit 1
 }
 
+# Open temp file for output
+fOutput=$(mktemp)
+
 # Define formats
 cModified="38;5;2"
 cMissing=2
 cDefault=2
+cNonexistent="38;5;1"
 
-# Loop through default settings
-rustfmt --print-config default | while read -r setting
+# Convert default and user configs to JSON
+configDefault=$(rustfmt --print-config default | yq -p toml -o json)
+configUser=$(cat $f | yq -p toml -o json)
+
+# Get default config keys
+keysDefault=$(echo $configDefault | jq keys | jq -r .[])
+
+# Loop through default config keys
+echo "$keysDefault" | while read -r keyDefault
 do
 
-	# Extract key and value
-	key=$(echo $setting | sed 's/ .*//g' )
-	default=$(echo $setting | sed "s/$key = //g")
+	# Get default and user values
+	valDefault=$(echo $configDefault | jq ".$keyDefault")
+	valUser=$(echo $configUser | jq ".$keyDefault")
 
-	# Check whether key exists in config
-	keyExists=$(cat $f | grep -c "^$key")
-
-	# Color missing and break if no user setting
-	[ $keyExists = 1 ] || {
-		echo  -e "\033[$cMissing""m$setting\033[0m"
+	# Add default and continue if unspecified
+	[ $valUser = null ] && {
+		echo "\033[$cMissing""m$keyDefault = $valDefault\033[0m" >> $fOutput
 		continue
 	}
 
-	# Get user setting, key, and value
-	settingUser=$(cat $f | grep "^$key ")
-	keyUser=$(echo $settingUser | sed 's/ .*//g' )
-	defaultUser=$(echo $settingUser | sed "s/$key = //g")
-
-	# Color modified, annotate, and break if user setting doesn't match default
-	[ "$setting" = "$settingUser" ] || {
-		echo -e "\033[$cModified""m$key = $defaultUser\033[0m \033[2m\033[3mDefault: $default\033[0m"
+	# Add modification and continue if modified
+	[ $valUser = $valDefault ] || {
+		echo "\033[$cModified""m$keyDefault = $valUser\033[0m \033[2m\033[3mDefault: $valDefault\033[0m" >> $fOutput
 		continue
 	}
 
-	# Show raw setting
-	echo -e "\033[$cDefault""m$setting\033[0m"
+	# Add default and continue if unmodified
+	[ $valUser = $valDefault ] && {
+		echo "\033[$cDefault""m$keyDefault = $valDefault\033[0m" >> $fOutput
+		continue
+	}
 
 done
+
+# Get user config keys
+keysUser=$(echo $configUser | jq keys | jq -r .[])
+
+# Add keys that don't exist in the default spec
+echo "$keysUser" | while read -r keyUser
+do
+	[ $(echo $configDefault | jq ".$keyUser") = null ] && {
+		echo "\033[$cNonexistent""m$keyUser = $(
+			echo $configUser | jq ".$keyUser"
+		)\033[0m \033[2m\033[3mInvalid key\033[0m" >> $fOutput
+	}
+done
+
+# Show output
+final=$(cat $fOutput | sort)
+echo -e "$final"
+
+# Remove output file
+rm $fOutput
 
 # Exit
 exit 0

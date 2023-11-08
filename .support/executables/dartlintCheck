@@ -59,7 +59,7 @@ do
 		echo $descList | \
 			xmllint --html --xpath "//a[@href=\"/tools/linter-rules/$allRule\"]/.." - \
 			2> /dev/null | \
-			grep -Eic "(experimental|deprecated)"
+			grep -Eic "(experimental|deprecated|unreleased)"
 	)
 	[ $isDeprecatedOrExperimental -gt 0 ] && continue
 	# Set exit code to 1

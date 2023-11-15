@@ -17,6 +17,7 @@ brew "firebase-cli"
 brew "jq"
 brew "latexindent" # Because VSCode can't see /Library/TeX/texbin/latexindent
 brew "mas"
+brew "mlr"
 brew "nano"
 brew "node"
 brew "packer"

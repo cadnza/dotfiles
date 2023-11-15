@@ -64,6 +64,7 @@ cask "mactex" # Run `sudo tlmgr update --self` in new terminal after installing 
 cask "nanosaur"
 cask "netnewswire"
 cask "openaudible"
+cask "openscad"
 cask "otto-matic"
 cask "plex"
 cask "r"

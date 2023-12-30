@@ -1,6 +1,10 @@
 # Set language (just in case) ----
 Sys.setenv(LANG="en_US.UTF-8")
 
+# Set display variable (needs to be set to R to use XQuartz, and RStudio sets it to :0 anyway)
+# NOTE: If you're using renv, this file won't be sourced, so you'll need to add this line to renv's .Rprofile.
+Sys.setenv(DISPLAY=":0")
+
 # Open environment for variables that need to be available throughout ----
 .GlobalEnv$.ShadowEnv <- new.env(parent=.GlobalEnv)
 

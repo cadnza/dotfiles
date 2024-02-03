@@ -48,6 +48,7 @@ cask "alfred"
 cask "anki"
 cask "audacity"
 cask "blender"
+cask "bricklink-studio"
 cask "bugdom"
 cask "cleanmymac"
 cask "daisydisk"
@@ -87,6 +88,5 @@ mas "Pixelmator Pro", id: 1289583905
 mas "WireGuard", id: 1451685025
 mas "iA Writer", id: 775737590
 mas "iMovie", id: 408981434
-# Bricklink Studio (available, but cask doesn't work on Apple Silicon)
 # Dorico 3.5.app
 # NotePerformer

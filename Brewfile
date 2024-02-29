@@ -15,6 +15,7 @@ brew "dua-cli"
 brew "exiftool"
 brew "ffmpeg"
 brew "firebase-cli"
+brew "go"
 brew "jq"
 brew "latexindent" # Because VSCode can't see /Library/TeX/texbin/latexindent
 brew "mas"

@@ -1,6 +1,9 @@
 # Note optional files
 # .hushdiff silences git buffer diff indicators. This can speed things up on a machine with large repos.
 
+# Source environment variables
+source $HOME/.support/env.sh
+
 # Source local scripts
 [[ -f $HOME/.localrc ]] && source $HOME/.localrc
 

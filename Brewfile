@@ -20,6 +20,7 @@ brew "jq"
 brew "latexindent" # Because VSCode can't see /Library/TeX/texbin/latexindent
 brew "mas"
 brew "mlr"
+brew "modular"
 brew "nano"
 brew "node"
 brew "packer"

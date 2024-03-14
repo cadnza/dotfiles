@@ -40,7 +40,7 @@ exitCode=0
 
 # Pull in master list and start to loop through all linter rules
 curl -s https://dart.dev/tools/linter-rules/all | \
-	xmllint --html --xpath "/html/body/main//code[contains(@class,'yaml')]/text()" - \
+	xmllint --html --xpath "string(/html/body//div[contains(@class,'code-block-body')]//code)" - \
 	2> /dev/null | \
 	yq -r -o json ".linter.rules" | \
 	jq -r ".[]" | \

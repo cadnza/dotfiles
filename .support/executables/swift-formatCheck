@@ -51,7 +51,7 @@ while read -r singlePath
 do
 
 	# Report paths that don't have values in the config file
-	val=$(cat "$f" | jq -M "getpath($singlePath)")
+	val=$(jq -M "getpath($singlePath)" "$f")
 	[ "$val" = null ] && {
 		final="$(
 			printf "%s\n\033[31mMISSING\033[0m %-60s \033[32mDEFAULT\033[0m %s" \

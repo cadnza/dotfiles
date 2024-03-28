@@ -1,111 +1,105 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-# This script shows swiftlint rules according to how they stand with the a given
-# swiftlint configuration file. Highlighting means the rule is enabled, and the
-# yellow light means that swiftlint --fix will autocorrect it. The rule type
-# shows to the right. Happy configuring!
+# shellcheck disable=SC2015
 
-# Validate swiftlint install
-which swiftlint &> /dev/null
-[[ $? = 0 ]] || {
-	echo "\033[32mswiftlint\033[0m not found" >&2
+# Make sure swiftlint is installed
+which swiftlint &> /dev/null || {
+	echo "Please install swiftlint" >&2
 	exit 1
 }
 
-# Validate argument
-[[ $1 = "" ]] && {
-	echo "Please supply a swiftlint config file." >&2
+# Assign argument
+f=$1
+
+# Make sure file is named .swiftlint.yml (rigid, but safe)
+wants=".swiftlint.yml"
+[ "$(basename "$f" 2> /dev/null )" = $wants ] 2> /dev/null || {
+	echo "Please supply a file called $wants." >&2
 	exit 1
 }
 
-# Run rules on argument if possible
-rules=$(swiftlint rules --config $1) 2> /dev/null
-exitStatus=$?
-[[ $exitStatus = 0 ]] || {
-	echo "$1 isn't formatted like a swiftlint config file."
-	exit $exitStatus
+# Make sure file exists
+[ -f "$f" ] || {
+	echo "$f does not exist." >&2
+	exit 1
 }
 
-# Open final variable
-final=""
+# Open final list
+final=()
 
-# Open loop through rows
-echo $rules | while read -r line
+# Set status
+didFindIssues=0
+
+# Open loop lines in config summary
+while read -r line
 do
-	# Skip drawn borders
-	[[ $(echo $line | grep -c "^\+") = 1 ]] && continue
 
-	# Get untrimmed name
-	ruleNameUntrimmed=$(echo $line | cut -d "|" -f 2 | sed "s/^ *//g")
+	# Skip formatting lines
+	[ "$(echo "$line" | grep -pc "^\+")" = 1 ] && continue
 
-	# Get trimmed name
-	ruleName=$(echo $ruleNameUntrimmed | sed "s/ *$//g")
+	# Remove whitespace
+	line=$(echo "$line" | perl -pe "s/ +//g")
 
-	# Get untrimmed kind
-	kindUntrimmed=$(echo $line | cut -d "|" -f 6 | sed "s/^ *//g")
+	# Get relevant keys
+	id=$(echo "$line" | cut -d"|" -f2)
+	optin=$(echo "$line" | cut -d"|" -f3)
+	correctable=$(echo "$line" | cut -d"|" -f4)
+	enabled=$(echo "$line" | cut -d"|" -f5)
+	kind=$(echo "$line" | cut -d"|" -f6)
 
-	# Get trimmed kind
-	kind=$(echo $kindUntrimmed | sed "s/ *$//g")
+	# Skip header
+	[ "$id" = "identifier" ] && continue
 
-	# Remove whitespace from line
-	line=$(echo $line | sed "s/ //g")
-
-	# Skip header row
-	[[ $ruleName = "identifier" ]] && continue
-
-	# Get opt-in value
-	isOptIn=$(echo $line | cut -d "|" -f 3)
-
-	# Get enabled value
-	isEnabled=$(echo $line | cut -d "|" -f 5)
-
-	# Get correctable-capable
-	isCorrectable=$(echo $line | cut -d "|" -f 4)
-
-	# Get analyzer-capable
-	isAnalyzable=$(echo $line | cut -d "|" -f 6)
-
-	# Set light characters
-	lightOn="\u25CF"
-	lightOff="\u25CB"
-
-	# Format name by opt-in and enabled
-	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "yes" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;0;48;5;2m"$ruleNameUntrimmed"\033[0m"
-	[[ $isOptIn = "yes" ]] && [[ $isEnabled = "no" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;2m"$ruleNameUntrimmed"\033[0m"
-	[[ $isOptIn = "no" ]] && [[ $isEnabled = "yes" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;0;48;5;1m"$ruleNameUntrimmed"\033[0m"
-	[[ $isOptIn = "no" ]] && [[ $isEnabled = "no" ]] && \
-		final_ruleNameUntrimmed="\033[38;5;1m"$ruleNameUntrimmed"\033[0m"
+	# Skip identifiers that are either opt-in and enabled or default and disabled
+	[ "$optin" = "$enabled" ] && continue
 
 	# Format correctable
-	[[ $isCorrectable = "yes" ]] && \
-		final_isCorrectable="\033[38;5;11m$lightOn\033[0m" \
-	|| \
-		final_isCorrectable="\033[38;5;8m$lightOff\033[0m"
-	final_isCorrectable="\033[38;5;11m$final_isCorrectable\033[0m"
+	[ "$correctable" = "yes" ] && correctable="correctable" || correctable=""
 
-	# Format kind
-	[[ $kind = "idiomatic" ]] && kindColor=3
-	[[ $kind = "lint" ]] && kindColor=7
-	[[ $kind = "metrics" ]] && kindColor=9
-	[[ $kind = "performance" ]] && kindColor=13
-	[[ $kind = "style" ]] && kindColor=14
-	final_kindUntrimmed="\033[38;5;"$kindColor"m$kindUntrimmed\033[0m"
+	# Assign color for rule kind
+	kindColor=""
+	[ "$kind" = "lint" ] && kindColor=3
+	[ "$kind" = "idiomatic" ] && kindColor=6
+	[ "$kind" = "style" ] && kindColor=4
+	[ "$kind" = "metrics" ] && kindColor=2
+	[ "$kind" = "performance" ] && kindColor=1
 
-	# Build string
-	border="|"
-	newRow="$border $final_isCorrectable $final_ruleNameUntrimmed $final_kindUntrimmed$border"
+	# Pad keys
+	kind=$(printf "%-12s" "$kind")
+	correctable=$(printf "%-12s" "$correctable")
 
-	# Add string to final
-	final=$final$newRow"\n"
+	# Formalize color variables
+	clrKind=$(tput setaf "$kindColor")
+	clrCorrectable=$(tput setaf 10)
+	clrFaded=$(tput setaf 8)
+	nrml=$(tput sgr0)
+
+	# Synthesize URL
+	url="${clrFaded}https://realm.github.io/SwiftLint/${clrKind}$id${clrFaded}.html${nrml}"
+
+	# Add rules to appropriate lists
+	[ "$optin" = "yes" ] && {
+		label="OPT-IN  CAN ENABLE"
+	} || {
+		label="DEFAULT CAN DISABLE"
+	}
+	final+=(
+		"$(
+			printf \
+				"%-20s %s %s %s" \
+				"$label" \
+				"${clrKind}$kind${nrml}" \
+				"${clrCorrectable}$correctable${nrml}" \
+				"$url"
+		)"
+	)
+	didFindIssues=1
 
 # Close loop
-done
+done < <(swiftlint rules --config "$f")
 
-# Echo
-echo -en $final
+# Show results
+[ "$didFindIssues" = 1 ] && printf '%s\n' "${final[@]}" | sort
 
 # Exit
 exit 0

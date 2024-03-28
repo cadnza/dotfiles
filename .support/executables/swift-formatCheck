@@ -53,7 +53,12 @@ do
 	# Report paths that don't have values in the config file
 	val=$(cat "$f" | jq -M "getpath($singlePath)")
 	[ "$val" = null ] && {
-		final="$(printf "%s\n\033[31mMISSING\033[0m %-60s \033[32mDEFAULT\033[0m %s " "$final" "$singlePath" "$(echo "$configDefault" | jq -M "getpath($singlePath)")")"
+		final="$(
+			printf "%s\n\033[31mMISSING\033[0m %-60s \033[32mDEFAULT\033[0m %s" \
+			"$final" \
+			"$singlePath" \
+			"$(echo "$configDefault" | jq -M "getpath($singlePath)")"
+		)"
 		didFindIssues=1
 	}
 

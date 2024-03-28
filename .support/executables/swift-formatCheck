@@ -33,20 +33,13 @@ wants=".swift-format"
 # Get default configuration
 configDefault=$(swift-format dump-configuration)
 
-# Get all default paths
-paths=$(
-	echo "$configDefault" | \
-		jq -c 'paths(type != "array" and type != "object")' | \
-		sort
-)
-
 # Set status
 didFindIssues=0
 
 # Open variable
 final=""
 
-# Loop through paths
+# Loop through paths in default configuration
 while read -r singlePath
 do
 
@@ -54,7 +47,7 @@ do
 	val=$(jq -M "getpath($singlePath)" "$f")
 	[ "$val" = null ] && {
 		final="$(
-			printf "%s\n\033[31mMISSING\033[0m %-60s \033[32mDEFAULT\033[0m %s" \
+			printf "%s\n\033[31mNOT IN CONFIG  \033[0m%-60s\033[32mDEFAULT\033[0m %s" \
 			"$final" \
 			"$singlePath" \
 			"$(echo "$configDefault" | jq -M "getpath($singlePath)")"
@@ -63,7 +56,31 @@ do
 	}
 
 # Close loop
-done < <(echo "$paths")
+done < <(
+	echo "$configDefault" | \
+		jq -c 'paths(type != "array" and type != "object")' | \
+		sort
+)
+
+# Loop through paths in config file
+while read -r singlePath
+do
+
+	# Report paths aren't valid (i.e. don't appear in the default config)
+	val=$(echo "$configDefault" | jq -M "getpath($singlePath)")
+	[ "$val" = null ] && {
+		final="$(
+			printf "%s\n\033[33mNOT IN DEFAULT\033[0m %s" \
+			"$final" \
+			"$singlePath"
+		)"
+		didFindIssues=1
+	}
+
+# Close loop
+done < <(
+	jq -c 'paths(type != "array" and type != "object")' "$f" | sort
+)
 
 # Exit
 [ "$didFindIssues" = 1 ] && {

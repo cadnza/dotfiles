@@ -16,6 +16,12 @@ which yq &> /dev/null || {
 	exit 1
 }
 
+# Make sure jq is installed
+which jq &> /dev/null || {
+	echo "Please install jq" >&2
+	exit 1
+}
+
 # Assign argument
 f=$1
 

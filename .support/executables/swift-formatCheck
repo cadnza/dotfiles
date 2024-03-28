@@ -2,6 +2,10 @@
 
 # shellcheck disable=SC2015
 
+# Keeps your .swift-format up to date by making sure you've explicitly assigned
+# all values found in `swift-format dump-configuration` and detecting values
+# that aren't found in the default.
+
 # Make sure swift-format is installed
 which swift-format &> /dev/null || {
 	echo "Please install swift-format" >&2

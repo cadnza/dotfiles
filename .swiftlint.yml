@@ -14,7 +14,7 @@ opt_in_rules:
   - accessibility_trait_for_button
   - anyobject_protocol
   - array_init
-  - attributes
+  # - attributes
   - balanced_xctest_lifecycle
   - closure_end_indentation
   - closure_spacing
@@ -39,11 +39,11 @@ opt_in_rules:
   - empty_xctest_method
   - enum_case_associated_values_count
   - expiring_todo
-  - explicit_acl
+  # - explicit_acl
   - explicit_enum_raw_value
   - explicit_init
-  - explicit_top_level_acl
-  - explicit_type_interface
+  # - explicit_top_level_acl
+  # - explicit_type_interface
   - extension_access_modifier
   - fallthrough
   - fatal_error_message

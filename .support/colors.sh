@@ -33,3 +33,6 @@ export LESS_TERMCAP_so=$(print -P "%K{magenta}") # Standout
 export LESS_TERMCAP_me=$(print -P "%f%b") # End bold, blink, underline
 export LESS_TERMCAP_ue=$(print -P "%f%u") # End underline
 export LESS_TERMCAP_se=$(print -P "%K{black}") # End standout
+
+# Enable grep color
+export GREP_OPTIONS='--color=always'

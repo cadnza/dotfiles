@@ -57,7 +57,6 @@ opt_in_rules:
   - function_default_parameter_at_end
   - ibinspectable_in_extension
   - identical_operands
-  - inert_defer
   - implicit_return
   - implicitly_unwrapped_optional
   - indentation_width
@@ -133,7 +132,6 @@ opt_in_rules:
   - unhandled_throwing_task
   - unneeded_parentheses_in_closure_argument
   - unowned_variable_capture
-  - unused_capture_list
   - untyped_error_in_catch
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces

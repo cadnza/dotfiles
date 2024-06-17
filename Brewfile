@@ -79,5 +79,5 @@ mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "WireGuard", id: 1451685025
 mas "iA Writer", id: 775737590
-# Dorico 3.5.app
+# Dorico 5.app
 # NotePerformer

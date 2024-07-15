@@ -67,6 +67,7 @@ cask "rstudio"
 cask "sf-symbols"
 cask "visual-studio-code"
 cask "vlc"
+cask "wifiman"
 mas "Apple Configurator", id: 1037126344
 mas "AudioBookBinder", id: 413969927
 mas "BetterSnapTool", id: 417375580

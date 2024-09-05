@@ -1,4 +1,4 @@
-#!/usr/false
+#!/usr/bin/env false
 
 # Enable op completion if op is installed
 eval "$(op completion zsh 2> /dev/null)" &> /dev/null

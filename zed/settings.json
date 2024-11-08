@@ -9,5 +9,12 @@
 {
 	"theme": "Ayu Dark",
 	"ui_font_size": 16,
-	"buffer_font_size": 13
+	"buffer_font_size": 13,
+	"inlay_hints": {"enabled": true, "show_background": true},
+	"tabs": {
+		"git_status": true,
+		"activate_on_close": "neighbour",
+		"file_icons": true
+	},
+	"tab_bar": {"show": true, "show_nav_history_buttons": false}
 }

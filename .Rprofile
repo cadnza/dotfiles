@@ -25,15 +25,6 @@ try(
 	silent=TRUE
 )
 
-# Define exit function for convenience ----
-exit <- function(
-	save="no",
-	status=0,
-	runLast=TRUE
-){
-	quit(save,status,runLast)
-}
-
 # Set text editor ----
 options(editor="nano")
 

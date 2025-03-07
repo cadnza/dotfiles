@@ -16,7 +16,8 @@
 	{
 		"context": "Editor",
 		"bindings": {
-			// "j k": ["workspace::SendKeystrokes", "escape"]
+			"alt-escape": "editor::ShowCompletions",
+			"fn-ctrl-space": "editor::ShowCompletions"
 		}
 	},
 	{"context": "TabSwitcher", "bindings": {"ctrl-shift-tab": null}}

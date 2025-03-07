@@ -99,7 +99,7 @@ do
 done < <(swiftlint rules --config "$f")
 
 # Show results
-[ "$didFindIssues" = 1 ] && printf '%s\n' "${final[@]}" | sort
+[ "$didFindIssues" = 1 ] && printf '%s\n' "${final[@]}" | sort >&2
 
 # Exit
 exit 0

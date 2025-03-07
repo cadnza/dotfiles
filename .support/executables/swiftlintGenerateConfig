@@ -12,7 +12,7 @@ do
 
 done < <(
 	swiftlintToJson | \
-		jq -r '.[] | select(.kind != "style" and .analyzer == false) | .id'
+		jq -r '.[] | select(.kind != "style" and .analyzer == false) | .id' # We want swift-format to do most of the actual formatting
 )
 
 echo -e "$final"

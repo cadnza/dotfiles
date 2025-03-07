@@ -72,7 +72,7 @@ do
 			--argjson optin "$(yn "$optin")" \
 			--argjson correctable "$(yn "$correctable")" \
 			--argjson enabled "$(yn "$enabled")" \
-			--argjson kind "$(yn "$kind")" \
+			--arg kind "$kind" \
 			--argjson analyzer "$(yn "$analyzer")" \
 			'{
 				id: $id,

@@ -87,7 +87,7 @@ do
 	didFindIssues=1
 
 # Close loop
-done < <(swiftlintToJson "$f" | jq -c '.[]')
+done < <(swiftlintToJson --config "$f" | jq -c '.[]')
 
 # Show results
 [ "$didFindIssues" = 1 ] && printf '%s\n' "${final[@]}" | sort >&2

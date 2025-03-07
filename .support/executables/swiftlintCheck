@@ -31,30 +31,21 @@ final=()
 didFindIssues=0
 
 # Open loop lines in config summary
-while read -r line
+while read -r obj
 do
 
-	# Skip formatting lines
-	[ "$(echo "$line" | grep -pc "^\+")" = 1 ] && continue
-
-	# Remove whitespace
-	line=$(echo "$line" | perl -pe "s/ +//g")
-
 	# Get relevant keys
-	id=$(echo "$line" | cut -d"|" -f2)
-	optin=$(echo "$line" | cut -d"|" -f3)
-	correctable=$(echo "$line" | cut -d"|" -f4)
-	enabled=$(echo "$line" | cut -d"|" -f5)
-	kind=$(echo "$line" | cut -d"|" -f6)
-
-	# Skip header
-	[ "$id" = "identifier" ] && continue
+	id=$(echo "$obj" | jq -r ".id")
+	optin=$(echo "$obj" | jq -r ".optin")
+	correctable=$(echo "$obj" | jq -r ".correctable")
+	enabled=$(echo "$obj" | jq -r ".enabled")
+	kind=$(echo "$obj" | jq -r ".kind")
 
 	# Skip identifiers that are either opt-in and enabled or default and disabled
 	[ "$optin" = "$enabled" ] && continue
 
 	# Format correctable
-	[ "$correctable" = "yes" ] && correctable="correctable" || correctable=""
+	[ "$correctable" = "true" ] && correctable="correctable" || correctable=""
 
 	# Assign color for rule kind
 	kindColor=""
@@ -78,7 +69,7 @@ do
 	url="${clrFaded}https://realm.github.io/SwiftLint/${clrKind}$id${clrFaded}.html${nrml}"
 
 	# Add rules to appropriate lists
-	[ "$optin" = "yes" ] && {
+	[ "$optin" = "true" ] && {
 		label="OPT-IN  CAN ENABLE"
 	} || {
 		label="DEFAULT CAN DISABLE"
@@ -96,7 +87,7 @@ do
 	didFindIssues=1
 
 # Close loop
-done < <(swiftlint rules --config "$f")
+done < <(swiftlintToJson "$f" | jq -c '.[]')
 
 # Show results
 [ "$didFindIssues" = 1 ] && printf '%s\n' "${final[@]}" | sort >&2

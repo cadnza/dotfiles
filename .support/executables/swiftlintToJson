@@ -14,22 +14,6 @@ which jq &> /dev/null || {
 	exit 1
 }
 
-# Assign argument
-f=$1
-
-# Make sure file is named .swiftlint.yml (rigid, but safe)
-wants=".swiftlint.yml"
-[ "$(basename "$f" 2> /dev/null )" = $wants ] 2> /dev/null || {
-	echo "Please supply a file called $wants." >&2
-	exit 1
-}
-
-# Make sure file exists
-[ -f "$f" ] || {
-	echo "$f does not exist." >&2
-	exit 1
-}
-
 # Open final JSON
 final='[]'
 
@@ -94,7 +78,7 @@ do
 	)"
 
 # Close loop
-done < <(swiftlint rules --config "$f")
+done < <(swiftlint rules "$@")
 
 # Return JSON
 echo "$final" | jq -Mc

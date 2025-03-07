@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Open final string
+final="only_rules:"
+
+# Open loop through specifified rules
+while read -r rule
+do
+
+	# Append rule to final
+	final="$final\n  - $rule"
+
+done < <(
+	swiftlintToJson | \
+		jq -r '.[] | select(.kind != "style" and .analyzer == false) | .id'
+)
+
+echo -e "$final"

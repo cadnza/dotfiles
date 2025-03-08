@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set predicate
+pred='select(.kind != "style")' # We want swift-format to do most of the actual formatting
+
 # Open final string
 final="only_rules:"
 
@@ -12,7 +15,7 @@ do
 
 done < <(
 	swiftlintToJson | \
-		jq -r '.[] | select(.kind != "style" and .analyzer == false) | .id' # We want swift-format to do most of the actual formatting
+		jq '.[] | select(.analyzer == false)' | jq "$pred" | jq -r '.id'
 )
 
 echo -e "$final"

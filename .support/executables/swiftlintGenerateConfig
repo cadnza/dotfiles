@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Set custom predicate
-pred='select(.kind != "style")'
+pred='select(.kind != "style") | select(.id | IN("explicit_type_interface", "explicit_acl", "explicit_top_level_acl") | not)'
 
 # Add comments
-comments=("We want swift-format to handle style fixes")
+comments=("We want swift-format to handle style fixes" "The access level and type rules are just annoying")
 
 # Set predicate to exclude analyzer rules
 predNoAnalyzer='select(.analyzer | not)'

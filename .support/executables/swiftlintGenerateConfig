@@ -7,7 +7,7 @@ pred='select(.kind != "style")'
 comments=("We want swift-format to handle style fixes")
 
 # Set predicate to exclude analyzer rules
-predNoAnalyzer='select(.analyzer == false)'
+predNoAnalyzer='select(.analyzer | not)'
 
 # Set header comment
 header="# Generated using:\n#   swiftlint $(swiftlint --version)\n# Predicates:\n#   $predNoAnalyzer\n#   $pred"

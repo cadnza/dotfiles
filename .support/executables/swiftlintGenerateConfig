@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 
 # Set custom predicate
-pred='select(.kind != "style")' # We want swift-format to do most of the actual formatting
+pred='select(.kind != "style")'
+
+# Add comments
+comments=("We want swift-format to handle style fixes")
 
 # Set predicate to exclude analyzer rules
 predNoAnalyzer='select(.analyzer == false)'
 
 # Set header comment
 header="# Generated using:\n#   swiftlint $(swiftlint --version)\n# Predicates:\n#   $predNoAnalyzer\n#   $pred"
+
+# Add comments to header
+didPlaceCommentsHeader=0
+for comment in "${comments[@]}"
+do
+	[ "$didPlaceCommentsHeader" = 0 ] && {
+		header="$header\n# Comments:"
+		didPlaceCommentsHeader=1
+	}
+	header="$header\n#   $comment"
+done
 
 # Open final string
 final="$header\n\nonly_rules:"

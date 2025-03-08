@@ -9,25 +9,6 @@ gd() {
 	cd $root
 }
 
-# Quite Apple Terminal on exiting the last window
-[ "$TERM_PROGRAM" = "Apple_Terminal" ] && {
-	exit() {
-
-		# Exit normally if in screen session
-		[ -n $STY ] || builtin exit "$@"
-
-		# Exit normally if in anything other than base Apple Terminal, e.g. tmux
-		# (checking here too to spare non- Apple Terminal emulators from having to define the alias)
-		[ "$TERM_PROGRAM" = "Apple_Terminal" ] || builtin exit "$@"
-
-		# Run Applescript for checking Apple Terminal windows and closing the application
-		screen -d -m $HOME/.support/scripts/quitAppleTerminal.sh
-
-		# Exit normally
-		builtin exit "$@"
-	}
-}
-
 # Add or update completions
 addCompletions() {
 

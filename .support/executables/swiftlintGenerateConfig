@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
-# Set predicate
+# Set custom predicate
 pred='select(.kind != "style")' # We want swift-format to do most of the actual formatting
 
+# Set predicate to exclude analyzer rules
+predNoAnalyzer='select(.analyzer == false)'
+
+# Set header comment
+header="# Generated using:\n#   swiftlint $(swiftlint --version)\n# Predicates:\n#   $predNoAnalyzer\n#   $pred"
+
 # Open final string
-final="only_rules:"
+final="$header\n\nonly_rules:"
 
 # Open loop through specifified rules
 while read -r rule
@@ -15,7 +21,7 @@ do
 
 done < <(
 	swiftlintToJson | \
-		jq '.[] | select(.analyzer == false)' | jq "$pred" | jq -r '.id'
+		jq '.[]' | jq "$predNoAnalyzer" | jq "$pred" | jq -r '.id'
 )
 
 echo -e "$final"

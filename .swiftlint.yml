@@ -1,3 +1,9 @@
+# Generated using:
+#   swiftlint 0.58.2
+# Predicates:
+#   select(.analyzer == false)
+#   select(.kind != "style")
+
 only_rules:
   - accessibility_label_for_image
   - accessibility_trait_for_button

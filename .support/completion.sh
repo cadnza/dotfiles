@@ -26,3 +26,6 @@ find $HOME/.support/completion_scripts -type f | while read -r f
 do
 	source $f
 done
+
+# Enable AWS completions
+complete -C aws_completer aws 2> /dev/null || :

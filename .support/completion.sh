@@ -29,3 +29,6 @@ done
 
 # Enable AWS completions
 complete -C aws_completer aws 2> /dev/null || :
+
+# Enable Azure completions
+. /opt/homebrew/Cellar/azure-cli/2.72.0/etc/bash_completion.d/az 2> /dev/null || :

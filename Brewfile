@@ -70,7 +70,6 @@ cask "visual-studio-code"
 cask "vlc"
 cask "wifiman"
 mas "AudioBookBinder", id: 413969927
-mas "BetterSnapTool", id: 417375580
 mas "Final Cut Pro", id: 424389933
 mas "Keynote", id: 409183694
 mas "Kindle", id: 302584613

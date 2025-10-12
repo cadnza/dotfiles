@@ -25,4 +25,4 @@ $bahLogo += $charReset
 $bahLogo += "`n"
 
 # Display logo
-Write-Host $bahLogo
+Write-Error $bahLogo

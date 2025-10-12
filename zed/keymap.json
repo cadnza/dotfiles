@@ -1,24 +1,9 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
-	{
-		"context": "Workspace",
-		"bindings": {
-			"ctrl-shift-tab": null,
-			"ctrl-tab": null
-		}
-	},
-	{
-		"context": "Editor",
-		"bindings": {
-			"alt-escape": "editor::ShowCompletions",
-			"fn-ctrl-space": "editor::ShowCompletions"
-		}
-	},
-	{"context": "TabSwitcher", "bindings": {"ctrl-shift-tab": null}}
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+      "ctrl-tab": "pane::ActivateNextItem"
+    }
+  }
 ]

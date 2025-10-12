@@ -7,23 +7,45 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-	"assistant": {
-		"default_model": {
-			"provider": "zed.dev",
-			"model": "claude-3-5-sonnet-latest"
-		},
-		"version": "2"
-	},
-	"theme": "Ayu Dark",
-	"ui_font_size": 16,
-	"buffer_font_size": 13,
-	"inlay_hints": {"enabled": true, "show_background": true},
-	"tabs": {
-		"git_status": true,
-		"activate_on_close": "neighbour",
-		"file_icons": true
-	},
-	"tab_bar": {"show": true, "show_nav_history_buttons": false},
-	"show_wrap_guides": true,
-	"soft_wrap": "editor_width"
+  "icon_theme": "Material Icon Theme",
+  "diagnostics": { "inline": { "enabled": true } },
+  "wrap_guides": [80, 120],
+  "agent": {
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
+    },
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
+    }
+  },
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "theme": "GitHub Dark Default",
+  "ui_font_size": 16,
+  "buffer_font_size": 13,
+  "inlay_hints": {
+    "enabled": false,
+    "show_background": true,
+    "toggle_on_modifiers_press": { "control": true, "alt": true }
+  },
+  "tabs": {
+    "activate_on_close": "neighbour",
+    "file_icons": true,
+    "show_diagnostics": "all",
+    "git_status": true
+  },
+  "tab_bar": { "show": true, "show_nav_history_buttons": false },
+  "show_wrap_guides": true,
+  "soft_wrap": "editor_width",
+  "minimap": {
+    "display_in": "all_editors",
+    "show": "always",
+    "thumb": "always"
+  },
+  "git": {
+    "inline_blame": { "enabled": false }
+  }
 }

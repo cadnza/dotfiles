@@ -51,6 +51,7 @@ cask "daisydisk"
 cask "db-browser-for-sqlite"
 cask "disk-drill"
 cask "docker"
+cask "dorico"
 cask "flutter"
 cask "google-chrome"
 cask "google-cloud-sdk"
@@ -79,5 +80,4 @@ mas "PDFOutliner", id: 420874236
 mas "Pages", id: 409201541
 mas "Pixelmator Pro", id: 1289583905
 mas "iA Writer", id: 775737590
-# Dorico 5.app
 # NotePerformer

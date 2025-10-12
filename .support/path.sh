@@ -39,3 +39,6 @@ export PATH=$PATH:$HOME/Repos/swiftpaper
 
 # Add path to cargo binaries
 export PATH=$PATH:$HOME/.cargo/bin
+
+# Add path to LM Studio CLI
+export PATH=$PATH:$HOME/.lmstudio/bin

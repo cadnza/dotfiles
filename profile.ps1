@@ -1,3 +1,14 @@
+# Define light profiling function to measure time since last invocation of this function
+function Time-Since {
+    if ((Get-Variable 'startTimeForTimeSinceFunction' -ErrorAction SilentlyContinue) -and (Get-Variable 'nthInvocationForTimeSinceFunction' -ErrorAction SilentlyContinue)) {
+        $global:nthInvocationForTimeSinceFunction += 1
+        Write-Warning "TIME SINCE LAST INVOCATION ($nthInvocationForTimeSinceFunction): $($($(Get-Date) - $startTimeForTimeSinceFunction).TotalMilliseconds)"
+    } else {
+        $global:nthInvocationForTimeSinceFunction = 0
+    }
+    $global:startTimeForTimeSinceFunction = Get-Date
+}
+
 # Import the Chocolatey Profile (for completions)
 $modChocolateyProfile = "C:\ProgramData\chocoportable\helpers\chocolateyProfile.psm1"
 if (Test-Path($modChocolateyProfile)) {

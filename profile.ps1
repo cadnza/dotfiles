@@ -18,16 +18,8 @@ if (Test-Path($modChocolateyProfile)) {
 # Import Get-ChildItemColor
 $modGetChildItemColor = "$HOME\Repos\Get-ChildItemColor\src\Get-ChildItemColor.psm1"
 if (Test-Path($modGetChildItemColor)) {
-	Import-Module -DisableNameChecking $modGetChildItemColor
-	Set-Alias ls Get-ChildItemColor -Option AllScope
-}
-
-# Import docker completions
-if (Get-Module -ListAvailable -Name DockerCompletion) {
-	Import-Module DockerCompletion
-}
-else {
-	Write-Warning 'For docker completions, run `Install-Module DockerCompletion -Scope CurrentUser`'
+       Import-Module -DisableNameChecking $modGetChildItemColor
+       Set-Alias ls Get-ChildItemColor -Option AllScope
 }
 
 # Define Microsoft colors (https://usbrandcolors.com/microsoft-colors/)

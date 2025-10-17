@@ -1,18 +1,18 @@
 # Note optional files
 # .hushdiff silences git buffer diff indicators. This can speed things up on a machine with large repos.
 
-# shellcheck disable=SC2015
-
 # Source environment variables
 source "$HOME/.support/env.sh"
 
-# Source local scripts
-[[ -f $HOME/.localrc ]] && source "$HOME/.localrc"
+# Source local logic
+f_localrc="$HOME/.localrc"
+# shellcheck disable=SC1090
+[ -f "$f_localrc" ] && source "$f_localrc"
 
 # Set zsh-newuser-install settings
-HISTFILE=$HOME/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+export HISTFILE=$HOME/.histfile
+export HISTSIZE=1000
+export SAVEHIST=1000
 unsetopt nomatch
 bindkey -e
 

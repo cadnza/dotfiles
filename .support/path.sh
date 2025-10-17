@@ -12,10 +12,6 @@ export PATH=$HOME/bin:$PATH
 # Add included executables to path
 export PATH=$HOME/.support/executables:$PATH
 
-# Add nano linter and formatter directories to path
-export PATH=$HOME/.support/nano/linters:$PATH
-export PATH=$HOME/.support/nano/formatters:$PATH
-
 # Add pub to path (for Flutter)
 export PATH=$PATH:$HOME/.pub-cache/bin
 

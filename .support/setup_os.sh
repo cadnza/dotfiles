@@ -1,25 +1,31 @@
-# Group OSs
-os_macos="darwin"
-os_linux="linux bsd"
-os_windows="cygwin msys"
+# Set OS values
+os_macos=1
+os_linux=2
+os_windows=3
+os_other=4
 
-# Define function for OS matching
-try_os_match() {
-    ptrn="("$(echo $1 | sed 's/ /\|/g')")"
-    if [ $(echo $OSTYPE | LC_ALL=en_US.utf8 grep -Eci "$ptrn") -gt 0 ]; then
-        echo $1
-    else
-        echo ""
-    fi
-}
-
-# Record OS string for fast checking
-working_os_filename=.dotfilesOS
-working_os_file=$HOME/$working_os_filename
-working_os=$(cat $working_os_file) 2>/dev/null || {
-    working_os="$(try_os_match $os_macos)$(try_os_match $os_linux)$(try_os_match $os_windows)"
-    echo $working_os >$working_os_file
-}
+# Determine OS
+working_os=0
+case "${OSTYPE:0:3}" in
+dar)
+    working_os=$os_macos
+    ;;
+lin)
+    working_os=$os_linux
+    ;;
+bsd)
+    working_os=$os_linux
+    ;;
+cyg)
+    working_os=$os_windows
+    ;;
+msy)
+    working_os=$os_windows
+    ;;
+*)
+    working_os=$os_other
+    ;;
+esac
 
 # Get function to show for zsh-syntax-highlighting install instructions
 show_zsh_install_instructions() {

@@ -27,7 +27,7 @@ source "$HOME/.support/path.sh"
 source "$HOME/.support/colors.sh"
 
 # Run settings per OS
-source "$HOME/.support/setupOS.sh" # Currently profiling on EngineRoom at ~0.08s
+source "$HOME/.support/setup_os.sh" # Currently profiling on EngineRoom at ~0.08s
 
 # Run completion settings
 source "$HOME/.support/completion.sh" # Currently profiling on EngineRoom at ~0.11s

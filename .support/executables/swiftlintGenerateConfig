@@ -14,28 +14,26 @@ header="# Generated using:\n#   swiftlint $(swiftlint --version)\n# Predicates:\
 
 # Add comments to header
 didPlaceCommentsHeader=0
-for comment in "${comments[@]}"
-do
-	[ "$didPlaceCommentsHeader" = 0 ] && {
-		header="$header\n# Comments:"
-		didPlaceCommentsHeader=1
-	}
-	header="$header\n#   $comment"
+for comment in "${comments[@]}"; do
+    [ "$didPlaceCommentsHeader" = 0 ] && {
+        header="$header\n# Comments:"
+        didPlaceCommentsHeader=1
+    }
+    header="$header\n#   $comment"
 done
 
 # Open final string
 final="$header\n\nonly_rules:"
 
 # Open loop through specifified rules
-while read -r rule
-do
+while read -r rule; do
 
-	# Append rule to final
-	final="$final\n  - $rule"
+    # Append rule to final
+    final="$final\n  - $rule"
 
 done < <(
-	swiftlintToJson | \
-		jq '.[]' | jq "$predNoAnalyzer" | jq "$pred" | jq -r '.id'
+    swiftlintToJson |
+        jq '.[]' | jq "$predNoAnalyzer" | jq "$pred" | jq -r '.id'
 )
 
 echo -e "$final"

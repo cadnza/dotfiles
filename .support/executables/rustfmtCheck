@@ -3,15 +3,15 @@
 # shellcheck disable=SC2028,SC2046,SC2086
 
 # Make sure yq is installed
-which yq &> /dev/null || {
-	echo "Please install yq" >&2
-	exit 1
+which yq &>/dev/null || {
+    echo "Please install yq" >&2
+    exit 1
 }
 
 # Make sure rustfmt is installed
-which rustfmt &> /dev/null || {
-	echo "Please install rustfmt" >&2
-	exit 1
+which rustfmt &>/dev/null || {
+    echo "Please install rustfmt" >&2
+    exit 1
 }
 
 # Assign argument
@@ -22,20 +22,20 @@ wants=.rustfmt.toml
 
 # Make sure argument is supplied
 [ -z $f ] && {
-	echo "Please supply a file called $wants." >&2
-	exit 1
+    echo "Please supply a file called $wants." >&2
+    exit 1
 }
 
 # Make sure file is named analysis_options.yaml (rigid, but safe)
 [ $(basename $f) = $wants ] || {
-	echo "Please supply a file called $wants." >&2
-	exit 1
+    echo "Please supply a file called $wants." >&2
+    exit 1
 }
 
 # Make sure file exists
 [ -f $f ] || {
-	echo "$f does not exist." >&2
-	exit 1
+    echo "$f does not exist." >&2
+    exit 1
 }
 
 # Open temp file for output
@@ -55,30 +55,29 @@ configUser=$(cat $f | yq -p toml -o json)
 keysDefault=$(echo $configDefault | jq keys | jq -r .[])
 
 # Loop through default config keys
-echo "$keysDefault" | while read -r keyDefault
-do
+echo "$keysDefault" | while read -r keyDefault; do
 
-	# Get default and user values
-	valDefault=$(echo $configDefault | jq ".$keyDefault")
-	valUser=$(echo $configUser | jq ".$keyDefault")
+    # Get default and user values
+    valDefault=$(echo $configDefault | jq ".$keyDefault")
+    valUser=$(echo $configUser | jq ".$keyDefault")
 
-	# Add default and continue if unspecified
-	[ $valUser = null ] && {
-		echo "\033[$cMissing""m$keyDefault = $valDefault\033[0m" >> $fOutput
-		continue
-	}
+    # Add default and continue if unspecified
+    [ $valUser = null ] && {
+        echo "\033[$cMissing""m$keyDefault = $valDefault\033[0m" >>$fOutput
+        continue
+    }
 
-	# Add modification and continue if modified
-	[ $valUser = $valDefault ] || {
-		echo "\033[$cModified""m$keyDefault = $valUser\033[0m \033[2m\033[3mDefault: $valDefault\033[0m" >> $fOutput
-		continue
-	}
+    # Add modification and continue if modified
+    [ $valUser = $valDefault ] || {
+        echo "\033[$cModified""m$keyDefault = $valUser\033[0m \033[2m\033[3mDefault: $valDefault\033[0m" >>$fOutput
+        continue
+    }
 
-	# Add default and continue if unmodified
-	[ $valUser = $valDefault ] && {
-		echo "\033[$cDefault""m$keyDefault = $valDefault\033[0m" >> $fOutput
-		continue
-	}
+    # Add default and continue if unmodified
+    [ $valUser = $valDefault ] && {
+        echo "\033[$cDefault""m$keyDefault = $valDefault\033[0m" >>$fOutput
+        continue
+    }
 
 done
 
@@ -86,13 +85,12 @@ done
 keysUser=$(echo $configUser | jq keys | jq -r .[])
 
 # Add keys that don't exist in the default spec
-echo "$keysUser" | while read -r keyUser
-do
-	[ $(echo $configDefault | jq ".$keyUser") = null ] && {
-		echo "\033[$cNonexistent""m$keyUser = $(
-			echo $configUser | jq ".$keyUser"
-		)\033[0m \033[2m\033[3mInvalid key\033[0m" >> $fOutput
-	}
+echo "$keysUser" | while read -r keyUser; do
+    [ $(echo $configDefault | jq ".$keyUser") = null ] && {
+        echo "\033[$cNonexistent""m$keyUser = $(
+            echo $configUser | jq ".$keyUser"
+        )\033[0m \033[2m\033[3mInvalid key\033[0m" >>$fOutput
+    }
 done
 
 # Show output

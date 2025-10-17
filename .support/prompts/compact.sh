@@ -1,5 +1,3 @@
-#!/usr/bin/env false
-
 # Define colors
 # Generic
 export fgPurple=189

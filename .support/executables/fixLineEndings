@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # Go to dotfiles directory
 cd $(git -C $(dirname $0:A) rev-parse --show-toplevel)
@@ -13,15 +13,14 @@ fixQueue="$(/usr/bin/find . -regex '\.\/\.[A-z0-9]+$')\n$(/usr/bin/find -name "*
 echo -ne "\r#"
 
 # Open loop through shell files
-echo $fixQueue | while read -r singleFile
-do
+echo $fixQueue | while read -r singleFile; do
 
-	# Fix line endings
-	[[ -f $singleFile ]] && dos2unix $singleFile 2> /dev/null
+    # Fix line endings
+    [[ -f $singleFile ]] && dos2unix $singleFile 2>/dev/null
 
-	echo -ne '\b##'
+    echo -ne '\b##'
 
-# Close loop
+    # Close loop
 done
 
 # Return to working directory

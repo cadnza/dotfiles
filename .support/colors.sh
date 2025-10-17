@@ -1,5 +1,3 @@
-#!/usr/bin/env false
-
 # Load colors
 autoload -U colors
 colors
@@ -24,14 +22,14 @@ export LSCOLORS=ExfxcxdxBxegedabagacad
 export LS_COLORS='rs=0:di=1;34:ln=35:so=32:pi=33:ex=1;31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
 # Configure man page formatting preferences
-export LESS_TERMCAP_mb=$(print -P "%F{cyan}") # Blink
-export LESS_TERMCAP_md=$(print -P "%B%F{red}") # Bold
+export LESS_TERMCAP_mb=$(print -P "%F{cyan}")    # Blink
+export LESS_TERMCAP_md=$(print -P "%B%F{red}")   # Bold
 export LESS_TERMCAP_us=$(print -P "%U%F{green}") # Underline
 export LESS_TERMCAP_so=$(print -P "%K{magenta}") # Standout
 
 # Set man page formatting resets
-export LESS_TERMCAP_me=$(print -P "%f%b") # End bold, blink, underline
-export LESS_TERMCAP_ue=$(print -P "%f%u") # End underline
+export LESS_TERMCAP_me=$(print -P "%f%b")      # End bold, blink, underline
+export LESS_TERMCAP_ue=$(print -P "%f%u")      # End underline
 export LESS_TERMCAP_se=$(print -P "%K{black}") # End standout
 
 # Enable grep color

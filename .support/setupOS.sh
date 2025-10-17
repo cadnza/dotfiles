@@ -6,7 +6,7 @@ osWindows="cygwin msys"
 # Define function for OS matching
 tryOSmatch() {
     ptrn="("$(echo $1 | sed 's/ /\|/g')")"
-    if [[ $(echo $OSTYPE | LC_ALL=en_US.utf8 grep -Eci "$ptrn") -gt 0 ]]; then
+    if [ $(echo $OSTYPE | LC_ALL=en_US.utf8 grep -Eci "$ptrn") -gt 0 ]; then
         echo $1
     else
         echo ""
@@ -28,9 +28,7 @@ showZshInstallInstructions() {
 }
 
 # Configure settings per OS
-if [[ 1 = 0 ]]; then # Dead line to avoid preferential treatment in if block
-# macos
-elif [[ $workingOS = $osMacos ]]; then
+if [ $workingOS = $osMacos ]; then
     # Set machine prompt color
     export colorMachine=$colorMacos
     # Enable syntax highlighting
@@ -38,14 +36,14 @@ elif [[ $workingOS = $osMacos ]]; then
         showZshInstallInstructions "brew install zsh-syntax-highlighting"
     }
     # Check for light mode
-    [[ $TERM_PROGRAM = Apple_Terminal ]] && {
+    [ $TERM_PROGRAM = Apple_Terminal ] && {
         [ $(
             defaults read -g AppleInterfaceStyle &>/dev/null
             echo $?
         ) = 0 ] || export isDarkMode=0
     }
 # Linux
-elif [[ $workingOS = $osLinux ]]; then
+elif [ $workingOS = $osLinux ]; then
     # Set machine prompt color
     export colorMachine=$colorLinux
     # Enable syntax highlighting
@@ -53,7 +51,7 @@ elif [[ $workingOS = $osLinux ]]; then
         showZshInstallInstructions "sudo apt install zsh-syntax-highlighting"
     }
 # Windows
-elif [[ $workingOS = $osWindows ]]; then
+elif [ $workingOS = $osWindows ]; then
     # Set machine prompt color
     export colorMachine=$colorWindows
     # Enable command to enable zsh-syntax-highlighting
@@ -69,7 +67,7 @@ else
 fi
 
 # Add aliases for non-macos machines
-if [[ $workingOS != $osMacos ]]; then
+if [ $workingOS != $osMacos ]; then
     alias ls="ls --color=auto"
     alias gtimeout="timeout"
 fi

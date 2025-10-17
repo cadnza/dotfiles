@@ -12,7 +12,7 @@ function Time-Since {
 # Import the Chocolatey Profile (for completions)
 $modChocolateyProfile = "C:\ProgramData\chocoportable\helpers\chocolateyProfile.psm1"
 if (Test-Path($modChocolateyProfile)) {
-	Import-Module $modChocolateyProfile
+    Import-Module $modChocolateyProfile
 }
 
 # Import Get-ChildItemColor
@@ -42,18 +42,18 @@ $charReset = "$([char]27)[0m"
 # Source local logic
 $localLogic = "$HOME\.local.ps1"
 if (Test-Path $localLogic) {
-	. $localLogic
+    . $localLogic
 }
 
 # Set prompt
 function prompt {
 
-	# Define separator character
-	# $sep = "$cSep$charSep$charReset" # Not currently in use
+    # Define separator character
+    # $sep = "$cSep$charSep$charReset" # Not currently in use
 
-	# Define prompt
-	$final = "$cUser$env:USERNAME$charReset $cMachine$env:COMPUTERNAME$charReset $cDirectory$( Split-Path $PWD -Leaf )$charReset "
+    # Define prompt
+    $final = "$cUser$env:USERNAME$charReset $cMachine$env:COMPUTERNAME$charReset $cDirectory$( Split-Path $PWD -Leaf )$charReset "
 
-	# Return
-	return $final
+    # Return
+    return $final
 }

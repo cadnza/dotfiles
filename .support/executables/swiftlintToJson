@@ -57,13 +57,13 @@ while read -r line; do
             --arg kind "$kind" \
             --argjson analyzer "$(yn "$analyzer")" \
             '{
-				id: $id,
-				optin: $optin,
-				correctable: $correctable,
-				enabled: $enabled,
-				kind: $kind,
-				analyzer: $analyzer
-			}'
+                id: $id,
+                optin: $optin,
+                correctable: $correctable,
+                enabled: $enabled,
+                kind: $kind,
+                analyzer: $analyzer
+            }'
     )"
 
     # Append object to JSON

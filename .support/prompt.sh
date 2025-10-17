@@ -26,9 +26,9 @@ decideByTimeout() {
     inner() {
         delay=0.15
         gtimeout $delay zsh -fc "{
-			git status &> /dev/null;
-			echo true;
-		}"
+            git status &> /dev/null;
+            echo true;
+        }"
         echo false
     }
     enable=$(echo $(inner) | cut -d " " -f 1)

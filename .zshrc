@@ -46,7 +46,7 @@ source "$HOME/.support/prompt.sh"
 source "$HOME/.support/shellfishrc.sh"
 
 # Initialize shell integration if running in VS Code
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)" || trap
+[ "$TERM_PROGRAM" == "vscode" ] && . "$(code --locate-shell-integration-path zsh)"
 
 # Source 1Password plugins
 fOpPlugins="$HOME/.config/op/plugins.sh"

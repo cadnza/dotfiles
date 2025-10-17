@@ -4,7 +4,7 @@
 autoload -U colors
 colors
 
-# Configure universal machine colors (don't reference these directly; use $colorMachine instead)
+# Configure universal machine colors (don't reference these directly; use $color_machine instead)
 export color_macos=7
 export color_linux=2
 export color_windows=9

@@ -29,8 +29,7 @@ esac
 
 # Get function to show for zsh-syntax-highlighting install instructions
 show_zsh_install_instructions() {
-    cmd=$1
-    echo "To enable syntax highlighting, run \`$1\` and start a new shell."
+    echo "To enable syntax highlighting, run \`$1\` and start a new shell." >&2
 }
 
 # Configure settings per OS

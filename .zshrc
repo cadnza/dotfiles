@@ -22,9 +22,6 @@ zstyle :compinstall filename "$HOME/.zshrc"
 # Modify path
 source "$HOME/.support/path.sh"
 
-# Source functions
-source "$HOME/.support/functions.sh"
-
 # Run color setup
 source "$HOME/.support/colors.sh"
 

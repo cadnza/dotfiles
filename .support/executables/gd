@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Moves to the top level of a git repo
+
+root=$(git rev-parse --show-toplevel) 2>/dev/null || {
+    echo -e "\033[32mgd\033[0m only works inside a Git repo." >&2
+    return
+}
+cd "$root" || exit 1

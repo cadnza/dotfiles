@@ -44,7 +44,7 @@ source "$HOME/.support/banners.sh"
 source "$HOME/.support/prompt.sh"
 
 # Source commands for Secure ShellFish
-source "$HOME/.support/shellfishrc.sh"
+source "$HOME/.support/.shellfishrc"
 
 # Initialize shell integration if running in VS Code
 [ "$TERM_PROGRAM" == "vscode" ] && . "$(code --locate-shell-integration-path zsh)"

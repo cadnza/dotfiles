@@ -1,3 +1,5 @@
+# shellcheck disable=SC1090
+
 # Note optional files
 # .hushdiff silences git buffer diff indicators. This can speed things up on a machine with large repos.
 
@@ -6,7 +8,6 @@ source "$HOME/.support/env.sh"
 
 # Source local logic
 f_localrc="$HOME/.localrc"
-# shellcheck disable=SC1090
 [ -f "$f_localrc" ] && source "$f_localrc"
 
 # Set zsh-newuser-install settings
@@ -49,5 +50,5 @@ source "$HOME/.support/shellfishrc.sh"
 [ "$TERM_PROGRAM" == "vscode" ] && . "$(code --locate-shell-integration-path zsh)"
 
 # Source 1Password plugins
-fOpPlugins="$HOME/.config/op/plugins.sh"
-[ -f "$fOpPlugins" ] && source "$fOpPlugins"
+f_op_plugins="$HOME/.config/op/plugins.sh"
+[ -f "$f_op_plugins" ] && source "$f_op_plugins"

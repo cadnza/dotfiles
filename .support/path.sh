@@ -19,23 +19,13 @@ export PATH=$HOME/.support/nano/formatters:$PATH
 # Add pub to path (for Flutter)
 export PATH=$PATH:$HOME/.pub-cache/bin
 
-# Add gcloud to path
-export PATH=$PATH:$HOME/.google-cloud-sdk/bin
-
 # Source Apple Silicon homebrew eval script (which adds brew to path)
 [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Add local homebrew to path and source eval script
-export PATH=$PATH:$HOME/.homebrew/bin
-[ -d $HOME/.homebrew ] && eval "$($HOME/.homebrew/bin/brew shellenv)"
 
 # Add lsregister location to path (for finding URI schemes)
 # You can list registered URI scheme bindings with `lsregister -dump URLSchemeBinding`.
 # Optionally throw on a `| sort` to sort the output.
 export PATH=$PATH:/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/
-
-# Add swiftpaper to path
-export PATH=$PATH:$HOME/Repos/swiftpaper
 
 # Add path to cargo binaries
 export PATH=$PATH:$HOME/.cargo/bin

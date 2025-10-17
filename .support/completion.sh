@@ -1,12 +1,9 @@
-# Generate completions from commands with zsh-specific completion generation
-addCompletions bookmarks "--generate-completion-script zsh"
-
 # Add zsh-completions
 type brew &> /dev/null && FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
 # Add static and dynamc completion directories to fpath
-fpath=($HOME/Repos/dotfiles/.support/completion_functions_static $fpath) # Use the addCompletions function to put scripts here
-fpath=($HOME/Repos/dotfiles/.support/completion_functions_dynamic $fpath) # Put static zsh completion scripts here
+fpath=($HOME/Repos/dotfiles/.support/completion_functions_static $fpath)
+fpath=($HOME/Repos/dotfiles/.support/completion_functions_dynamic $fpath)
 
 # Initialize completion
 autoload -Uz compinit

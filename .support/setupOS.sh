@@ -30,7 +30,7 @@ showZshInstallInstructions() {
 # Configure settings per OS
 if [ $workingOS = $osMacos ]; then
     # Set machine prompt color
-    export colorMachine=$colorMacos
+    export colorMachine=$color_macos
     # Enable syntax highlighting
     source $(brew --prefix 2>/dev/null)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || {
         showZshInstallInstructions "brew install zsh-syntax-highlighting"
@@ -40,12 +40,12 @@ if [ $workingOS = $osMacos ]; then
         [ $(
             defaults read -g AppleInterfaceStyle &>/dev/null
             echo $?
-        ) = 0 ] || export isDarkMode=0
+        ) = 0 ] || export is_dark_mode=0
     }
 # Linux
 elif [ $workingOS = $osLinux ]; then
     # Set machine prompt color
-    export colorMachine=$colorLinux
+    export colorMachine=$color_linux
     # Enable syntax highlighting
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || {
         showZshInstallInstructions "sudo apt install zsh-syntax-highlighting"
@@ -53,7 +53,7 @@ elif [ $workingOS = $osLinux ]; then
 # Windows
 elif [ $workingOS = $osWindows ]; then
     # Set machine prompt color
-    export colorMachine=$colorWindows
+    export colorMachine=$color_windows
     # Enable command to enable zsh-syntax-highlighting
     source $HOME/.support/zshSyntaxHighlightingPull.sh
     # Make sure /usr/bin is first in path
@@ -61,7 +61,7 @@ elif [ $workingOS = $osWindows ]; then
 # Other
 else
     # Set machine prompt color
-    export colorMachine=$colorOther
+    export colorMachine=$color_other
     # Enable command to enable zsh-syntax-highlighting
     source $HOME/.support/zshSyntaxHighlightingPull.sh
 fi

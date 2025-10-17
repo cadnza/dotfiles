@@ -21,7 +21,7 @@ export bgGray=240
 export fgBlue=39
 export bgBlue=21
 # Standard
-[ $isDarkMode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
+[ $is_dark_mode = 1 ] && export colorTxtStandard=0 || export colorTxtStandard=#FFFFFF
 export fgUser=$fgRed
 export bgUser=$bgRed
 export fgMachine=$fgDandelion

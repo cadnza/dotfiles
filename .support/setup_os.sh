@@ -1,3 +1,5 @@
+# shellcheck disable=SC1091,SC1094,SC2154
+
 # Set OS values
 os_macos=1
 os_linux=2
@@ -49,10 +51,4 @@ elif [ $working_os = $os_windows ]; then
 else
     # Set machine prompt color
     export color_machine=$color_other
-fi
-
-# Add aliases for non-macos machines
-if [ $working_os != $os_macos ]; then
-    alias ls="ls --color=auto"
-    alias gtimeout="timeout"
 fi

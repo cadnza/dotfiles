@@ -126,7 +126,7 @@ zstyle ':vcs_info:git:*' unstagedstr '*'
 zstyle ':vcs_info:git:*' stagedstr '+'
 
 # Get function to set right prompt with VCS info
-buildRightPrompt() {
+build_right_prompt() {
     base="%B$(cfb $fgRepo $bgRepo 0)%r$nfb$(cfb $fgBranch $bgBranch 0)%b$nfb%%b"
     indicatorsString="%B$(cfb $fgUnstaged $bgUnstaged 0)%u$nfb$(cfb $fgStaged $bgStaged 0)%c$nfb%%b"
     indicatorDefault=?
@@ -134,24 +134,4 @@ buildRightPrompt() {
     [ $1 = "action" ] && base=$(echo %B$(cfb $fgAction $bgAction 0)%a$nfb%%b"$base")
     [ $2 = "true" ] && base=$(echo $base$indicatorsString) || base=$(echo $base$indicatorDefaultString)
     echo $base
-}
-
-# Define function to check commits
-getCommits() {
-    workingDirectory=$1
-    branch=$(git -C $workingDirectory branch -vv | grep ^\* | grep -Eo '\[.+\]') # Taking a long time
-    nCommitsUnpushed=$(echo $branch | grep -Eo 'ahead [[:digit:]]+' | cut -d " " -f 2) # Taking a long time
-    nCommitsUnpulled=$(echo $branch | grep -Eo 'behind [[:digit:]]+' | cut -d " " -f 2) # Taking a long time
-    unpushed=↑
-    unpulled=↓
-    strUnpushed="%B$(cfb $fgUnpushed $bgUnpushed 0)$unpushed$nfb%b"
-    strUnpulled="%B$(cfb $fgUnpulled $bgUnpulled 0)$unpulled$nfb%b"
-    final=""
-    [ ${#nCommitsUnpushed} -gt 0 ] && final=$final$strUnpushed
-    [ ${#nCommitsUnpulled} -gt 0 ] && final=$final$strUnpulled
-    [ ${#final} -eq 0 ] && {
-        echo ""
-        return
-    }
-    echo $final
 }

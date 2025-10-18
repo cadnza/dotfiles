@@ -1,3 +1,5 @@
+# shellcheck disable=SC1090
+
 # Run patch to speed up git completion
 # (I currently don't understand how this works. I'm pending reading into the zsh completion system, but that's not a priority right now.)
 # The fix comes from here:
@@ -6,61 +8,29 @@ __git_files() {
     _wanted files expl 'local files' _files
 }
 
-# Source chosen prompt
-promptFile="$HOME/.prompt"
-promptsDir="$HOME/.support/prompts"
-basicPrompt="$promptsDir/basic.sh"
-[ -f $promptFile ] && {
-    themeName=$(cat $promptFile | head -n 1)
-    themeFile="$promptsDir/$themeName.sh"
-    [ -f $themeFile ] && source $themeFile || source $basicPrompt
-} || source $basicPrompt
+# Source chosen prompt, defaulting to basic
+prompt_file="$HOME/.prompt"
+prompts_dir="$HOME/.support/prompts"
+basic_prompt="$prompts_dir/basic.sh"
+if [ -f "$prompt_file" ]; then
+    theme_name=$(cat "$prompt_file" | head -n 1)
+    theme_file="$prompts_dir/$theme_name.sh"
+    if [ -f "$theme_file" ]; then
+        source "$theme_file"
+    else
+        source "$basic_prompt"
+    fi
+else
+    source "$basic_prompt"
+fi
 
 # Set right prompt VCS options
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 
-# Get function to decide whether to show git diff indicators by timeout
-decideByTimeout() {
-    inner() {
-        delay=0.15
-        gtimeout $delay zsh -fc "{
-            git status &> /dev/null;
-            echo true;
-        }"
-        echo false
-    }
-    enable=$(echo $(inner) | cut -d " " -f 1)
-    echo $enable
-}
-
-# Get function to decide whether to show git diff indicators by reported repo size
-decideBySize() {
-    threshold=2000
-    sizeKB=$(git count-objects | cut -d " " -f 3)
-    if [ $sizeKB -gt $threshold ]; then
-        echo false
-        return
-    fi
-    echo true
-}
-
-# Configure and run one-time and regular Git setup commands
-setupGitOnce() {
-    [[ -f $HOME/.hushdiff ]] && useDiffIndicator=false || useDiffIndicator=true
-    zstyle ':vcs_info:git:*' check-for-changes $useDiffIndicator
-    zstyle ':vcs_info:git:*' formats $(buildRightPrompt noAction $useDiffIndicator)
-    zstyle ':vcs_info:git:*' actionformats $(buildRightPrompt action $useDiffIndicator)
-}
-setupGitRegular() {
-    git rev-parse &>/dev/null || {
-        RPROMPT=""
-        return
-    }
-    draft='${vcs_info_msg_0_}'
-    RPROMPT=$(echo "$draft$(getCommits $PWD)" | xargs echo -n) # xargs for trimming
-    vcs_info
-}
-setupGitOnce
-precmd_functions+=(setupGitRegular)
+# Set git options
+[[ -f $HOME/.hushdiff ]] && use_diff_indicator=false || use_diff_indicator=true
+zstyle ':vcs_info:git:*' check-for-changes "$use_diff_indicator"
+zstyle ':vcs_info:git:*' formats "$(build_right_prompt noAction "$use_diff_indicator")"
+zstyle ':vcs_info:git:*' actionformats "$(build_right_prompt action "$use_diff_indicator")"

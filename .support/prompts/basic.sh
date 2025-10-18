@@ -1,20 +1,18 @@
 # Define colors
 # Standard
-export colorUser=1
-export colorDirectory=12
-export colorSep=8
+export color_user=1
+export color_directory=12
+export color_sep=8
 # Git
-export colorAction=15
-export colorRepo=6
-export colorBranch=3
-export colorStaged=2
-export colorUnstaged=9
-export colorUnknown=$colorSep
-export colorUnpushed=13
-export colorUnpulled=10
+export color_action=15
+export color_repo=6
+export color_branch=3
+export color_staged=2
+export color_unstaged=9
+export color_unknown=$color_sep
 
 # Define exit code indicator
-ecI=$(echo '
+exit_code_indicator=$(echo '
 %(0?..%F{7})
 %(1?.%F{1}.)
 %(2?.%F{3}.)
@@ -28,7 +26,8 @@ ecI=$(echo '
 ' | tr '\n' ' ' | sed 's/ *//g')
 
 # Set PS1
-PS1=$'%F{$colorUser}%n%f%F{$colorSep}@%f%F{$color_machine}%B%m%b%f %F{$colorDirectory}%{\033[3m%}%1~%{\033[0m%}%f'" $ecI "
+# shellcheck disable=SC2025,SC2154
+PS1=$'%F{$color_user}%n%f%F{$color_sep}@%f%F{$color_machine}%B%m%b%f %F{$color_directory}%{\033[3m%}%1~%{\033[0m%}%f'" $exit_code_indicator "
 
 # Set strings for unstaged and staged changes
 zstyle ':vcs_info:git:*' unstagedstr '*'
@@ -37,11 +36,11 @@ zstyle ':vcs_info:git:*' stagedstr '+'
 # Get function to set right prompt with VCS info
 build_right_prompt() {
     sep=→
-    base=%B%F{$colorRepo}%r%f%%b%F{$colorSep}$sep%f%B%F{$colorBranch}%b%f%%b
-    indicatorsString=%F{$colorUnstaged}%u%f%F{$colorStaged}%c%f
-    indicatorDefault=?
-    indicatorDefaultString=%F{$colorUnknown}$indicatorDefault%f
-    [ $1 = "action" ] && base=$(echo %F{$colorAction}%B%a%%b%f%F{$colorSep}:%f"$base")
-    [ $2 = "true" ] && base=$(echo $base$indicatorsString) || base=$(echo $base$indicatorDefaultString)
+    base=%B%F{$color_repo}%r%f%%b%F{$color_sep}$sep%f%B%F{$color_branch}%b%f%%b
+    indicators_string=%F{$color_unstaged}%u%f%F{$color_staged}%c%f
+    indicator_default=?
+    indicator_default_string=%F{$color_unknown}$indicator_default%f
+    [ $1 = "action" ] && base=$(echo %F{$color_action}%B%a%%b%f%F{$color_sep}:%f"$base")
+    [ $2 = "true" ] && base=$(echo $base$indicators_string) || base=$(echo $base$indicator_default_string)
     echo $base
 }

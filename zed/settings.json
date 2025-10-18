@@ -7,6 +7,10 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "lsp_document_colors": "inlay",
+  "indent_guides": {
+    "coloring": "indent_aware"
+  },
   "icon_theme": "Material Icon Theme",
   "diagnostics": { "inline": { "enabled": true } },
   "wrap_guides": [80, 120],

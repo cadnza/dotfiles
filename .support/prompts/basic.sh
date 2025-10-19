@@ -35,7 +35,7 @@ zstyle ':vcs_info:git:*' stagedstr '+'
 
 # Define function to set right prompt with VCS info
 build_right_prompt() {
-    sep=→
+    sep=$(echo -e "\u2192")
     base=%B%F"{""$color_repo""}""%r%f%%b%F""{""$color_sep""}"$sep%f%B%F"{""$color_branch""}"%b%f%%b
     [ "$1" = "action" ] && base=%F"{""$color_action""}""%B%a%%b%f%F""{""$color_sep""}"":%f""$base"
     echo "$base"

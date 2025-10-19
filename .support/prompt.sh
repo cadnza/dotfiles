@@ -30,7 +30,5 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 
 # Set git options
-[[ -f $HOME/.hushdiff ]] && use_diff_indicator=false || use_diff_indicator=true
-zstyle ':vcs_info:git:*' check-for-changes "$use_diff_indicator"
-zstyle ':vcs_info:git:*' formats "$(build_right_prompt noAction "$use_diff_indicator")"
-zstyle ':vcs_info:git:*' actionformats "$(build_right_prompt action "$use_diff_indicator")"
+zstyle ':vcs_info:git:*' formats "$(build_right_prompt noAction)"
+zstyle ':vcs_info:git:*' actionformats "$(build_right_prompt action)"

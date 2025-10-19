@@ -1,8 +1,5 @@
 # shellcheck disable=SC1090
 
-# Note optional files
-# .hushdiff silences git buffer diff indicators. This can speed things up on a machine with large repos.
-
 # Source environment variables
 source "$HOME/.support/env.sh"
 

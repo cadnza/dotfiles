@@ -7,9 +7,6 @@ export color_sep=8
 export color_action=15
 export color_repo=6
 export color_branch=3
-export color_staged=2
-export color_unstaged=9
-export color_unknown=$color_sep
 
 # Define exit code indicator
 exit_code_indicator=$(echo '

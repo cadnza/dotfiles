@@ -33,7 +33,7 @@ PS1=$'%F{$color_user}%n%f%F{$color_sep}@%f%F{$color_machine}%B%m%b%f %F{$color_d
 zstyle ':vcs_info:git:*' unstagedstr '*'
 zstyle ':vcs_info:git:*' stagedstr '+'
 
-# Get function to set right prompt with VCS info
+# Define function to set right prompt with VCS info
 build_right_prompt() {
     sep=→
     base=%B%F"{""$color_repo""}""%r%f%%b%F""{""$color_sep""}"$sep%f%B%F"{""$color_branch""}"%b%f%%b

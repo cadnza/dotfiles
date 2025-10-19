@@ -32,3 +32,10 @@ zstyle ':vcs_info:*' enable git
 # Set git options
 zstyle ':vcs_info:git:*' formats "$(build_right_prompt no_action)"
 zstyle ':vcs_info:git:*' actionformats "$(build_right_prompt action)"
+
+# Register right prompt
+precmd() {
+    vcs_info
+}
+# shellcheck disable=SC2016
+export RPROMPT='${vcs_info_msg_0_}'

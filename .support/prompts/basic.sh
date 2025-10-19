@@ -37,9 +37,6 @@ zstyle ':vcs_info:git:*' stagedstr '+'
 build_right_prompt() {
     sep=→
     base=%B%F"{""$color_repo""}""%r%f%%b%F""{""$color_sep""}"$sep%f%B%F"{""$color_branch""}"%b%f%%b
-    indicator_default="?"
-    indicator_default_string=%F"{""$color_unknown""}"$indicator_default%f
     [ "$1" = "action" ] && base=%F"{""$color_action""}""%B%a%%b%f%F""{""$color_sep""}"":%f""$base"
-    base=$base$indicator_default_string
     echo "$base"
 }

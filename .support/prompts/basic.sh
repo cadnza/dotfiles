@@ -1,9 +1,9 @@
-# Define colors
-# Standard
+# Define standard colors
 export color_user=1
 export color_directory=12
 export color_sep=8
-# Git
+
+# Define git colors
 export color_action=15
 export color_repo=6
 export color_branch=3

@@ -1,5 +1,5 @@
 # Define light profiling function to measure time since last invocation of this function
-function Time-Since {
+function Measure-TimeSince {
     if ((Get-Variable 'startTimeForTimeSinceFunction' -ErrorAction SilentlyContinue) -and (Get-Variable 'nthInvocationForTimeSinceFunction' -ErrorAction SilentlyContinue)) {
         $global:nthInvocationForTimeSinceFunction += 1
         Write-Warning "TIME SINCE LAST INVOCATION ($nthInvocationForTimeSinceFunction): $($($(Get-Date) - $startTimeForTimeSinceFunction).TotalMilliseconds)"

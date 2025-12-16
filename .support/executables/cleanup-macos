@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Ensure macOS
+[ "$(uname -s)" = "Darwin" ] || {
+    echo "$(basename "$0") is only available on macOS" >&2
+    exit 1
+}
+
+# Ensure root privileges
+[ $EUID = 0 ] || {
+    echo "$(basename "$0") requires root privileges" >&2
+    exit 1
+}
+
+# Define confirmation function
+confirm() {
+    until false; do
+        read -r -p "$1 (y/n)" answer
+        printf '\033[0F\033[0K'
+        [ "$answer" = y ] && return 0
+        [ "$answer" = n ] && return 1
+    done
+}
+
+# Clear caches
+confirm "Clear caches?" && {
+    d_caches="$HOME/Library/Caches"
+    rm -rf "${d_caches:?}/*" "${d_caches:?}/.*"
+    echo "Cleared caches:      $d_caches" >&2
+}
+
+# Clear system logs
+confirm "Clear system logs?" && {
+    d_system_logs="/var/log"
+    rm -rf "${d_system_logs:?}/*" "${d_system_logs:?}/.*"
+    echo "Cleared system logs: $d_system_logs" >&2
+}
+
+# Prune Docker images
+confirm "Prune Docker?" && {
+    docker system prune -y
+}
+
+# Clean up homebrew
+[ -n "${SUDO_USER+x}" ] && command -v brew >/dev/null && confirm "Clean up homebrew?" && {
+    if sudo -u "$SUDO_USER" brew autoremove; then
+        echo "Ran brew autoremove" >&2
+    else
+        :
+    fi
+    if sudo -u "$SUDO_USER" brew cleanup; then
+        echo "Ran brew cleanup" >&2
+    else
+        :
+    fi
+}

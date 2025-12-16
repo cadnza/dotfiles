@@ -41,8 +41,8 @@ confirm "Clear system logs?" && {
 # Prune Docker images
 if [ -S "$HOME/.docker/run/docker.sock" ]; then
     confirm "Prune Docker?" && {
-        docker system prune -f
-        echo "Pruned docker" >&2
+        docker system prune -af --volumes
+        echo "Pruned docker system" >&2
     }
 else
     echo "Docker daemon is not running; can't offer to prune Docker" >&2

@@ -39,9 +39,14 @@ confirm "Clear system logs?" && {
 }
 
 # Prune Docker images
-confirm "Prune Docker?" && {
-    docker system prune -y
-}
+if [ -S "$HOME/.docker/run/docker.sock" ]; then
+    confirm "Prune Docker?" && {
+        docker system prune -f
+        echo "Pruned docker" >&2
+    }
+else
+    echo "Docker daemon is not running; can't offer to prune Docker" >&2
+fi
 
 # Clean up homebrew
 [ -n "${SUDO_USER+x}" ] && command -v brew >/dev/null && confirm "Clean up homebrew?" && {
@@ -56,3 +61,6 @@ confirm "Prune Docker?" && {
         :
     fi
 }
+
+# Exit
+exit 0

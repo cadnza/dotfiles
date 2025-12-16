@@ -2,7 +2,7 @@
 
 set -e
 
-# Ensure interactive mode
+# Ensure interactive shell
 [ -t 0 ] || {
     echo "$(basename "$0") requires an interactive shell" >&2
     exit 1

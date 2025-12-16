@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "colorize_brackets": true,
   "lsp_document_colors": "inlay",
   "indent_guides": {
     "coloring": "indent_aware"

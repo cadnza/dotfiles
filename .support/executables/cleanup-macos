@@ -34,7 +34,7 @@ confirm() {
 confirm "Clear caches?" && {
     d_caches="$HOME/Library/Caches"
     rm -rf "${d_caches:?}/*" "${d_caches:?}/.*"
-    echo "Cleared caches:      $d_caches" >&2
+    echo "Cleared caches: $d_caches" >&2
 }
 
 # Clear system logs

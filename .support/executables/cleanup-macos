@@ -44,6 +44,13 @@ confirm "Clear system logs?" && {
     echo "Cleared system logs: $d_system_logs" >&2
 }
 
+# Clear iMessage attachments
+confirm "Clear local iMessage attachments?" && {
+    d_attachments="$HOME/Library/Messages/Attachments"
+    rm -rf "$d_attachments"
+    echo "Cleared local iMessage attachments: $d_attachments" >&2
+}
+
 # Prune Docker images
 if [ -S "$HOME/.docker/run/docker.sock" ]; then
     confirm "Prune Docker?" && {

@@ -45,10 +45,11 @@ confirm "Clear system logs?" && {
 }
 
 # Clear iMessage attachments
-confirm "Clear local iMessage attachments?" && {
-    d_attachments="$HOME/Library/Messages/Attachments"
-    rm -rf "$d_attachments"
-    echo "Cleared local iMessage attachments: $d_attachments" >&2
+confirm "Clear local iMessage attachments and cache? (Will close the Messages app)" && {
+    osascript -e 'tell application "Messages" to quit'
+    rm -rf "$HOME/Library/Messages/Attachments"
+    rm -rf "$HOME/Library/Messages/Cache"
+    echo "Cleared local iMessage attachments and cache" >&2
 }
 
 # Prune Docker images

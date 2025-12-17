@@ -77,5 +77,29 @@ fi
     fi
 }
 
+# Remove Cargo build artifacts
+dir_repos="$HOME/Repos"
+[ -d "$dir_repos" ] && confirm "Remove Cargo build artifacts from $dir_repos?" && {
+    while read -r c_toml; do
+        d_repo="$(dirname "$c_toml")"
+        d_target="$d_repo/target"
+        [ -d "$d_target" ] && {
+            git ls-files --error-unmatch "$d_target"
+            case $? in
+            0) # ./target file is tracked by git
+                echo "Skipping $d_target; directory is tracked by git" >&2
+                ;;
+            1) # ./target file is not tracked by git
+                [ -d "$d_target" ] && rm -rf "$d_target"
+                echo "Removed $d_target" >&2
+                ;;
+            *) # git error (most likely this isn't a git repo, in which case we don't want to touch anything)
+                echo "Skipping $d_target; unable to determine git status" >&2
+                ;;
+            esac
+        }
+    done < <(find "$dir_repos" -type f -name Cargo.toml -mindepth 2 -maxdepth 2)
+}
+
 # Exit
 exit 0

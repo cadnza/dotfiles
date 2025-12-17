@@ -23,7 +23,7 @@ set -e
 # Define confirmation function
 confirm() {
     until false; do
-        read -r -p "$1 (y/n)" answer
+        read -r -p "$1 (y/n) " answer
         printf '\033[0F\033[0K'
         [ "$answer" = y ] && return 0
         [ "$answer" = n ] && return 1

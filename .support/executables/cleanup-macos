@@ -48,7 +48,7 @@ confirm "Clear system logs?" && {
 confirm "Clear local iMessage attachments and cache? (Will close the Messages app)" && {
     osascript -e 'tell application "Messages" to quit'
     rm -rf "$HOME/Library/Messages/Attachments"
-    rm -rf "$HOME/Library/Messages/Cache"
+    rm -rf "$HOME/Library/Messages/Caches"
     echo "Cleared local iMessage attachments and cache" >&2
 }
 

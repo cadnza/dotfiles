@@ -99,6 +99,7 @@ dir_repos="$HOME/Repos"
             esac
         }
     done < <(find "$dir_repos" -type f -name Cargo.toml -mindepth 2 -maxdepth 2)
+    echo "Removed Cargo build artifacts from $dir_repos" >&2
 }
 
 # Exit

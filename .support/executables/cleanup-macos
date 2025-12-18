@@ -20,8 +20,8 @@ set -e
     exit 1
 }
 
-# Define confirmation function
-confirm() {
+# Define offer function
+offer() {
     until false; do
         read -r -p "$1 (y/n) " answer
         printf '\033[0F\033[0K'
@@ -30,48 +30,57 @@ confirm() {
     done
 }
 
+# Define reporting function
+report() {
+    clr=35
+    [ -n "${2+x}" ] && {
+        [ "$2" = 0 ] || clr=31
+    }
+    echo -e "\033[$clr;1m$1\033[0m" >&2
+}
+
 # Clear caches
-confirm "Clear caches?" && {
+offer "Clear caches?" && {
     d_caches="$HOME/Library/Caches"
     rm -rf "${d_caches:?}/*" "${d_caches:?}/.*"
-    echo "Cleared caches: $d_caches" >&2
+    report "Cleared caches: $d_caches"
 }
 
 # Clear system logs
-confirm "Clear system logs?" && {
+offer "Clear system logs?" && {
     d_system_logs="/var/log"
     rm -rf "${d_system_logs:?}/*" "${d_system_logs:?}/.*"
-    echo "Cleared system logs: $d_system_logs" >&2
+    report "Cleared system logs: $d_system_logs"
 }
 
 # Clear iMessage attachments
-confirm "Clear local iMessage attachments and cache? (Will close the Messages app)" && {
+offer "Clear local iMessage attachments and cache? (Will close the Messages app)" && {
     osascript -e 'tell application "Messages" to quit'
     rm -rf "$HOME/Library/Messages/Attachments"
     rm -rf "$HOME/Library/Messages/Caches"
-    echo "Cleared local iMessage attachments and cache" >&2
+    report "Cleared local iMessage attachments and cache"
 }
 
 # Prune Docker images
 if [ -S "$HOME/.docker/run/docker.sock" ]; then
-    confirm "Prune Docker?" && {
+    offer "Prune Docker?" && {
         docker system prune -af
         docker volume prune -af
-        echo "Pruned docker system" >&2
+        report "Pruned docker system"
     }
 else
-    echo "Docker daemon is not running; can't offer to prune Docker" >&2
+    report "Docker daemon is not running; can't offer to prune Docker" 1
 fi
 
 # Clean up homebrew
-[ -n "${SUDO_USER+x}" ] && command -v brew >/dev/null && confirm "Clean up homebrew?" && {
+[ -n "${SUDO_USER+x}" ] && command -v brew >/dev/null && offer "Clean up homebrew?" && {
     if sudo -u "$SUDO_USER" brew autoremove; then
-        echo "Ran brew autoremove" >&2
+        report "Ran brew autoremove"
     else
         :
     fi
     if sudo -u "$SUDO_USER" brew cleanup --prune all; then
-        echo "Ran brew cleanup" >&2
+        report "Ran brew cleanup"
     else
         :
     fi
@@ -79,7 +88,7 @@ fi
 
 # Remove Cargo build artifacts
 dir_repos="$HOME/Repos"
-[ -d "$dir_repos" ] && confirm "Remove Cargo build artifacts from $dir_repos?" && {
+[ -d "$dir_repos" ] && offer "Remove Cargo build artifacts from $dir_repos?" && {
     while read -r c_toml; do
         d_repo="$(dirname "$c_toml")"
         d_target="$d_repo/target"
@@ -87,19 +96,19 @@ dir_repos="$HOME/Repos"
             git ls-files --error-unmatch "$d_target"
             case $? in
             0) # ./target file is tracked by git
-                echo "Skipping $d_target; directory is tracked by git" >&2
+                report "Skipping $d_target; directory is tracked by git" 1
                 ;;
             1) # ./target file is not tracked by git
                 [ -d "$d_target" ] && rm -rf "$d_target"
-                echo "Removed $d_target" >&2
+                report "Removed $d_target"
                 ;;
             *) # git error (most likely this isn't a git repo, in which case we don't want to touch anything)
-                echo "Skipping $d_target; unable to determine git status" >&2
+                report "Skipping $d_target; unable to determine git status" 1
                 ;;
             esac
         }
     done < <(find "$dir_repos" -type f -name Cargo.toml -mindepth 2 -maxdepth 2)
-    echo "Removed Cargo build artifacts from $dir_repos" >&2
+    report "Removed Cargo build artifacts from $dir_repos"
 }
 
 # Exit

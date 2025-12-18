@@ -111,5 +111,11 @@ dir_repos="$HOME/Repos"
     report "Removed Cargo build artifacts from $dir_repos"
 }
 
+# Restart Shortcuts Events
+offer "Kill (restart) Shortcuts events?" && {
+    killall "siriactionsd" 2>/dev/null || :
+    report "Killed (restarted) Shortcuts events"
+}
+
 # Exit
 exit 0

@@ -112,7 +112,7 @@ dir_repos="$HOME/Repos"
 }
 
 # Restart Shortcuts Events
-offer "Kill (restart) Shortcuts events?" && {
+pgrep -q siriactionsd && offer "Kill (restart) Shortcuts events?" && {
     killall "siriactionsd" 2>/dev/null || :
     report "Killed (restarted) Shortcuts events"
 }

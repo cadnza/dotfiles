@@ -111,6 +111,12 @@ dir_repos="$HOME/Repos"
     report "Removed Cargo build artifacts from $dir_repos"
 }
 
+# Restart cloudkitd
+pgrep -q cloudd && offer "Kill (restart) cloudd?" && {
+    killall "cloudd" 2>/dev/null
+    report "Killed (restarted) cloudd"
+}
+
 # Restart Shortcuts Events
 pgrep -q siriactionsd && offer "Kill (restart) Shortcuts events?" && {
     killall "siriactionsd" 2>/dev/null || :

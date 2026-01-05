@@ -1,16 +1,3 @@
-[core]
-	editor = nano
-	excludesfile = ~/.gitignore_global
 [user]
 	name = Jon Dayley
 	email = jonathandayley@gmail.com
-[advice]
-	addIgnoredFile = false
-[pull]
-	rebase = false
-[init]
-	defaultBranch = main
-[merge]
-	tool = code
-[mergetool "code"]
-	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED

@@ -1,3 +1,8 @@
+# Define shadow function to open VS Code using BAH profile
+function code {
+    code --profile BAH @args
+}
+
 # Define Booz Allen teal
 $cBah = "1;128;126"
 

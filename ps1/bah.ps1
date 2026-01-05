@@ -1,6 +1,6 @@
 # Define shadow function to open VS Code using BAH profile
 function code {
-    code --profile BAH @args
+    & "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --profile BAH @args
 }
 
 # Define Booz Allen teal

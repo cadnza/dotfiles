@@ -7,40 +7,58 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "language_models": {
+    "ollama": {
+      "available_models": [
+        {
+          "name": "devstral-small-2",
+          "max_tokens": 49152, // Max 49152 for 100% GPU
+          "display_name": "devstral-small-2-tight",
+          "supports_tools": true,
+          "keep_alive": 300,
+        },
+        {
+          "name": "qwen3-coder",
+          "max_tokens": 49152, // Max 49152 for 100% GPU
+          "display_name": "qwen3-coder-tight",
+          "supports_tools": true,
+          "keep_alive": 300,
+        },
+      ],
+    },
+  },
+  "buffer_font_features": { "calt": false }, // Disables ligatures
   "colorize_brackets": true,
   "lsp_document_colors": "inlay",
   "indent_guides": {
-    "coloring": "indent_aware"
+    "coloring": "indent_aware",
   },
   "icon_theme": "Material Icon Theme",
-  "diagnostics": { "inline": { "enabled": true } },
+  "diagnostics": { "inline": { "enabled": false } },
   "wrap_guides": [80, 120],
   "agent": {
-    "inline_assistant_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
-    },
+    "show_turn_stats": true,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    }
+      "provider": "ollama",
+      "model": "qwen3-coder",
+    },
   },
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
-  "theme": "GitHub Dark Default",
+  "theme": "Ayu Dark",
   "ui_font_size": 16,
   "buffer_font_size": 13,
   "inlay_hints": {
     "enabled": false,
     "show_background": true,
-    "toggle_on_modifiers_press": { "control": true, "alt": true }
+    "toggle_on_modifiers_press": { "control": true, "alt": true },
   },
   "tabs": {
     "activate_on_close": "neighbour",
     "file_icons": true,
     "show_diagnostics": "all",
-    "git_status": true
+    "git_status": true,
   },
   "tab_bar": { "show": true, "show_nav_history_buttons": false },
   "show_wrap_guides": true,
@@ -48,9 +66,9 @@
   "minimap": {
     "display_in": "all_editors",
     "show": "always",
-    "thumb": "always"
+    "thumb": "always",
   },
   "git": {
-    "inline_blame": { "enabled": false }
-  }
+    "inline_blame": { "enabled": false },
+  },
 }

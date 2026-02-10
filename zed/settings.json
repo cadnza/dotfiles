@@ -11,13 +11,6 @@
     "ollama": {
       "available_models": [
         {
-          "name": "devstral-small-2",
-          "max_tokens": 49152, // Max 49152 for 100% GPU
-          "display_name": "devstral-small-2-tight",
-          "supports_tools": true,
-          "keep_alive": 300,
-        },
-        {
           "name": "qwen3-coder",
           "max_tokens": 49152, // Max 49152 for 100% GPU
           "display_name": "qwen3-coder-tight",

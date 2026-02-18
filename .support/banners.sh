@@ -1,22 +1,22 @@
 # Count and banner tmux sessions
 tmux ls &>/dev/null && {
     ct=$(tmux ls | grep -c .)
-    ctAttached=$(tmux ls | grep -cEo "\(attached\)$")
-    ct=$(($ct - $ctAttached))
-    sessionsWord=session
-    [[ $ct = 1 ]] || sessionsWord=$sessionsWord"s"
+    ct_attached=$(tmux ls | grep -cEo "\(attached\)$")
+    ct=$((ct - ct_attached))
+    sessions_word=session
+    [[ $ct = 1 ]] || sessions_word=$sessions_word"s"
     [[ $ct -ge 1 ]] &&
-        echo -e "\033[48;5;9m$ct detached \033[1mtmux\033[22m $sessionsWord\033[0m"
+        printf '\033[48;5;9m%s detached \033[1mtmux\033[22m %s\033[0m\n' $ct $sessions_word
 }
 
 # Count and banner screen sessions
-dS=[[:digit:]]
+dS='[[:digit:]]'
 [[ $(screen -ls | head -n 1 | grep -c "^No Sockets") = 1 ]] || {
     ct=$(screen -ls | grep -Eo "^$dS$dS* Socket" | grep -Eo "^$dS$dS*")
-    ctAttached=$(screen -ls | grep -cEo "\(Attached\)$")
-    ct=$(($ct - $ctAttached))
-    screensWord="\033[1mscreen\033[22m"
-    [[ $ct = 1 ]] || screensWord=$screensWord"s"
+    ct_attached=$(screen -ls | grep -cEo "\(Attached\)$")
+    ct=$((ct - ct_attached))
+    screens_word="\033[1mscreen\033[22m"
+    [[ $ct = 1 ]] || screens_word=$screens_word"s"
     [[ $ct -ge 1 ]] &&
-        echo -e "\033[48;5;4m$ct detached $screensWord\033[0m"
+        printf '\033[48;5;4m%s detached \033[1mscreen\033[22m %s\033[0m\n' $ct "$sessions_word"
 }

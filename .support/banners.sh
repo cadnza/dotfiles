@@ -6,7 +6,7 @@ tmux ls &>/dev/null && {
     sessions_word=session
     [[ $ct = 1 ]] || sessions_word=$sessions_word"s"
     [[ $ct -ge 1 ]] &&
-        printf '\033[30;41m%s detached \033[1mtmux\033[22m %s\033[0m\n' $ct $sessions_word
+        printf '\033[30;41m%s detached \033[1mtmux\033[22m %s\033[0m\n' $ct $sessions_word >&2
 }
 
 # Count and banner screen sessions
@@ -18,5 +18,5 @@ dS='[[:digit:]]'
     screens_word="\033[1mscreen\033[22m"
     [[ $ct = 1 ]] || screens_word=$screens_word"s"
     [[ $ct -ge 1 ]] &&
-        printf '\033[37;44m%s detached \033[1mscreen\033[22m %s\033[0m\n' $ct "$sessions_word"
+        printf '\033[37;44m%s detached \033[1mscreen\033[22m %s\033[0m\n' $ct "$sessions_word" >&2
 }

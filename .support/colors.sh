@@ -10,8 +10,10 @@ export color_linux=2
 export color_windows=9
 export color_other=5
 
-# Set Xterm
-export TERM=xterm-256color
+# Set Xterm, but only when TERM is unset or the bare "xterm" (which lacks 256
+# colors). Terminals and multiplexers that set their own value (tmux, kitty,
+# etc.) keep it, since overriding it can break their key handling and colors.
+[[ -z $TERM || $TERM == xterm ]] && export TERM=xterm-256color
 
 # Configure BSD colors
 export CLICOLOR=yes

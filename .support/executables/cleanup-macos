@@ -39,19 +39,20 @@ report() {
     echo -e "\033[$clr;1m$1\033[0m" >&2
 }
 
-# Clear caches
-offer "Clear caches?" && {
-    d_caches="$HOME/Library/Caches"
-    rm -rf "${d_caches:?}/*" "${d_caches:?}/.*"
-    report "Cleared caches: $d_caches"
+# Define function to empty a directory (but not remove it)
+clear_dir() {
+    if find "${1:?}" -mindepth 1 -delete 2>/dev/null; then
+        report "Cleared $2: $1"
+    else
+        report "Could not fully clear $2: $1" 1
+    fi
 }
 
+# Clear caches
+offer "Clear caches?" && clear_dir "$HOME/Library/Caches" caches
+
 # Clear system logs
-offer "Clear system logs?" && {
-    d_system_logs="/var/log"
-    rm -rf "${d_system_logs:?}/*" "${d_system_logs:?}/.*"
-    report "Cleared system logs: $d_system_logs"
-}
+offer "Clear system logs?" && clear_dir /var/log "system logs"
 
 # Clear iMessage attachments
 offer "Clear local iMessage attachments and cache? (Will close the Messages app)" && {
@@ -93,8 +94,9 @@ dir_repos="$HOME/Repos"
         d_repo="$(dirname "$c_toml")"
         d_target="$d_repo/target"
         [ -d "$d_target" ] && {
-            git ls-files --error-unmatch "$d_target"
-            case $? in
+            rc=0
+            git -C "$d_repo" ls-files --error-unmatch target >/dev/null 2>&1 || rc=$?
+            case $rc in
             0) # ./target file is tracked by git
                 report "Skipping $d_target; directory is tracked by git" 1
                 ;;

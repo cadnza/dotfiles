@@ -1,54 +1,25 @@
-# shellcheck disable=SC1091,SC1094,SC2154
-
-# Set OS values
-os_macos=1
-os_linux=2
-os_windows=3
-os_other=4
-
-# Determine OS
-working_os=0
-case "${OSTYPE:0:3}" in
-dar)
-    working_os=$os_macos
-    ;;
-lin)
-    working_os=$os_linux
-    ;;
-bsd)
-    working_os=$os_linux
-    ;;
-cyg)
-    working_os=$os_windows
-    ;;
-msy)
-    working_os=$os_windows
-    ;;
-*)
-    working_os=$os_other
-    ;;
-esac
+# shellcheck disable=SC1090,SC2154
 
 # Configure settings per OS
-if [ $working_os = $os_macos ]; then
-    # Set machine prompt color
+syntax_highlighting=
+case "${OSTYPE:0:3}" in
+dar)
     export color_machine=$color_macos
-    # Enable syntax highlighting
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || :
-# Linux
-elif [ $working_os = $os_linux ]; then
-    # Set machine prompt color
+    syntax_highlighting=/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ;;
+lin | bsd)
     export color_machine=$color_linux
-    # Enable syntax highlighting
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || :
-# Windows
-elif [ $working_os = $os_windows ]; then
-    # Set machine prompt color
+    syntax_highlighting=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ;;
+cyg | msy)
     export color_machine=$color_windows
     # Make sure /usr/bin is first in path
     export PATH=/usr/bin:$PATH
-# Other
-else
-    # Set machine prompt color
+    ;;
+*)
     export color_machine=$color_other
-fi
+    ;;
+esac
+
+# Enable syntax highlighting
+[ -f "$syntax_highlighting" ] && source "$syntax_highlighting"

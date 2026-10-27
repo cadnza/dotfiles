@@ -13,7 +13,7 @@ prompt_file="$HOME/.prompt"
 prompts_dir="$HOME/.support/prompts"
 basic_prompt="$prompts_dir/basic.sh"
 if [ -f "$prompt_file" ]; then
-    theme_name=$(cat "$prompt_file" | head -n 1)
+    theme_name=$(head -n 1 "$prompt_file")
     theme_file="$prompts_dir/$theme_name.sh"
     if [ -f "$theme_file" ]; then
         source "$theme_file"
@@ -34,8 +34,7 @@ zstyle ':vcs_info:git:*' formats "$(build_right_prompt no_action)"
 zstyle ':vcs_info:git:*' actionformats "$(build_right_prompt action)"
 
 # Register right prompt
-precmd() {
-    vcs_info
-}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd vcs_info
 # shellcheck disable=SC2016
 export RPROMPT='${vcs_info_msg_0_}'

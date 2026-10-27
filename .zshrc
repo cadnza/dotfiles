@@ -29,22 +29,14 @@ source "$HOME/.support/setup_os.sh" # Currently profiling on EngineRoom at ~0.08
 # Run completion settings
 source "$HOME/.support/completion.sh" # Currently profiling on EngineRoom at ~0.11s
 
-# Set default text editor
-export VISUAL=nano
-export EDITOR=nano
-git config --global core.editor nano
-
 # Display banners
 source "$HOME/.support/banners.sh"
 
 # Run prompt setup
 source "$HOME/.support/prompt.sh"
 
-# Source commands for Secure ShellFish
-source "$HOME/.support/.shellfishrc"
-
 # Initialize shell integration if running in VS Code
-[ "$TERM_PROGRAM" == "vscode" ] && . "$(code --locate-shell-integration-path zsh)"
+[ "$TERM_PROGRAM" = "vscode" ] && . "$(code --locate-shell-integration-path zsh)"
 
 # Source 1Password plugins
 f_op_plugins="$HOME/.config/op/plugins.sh"

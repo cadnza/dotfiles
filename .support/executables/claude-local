@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Verify claude install
+command -v claude >/dev/null 2>&1 || {
+    echo "Please install \`claude\`" >&2
+    exit 1
+}
+
+# Set environment variable
+CLAUDE_CONFIG_DIR="$PWD/.claude-local"
+export CLAUDE_CONFIG_DIR
+
+# Make directory if needed
+[ -d "$CLAUDE_CONFIG_DIR" ] || mkdir "$CLAUDE_CONFIG_DIR"
+
+# Write gitignore
+echo '*' >"$CLAUDE_CONFIG_DIR/.gitignore"
+
+# Execute
+claude "$@"
